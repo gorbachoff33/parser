@@ -1,6 +1,7 @@
 """mmparser"""
 
 import logging
+import re
 from datetime import datetime
 import random
 import string
@@ -12,6 +13,7 @@ import json
 import signal
 from pathlib import Path
 from urllib.parse import urlparse, parse_qsl, parse_qs, unquote, urljoin
+import uuid
 
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn, TimeRemainingColumn
 from rich.logging import RichHandler
@@ -42,7 +44,7 @@ class Parser_url:
         allow_direct: bool = False,
         use_merchant_blacklist: bool = False,
         proxy_file_path: str = "",
-        tg_config: str = "",
+        tg_config: list = [],
         price_min_value_alert: float = None,
         price_value_alert: float = None,
         price_bonus_value_alert: float = None,
@@ -78,6 +80,7 @@ class Parser_url:
 
         self.logger: logging.Logger = self._create_logger(self.log_level)
         self.tg_client: TelegramClient = None
+        self.tg_client_phone: TelegramClient = None
 
         self.url: str = url
         self.urls: list[str] = urls
@@ -110,10 +113,12 @@ class Parser_url:
         self.address_id: str = None
         self.lock = threading.Lock()
         self.category_methods = {
-            "Смартфон": self._process_smartphone,
-            "Ноутбук": self._process_laptop,
+            "Смартфон": self._process_smartphone_apple,
+            "Ноутбук": self._process_notebook_apple,
             "Планшет": self._process_planshet
         }
+        
+        self.all_titles = []
 
         self._set_up()
 
@@ -195,9 +200,11 @@ class Parser_url:
     def _set_up(self) -> None:
         """Парсинг в валидация конфигурации"""
         if self.tg_config:
-            # if not validate_tg_credentials(self.tg_config):
-            #     raise ConfigError(f"Конфиг {self.tg_config} не прошел проверку!")
-            self.tg_client = TelegramClient(self.tg_config, self.logger)
+            for client in self.tg_config:
+                if not validate_tg_credentials(client):
+                    raise ConfigError(f"Конфиг {client} не прошел проверку!")
+            self.tg_client = TelegramClient(self.tg_config[0], self.logger)
+            self.tg_client_phone = TelegramClient(self.tg_config[1], self.logger)
         self.parsed_proxies = self.proxy_file_path and utils.parse_proxy_file(self.proxy_file_path)
         self.categories = self.categories_path and utils.parse_categories_file(self.categories_path)
         self._proxies_set_up()
@@ -231,6 +238,9 @@ class Parser_url:
                 self.logger.info("Целевой URL: %s", self.url)
                 self.logger.info("Потоков: %s", self.threads)
                 self._single_url()
+            # filename = f"{uuid.uuid4().hex}.json"
+            # with open(filename, "w", encoding="utf-8") as file:
+            #     json.dump(sorted(set(self.all_titles)), file, indent=4, ensure_ascii=False)
 
     def _single_url(self):
         self.parse_input_url()
@@ -433,26 +443,35 @@ class Parser_url:
         if last_notified:
             now = datetime.now()
             time_diff = now - last_notified
-                
-        if (
-            parsed_offer.bonus_percent >= self.bonus_percent_alert 
-             and parsed_offer.bonus_amount >= self.bonus_value_alert 
-             and parsed_offer.price <= self.price_value_alert 
-             and parsed_offer.price_bonus <= self.price_bonus_value_alert 
-             and parsed_offer.price >= self.price_min_value_alert
-            and (not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff)))
-            and self.tg_client
-        ):
+              
+        if self.perecup_price and (not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff))):
+            
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 message = self._format_tg_message(parsed_offer)
-                executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
+                executor.submit(self.tg_client_phone.notify, message, parsed_offer.image_url)
                 self.perecup_price = None
                 return True
+        else:
+            if (
+                parsed_offer.bonus_percent >= self.bonus_percent_alert 
+                and parsed_offer.bonus_amount >= self.bonus_value_alert 
+                and parsed_offer.price <= self.price_value_alert 
+                and parsed_offer.price_bonus <= self.price_bonus_value_alert 
+                and parsed_offer.price >= self.price_min_value_alert
+                and (not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff)))
+                and self.tg_client
+            ):
+                with concurrent.futures.ThreadPoolExecutor() as executor:
+                    message = self._format_tg_message(parsed_offer)
+                    executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
+                    self.perecup_price = None
+                    return True
         return False
 
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
         """Форматировать данные для отправки в telegram"""
-        return (
+        if self.perecup_price:
+            return (
             f'🛍 <b>Товар:</b> <a href="{parsed_offer.url}">{parsed_offer.title}</a>\n'
             f"💰 <b>Цена:</b> {parsed_offer.price}₽\n"
             f"💸 <b>Цена-Бонусы:</b> {parsed_offer.price_bonus}\n"
@@ -461,10 +480,20 @@ class Parser_url:
             f"✅ <b>Доступно:</b> {parsed_offer.available_quantity or '?'}\n"
             f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
             f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
-            # f"☎️ <b>Аккаунт:</b> {self.profile.get('phone')}"
-            # f"💰 <b>Цена перекупа:</b> {self.perecup_price}₽\n"
-            # f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽"
+            f"💰 <b>Цена перекупа:</b> {self.perecup_price}₽\n"
+            f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽"
         )
+        else:
+            return (
+                f'🛍 <b>Товар:</b> <a href="{parsed_offer.url}">{parsed_offer.title}</a>\n'
+                f"💰 <b>Цена:</b> {parsed_offer.price}₽\n"
+                f"💸 <b>Цена-Бонусы:</b> {parsed_offer.price_bonus}\n"
+                f"🟢 <b>Бонусы:</b> {parsed_offer.bonus_amount}\n"
+                f"🔢 <b>Процент Бонусов:</b> {parsed_offer.bonus_percent}\n"
+                f"✅ <b>Доступно:</b> {parsed_offer.available_quantity or '?'}\n"
+                f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
+                f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
+            )
 
     def _get_offers(self, goods_id: str, delay: int = 0) -> list[dict]:
         """Получить список предложений товара"""
@@ -525,73 +554,170 @@ class Parser_url:
             return False
         page_progress = self.rich_progress.add_task(f"[orange]Страница {int(int(response_json.get('offset')) / items_per_page) + 1}")
         self.rich_progress.update(page_progress, total=len(response_json["items"]))
+        x = 0
         for item in response_json["items"]:
+            x += 1
             bonus_percent = item["favoriteOffer"]["bonusPercent"]
             item_title = item["goods"]["title"]
+            price = item["favoriteOffer"]["price"]
+            
             if self._exclude_check(item_title) or (item["isAvailable"] is not True) or (not self._include_check(item_title)):
                 # пропускаем, если товар не доступен или исключен
                 self.rich_progress.update(page_progress, advance=1)
                 continue
             is_listing = self.parsed_url["type"] == "TYPE_LISTING"
-            # self.perecup_price = self._match_product(item_title, self._match_category(item_title, item["goods"]["attributes"]))
-            # if "Apple" in item_title:
-            #     file_name = "ZApple" + ''.join(random.choices(string.ascii_letters + string.digits, k=10)) + ".json"
-            # elif "Acer" in item_title:
-            #     file_name = "ZAcer" + ''.join(random.choices(string.ascii_letters + string.digits, k=10)) + ".json"
-            # elif "Honor" in item_title:
-            #     file_name = "ZHonor" + ''.join(random.choices(string.ascii_letters + string.digits, k=10)) + ".json"
-            # elif "Samsung" in item_title:
-            #     file_name = "ZSamsung" + ''.join(random.choices(string.ascii_letters + string.digits, k=10)) + ".json"
-
-            # Сохранение файла с рандомным именем
-            # with open(file_name, "w", encoding="utf-8") as file:
-            #     json.dump(item, file, ensure_ascii=False, indent=4)
-            # if self.perecup_price is None:
-            if bonus_percent >= self.bonus_percent_alert:
+            attributes = item["goods"]["attributes"]
+            brand = item["goods"]["brand"]
+            if brand in "Apple":
+                self.perecup_price = self._match_product_apple(item_title, attributes)
+            # match = re.search(r"Apple iPhone 15 Pro Max", item_title)
+            # if match:
+                # filename = f"'Z'.{uuid.uuid4().hex}.json"
+                # with open(filename, "w", encoding="utf-8") as file:
+                #     json.dump(item, file, indent=4, ensure_ascii=False)
+                self.all_titles.append(item_title)
+            if self.perecup_price is None:
+                if bonus_percent >= self.bonus_percent_alert:
+                    if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
+                        self.logger.info("Парсим предложения %s", item_title)
+                        offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
+                        for offer in offers:
+                            self._parse_offer(item["goods"], offer)
+                    else:
+                        self._parse_item(item)
+            elif price < self.perecup_price:
                 if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
-                    self.logger.info("Парсим предложения %s", item_title)
-                    # print(item_title, bonus_percent)
+                    self.logger.info("Парсим предложения %s ", item_title)
                     offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
                     for offer in offers:
                         self._parse_offer(item["goods"], offer)
                 else:
                     self._parse_item(item)
-            # elif price < self.perecup_price:
-            #     if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
-            #         self.logger.info("Парсим предложения %s", item_title)
-            #         offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
-            #         for offer in offers:
-            #             self._parse_offer(item["goods"], offer)
-            # else:
-                # self._parse_item(item)
             self.rich_progress.update(page_progress, advance=1)
 
         self.rich_progress.remove_task(page_progress)
         parse_next_page = response_json["items"] and response_json["items"][-1]["isAvailable"]
         return parse_next_page
     
-    def _match_category(self, input_string, attributes):
-        # for category, method in self.category_methods.items():
-        #     if input_string.startswith(category):
-        #         return method(attributes)
+    def _match_category_phone_apple(self, input_string, attributes):
+        if not attributes:
+            return None
+        one = ["128", "128gb", "128гб"]
+        two = ["256", "256gb", "256гб"]
+        three = ["512", "512gb", "512гб"]
+        four = ["1024", "1024gb", "1024гб"]
+        for category, method in self.category_methods.items():
+            if input_string.startswith(category.lower()):
+                result = method(attributes)
+                if result:
+                    return result
+                if any(x in input_string for x in one):
+                    return "128"
+                elif any(x in input_string for x in two):
+                    return "256"
+                elif any(x in input_string for x in three):
+                    return "512"
+                elif any(x in input_string for x in four):
+                    return "1024"
         return None
     
-    def _process_smartphone(self, attributes):
-        return f"{self._getOperative(attributes)}/{self._getMemory(attributes)}"
+    def _processor_apple(self, input_string, attributes):
+        if not attributes:
+            return None
+        processor_patterns = {"M1", "M2", "M3", "M4"}
+        for x in processor_patterns:
+            if x in input_string:
+                return x
+        processor = self._getProcessor(attributes)
+        for x in processor_patterns:
+            if x in processor:
+                return x
+        return None
     
-    def _process_laptop(self, attributes):
+    def _match_category_notebook_apple(self, input_string):
+        input_string = input_string.lower().replace(" ", "")
+
+        memory_patterns = {
+            "48": [r"48/256", r"/48/256", r"48/512", r"/48/512", r"48/1024", r"48/1000", r"48/1tb", r"48/1тб", r"/48/1024", r"/48/1000", r"/48/1tb", r"/48/1тб", r"48/2048", r"48/2000", r"48/2tb", r"48/2тб", r"/48/2048", r"/48/2000", r"/48/2tb", r"/48/2тб", r"48gb", r"/48gb", r"48гб", r"/48гб"],
+            "32": [r"32/256", r"/32/256", r"32/512", r"/32/512", r"32/1024", r"32/1000", r"32/1tb", r"32/1тб", r"/32/1024", r"/32/1000", r"/32/1tb", r"/32/1тб", r"32/2048", r"32/2000", r"32/2tb", r"32/2тб", r"/32/2048", r"/32/2000", r"/32/2tb", r"/32/2тб", r"32gb", r"/32gb", r"32гб", r"/32гб"],
+            "24": [r"24/256", r"/24/256", r"24/512", r"/24/512", r"24/1024", r"24/1000", r"24/1tb", r"24/1тб", r"/24/1024", r"/24/1000", r"/24/1tb", r"/24/1тб", r"24/2048", r"24/2000", r"24/2tb", r"24/2тб", r"/24/2048", r"/24/2000", r"/24/2tb", r"/24/2тб", r"24gb", r"/24gb", r"24гб", r"/24гб"],
+            "16": [r"16/256", r"/16/256", r"16/512", r"/16/512", r"16/1024", r"16/1000", r"16/1tb", r"16/1тб", r"/16/1024", r"/16/1000", r"/16/1tb", r"/16/1тб", r"16/2048", r"16/2000", r"16/2tb", r"16/2тб", r"/16/2048", r"/16/2000", r"/16/2tb", r"/16/2тб", r"16gb", r"/16gb", r"16гб", r"/16гб"],
+            "8": [r"8/256", r"/8/256", r"8/512", r"/8/512", r"8/1024", r"8/1000", r"8/1tb", r"8/1тб", r"/8/1024", r"/8/1000", r"/8/1tb", r"/8/1тб", r"8/2048", r"8/2000", r"8/2tb", r"8/2тб", r"/8/2048", r"/8/2000", r"/8/2tb", r"/8/2тб", r"8gb", r"/8gb", r"8гб", r"/8гб"]
+        }
+
+        hard_drive_patterns = {
+            "2048": [r"2048", r"2000", r"2000gb", r"2000 gb", r"2048gb", r"2048 gb", r"2048гб", r"2048 гб", r"2000 гб", r"2000гб", r"2tb", r"2тб", r"2 tb", r"2 тб"],
+            "1024": [r"1024", r"1000", r"1000gb", r"1000 gb", r"1024gb", r"1024 gb", r"1024гб", r"1024 гб", r"1000 гб", r"1000гб", r"1tb", r"1тб", r"1 tb", r"1 тб"],
+            "512": [r"512gb", r"512гб", r"512"],
+            "256": [r"256gb", r"256гб", r"256"]
+        }
+
+        memory = None
+        memory_hard = None
+
+        for mem, patterns in memory_patterns.items():
+            if any(re.search(pattern, input_string) for pattern in patterns):
+                memory = mem
+                break
+
+        for hdd, patterns in hard_drive_patterns.items():
+            if any(re.search(pattern, input_string) for pattern in patterns):
+                memory_hard = hdd
+                break
+
+        if memory and memory_hard:
+            return f"{memory}/{memory_hard}"
+        return None
+    
+    def _process_smartphone_apple(self, attributes):
+        return self._getMemory(attributes)
+    
+    def _process_notebook_apple(self, attributes):
         return self._getMemory(attributes)
     
     def _process_planshet(self, attributes):
         return self._getMemory(attributes)
     
-    def _match_product(self, input_string: str, memory: str):
-        # print(input_string, memory)
+    def _match_product_apple(self, input_string, attributes):
+        input_string = input_string.lower()
+        if input_string.startswith("смартфон"):
+            return self._match_product_phone_apple(input_string, self._match_category_phone_apple(input_string, attributes))
+        elif input_string.startswith("ноутбук"):
+            return self._match_product_notebook_apple(input_string, self._match_category_notebook_apple(input_string), self._processor_apple(input_string, attributes))
+        # elif input_string.startswith("планшет"):
+        
+        return None
+    
+    def _match_product_notebook_apple(self, input_string: str, memory: str, processor: str):
+        if not memory or not processor:
+            return None
         for category, products in self.categories.items():
-            if input_string.startswith(category):
+            if input_string.startswith(category.lower()):
                 for product in products:
-                    # if product["description"] in input_string and product["memory"] in memory:
+                    if product["code"].lower() in input_string:
                         return product["price"]
+                    if product["description"].lower() in input_string and product["memory"] in memory and product["proc"] in processor:
+                        return product["price"]
+        return None
+    
+    def _match_product_phone_apple(self, input_string: str, memory: str):
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string and product["memory"] in memory:
+                        if product["sim"].lower() in input_string:
+                            if not product["priceSim"]:
+                                return None
+                            return product["priceSim"]
+                        if not product["price"]:
+                            return None
+                        return product["price"]
+        return None
+    
+    def _getProcessor(self, attributes):
+        for attribute in attributes:
+            if attribute["title"].startswith("Модель процессора"):
+                return attribute["value"]
         return None
     
     def _getOperative(self, attributes):

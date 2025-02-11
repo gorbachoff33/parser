@@ -11,7 +11,7 @@ def validate_tg_credentials(tg_config: str):
         return requests.get(url).ok
 
     try:
-        bot_token, chat_id = tg_config.split("$")
+        bot_token, chat_id, thread_id = tg_config.split("$")
     except IndexError:
         return False
     if not bot_token or not chat_id:
@@ -25,6 +25,7 @@ class TelegramClient:
     def __init__(self, tg_config, logger):
         self.bot_token = tg_config.split("$")[0]
         self.chat_id = tg_config.split("$")[1]
+        self.thread_id = tg_config.split("$")[2]
         self.logger = logger
         if not self.bot_token or not self.chat_id:
             raise Exception("Не валидный конфиг Telegram!")
@@ -33,6 +34,8 @@ class TelegramClient:
         if image_url:
             base_url = f"https://api.telegram.org/bot{self.bot_token}/sendPhoto"
             params = {"chat_id": self.chat_id, "caption": message, "photo": image_url, "parse_mode": "HTML"}
+            if self.thread_id:
+                params["message_thread_id"] = self.thread_id
             try:
                 response = requests.get(base_url, params=params)
                 response.raise_for_status()
@@ -41,7 +44,7 @@ class TelegramClient:
                 self.logger.info(f"Ошибка отправки сообщения с картинкой: {e}")
         else:
             base_url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
-            params = {"chat_id": self.chat_id, "text": message, "parse_mode": "HTML"}
+            params = {"chat_id": self.chat_id, "message_thread_id": self.thread_id, "text": message, "parse_mode": "HTML"}
             try:
                 response = requests.get(base_url, params=params)
                 response.raise_for_status()

@@ -85,17 +85,14 @@ def get_last_notified(goods_id, merchant_id, price, bonus_amount):
     """Возвращает дату последнего уведомления по этому товару"""
     sqlite_connection = sqlite3.connect(FILENAME)
     cursor = sqlite_connection.cursor()
-
     cursor.execute("""
         SELECT scraped_at FROM products 
         WHERE goods_id = ? AND merchant_id = ? AND price = ? AND bonus_amount = ?
         ORDER BY scraped_at DESC 
         LIMIT 1
     """, (goods_id, merchant_id, price, bonus_amount))
-
     row = cursor.fetchone()
     cursor.close()
-    print("KKKKK",goods_id, merchant_id, price, bonus_amount)
     return row[0] if row else None
 
 
