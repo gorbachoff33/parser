@@ -3,7 +3,6 @@
 .vscode/launch.json
 /core/__pycache__
 *.sqlite
-*.json
 *.txt
 /mmparser.egg-info
 /tests/__pycache__

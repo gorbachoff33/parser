@@ -3,7 +3,6 @@
 import logging
 import re
 from datetime import datetime
-import random
 import string
 from time import sleep, time
 import threading
@@ -119,6 +118,7 @@ class Parser_url:
         }
         
         self.all_titles = []
+        self.zakup_info = ""
 
         self._set_up()
 
@@ -480,7 +480,8 @@ class Parser_url:
             f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
             f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
             f"💰 <b>Цена перекупа:</b> {self.perecup_price}₽\n"
-            f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽"
+            f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽\n"
+            f"🟢 <b>Статус закупки:</b> {self.zakup_info}"
         )
         else:
             return (
@@ -567,6 +568,7 @@ class Parser_url:
             attributes = item["goods"]["attributes"]
             brand = item["goods"]["brand"]
             self.perecup_price = None
+            self.zakup_info = ""
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
             # match = re.search(r"Apple iPad mini", item_title)
@@ -708,7 +710,9 @@ class Parser_url:
                 for product in products:
                     if product["description"].lower() in input_string and product["memory"] in memory and product["year"] in year and product["diagonal"] in size:
                         if product["lte"].lower() in input_string:
+                            self.zakup_info = product["result"]
                             return product["priceLte"]
+                        self.zakup_info = product["result"]
                         return product["price"]
         return None
         
@@ -749,8 +753,10 @@ class Parser_url:
             if input_string.startswith(category.lower()):
                 for product in products:
                     if product["code"].lower() in input_string:
+                        self.zakup_info = product["result"]
                         return product["price"]
                     if product["description"].lower() in input_string and product["memory"] in memory and product["proc"] in processor:
+                        self.zakup_info = product["result"]
                         return product["price"]
         return None
     
@@ -764,9 +770,11 @@ class Parser_url:
                         if product["sim"].lower() in input_string:
                             if not product["priceSim"]:
                                 return None
+                            self.zakup_info = product["result"]
                             return product["priceSim"]
                         if not product["price"]:
                             return None
+                        self.zakup_info = product["result"]
                         return product["price"]
         return None
     

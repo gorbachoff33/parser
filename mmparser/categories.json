@@ -1,0 +1,1551 @@
+{
+  "Смартфон": [
+    {
+      "description": "iPhone 16 Pro Max",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": 145000,
+      "priceSim": 150000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro Max",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": 125000,
+      "priceSim": 129000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro Max",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 113000,
+      "priceSim": 114500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro Max",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": 135000,
+      "priceSim": 141500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": 118000,
+      "priceSim": 125000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 100000,
+      "priceSim": 103500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 92000,
+      "priceSim": 96000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 90000,
+      "priceSim": 94000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 78000,
+      "priceSim": 82500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 78000,
+      "priceSim": 82500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 65000,
+      "priceSim": 69500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro Max",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro Max",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": 124000,
+      "priceSim": 124000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro Max",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 96000,
+      "priceSim": 101000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": 110000,
+      "priceSim": 117500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 95000,
+      "priceSim": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Pro",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 85000,
+      "priceSim": 90000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Plus",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Plus",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Plus",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 80000,
+      "priceSim": 80000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15 Plus",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 68000,
+      "priceSim": 68000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 70000,
+      "priceSim": 72500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 57000,
+      "priceSim": 61000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Plus",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Plus",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 70000,
+      "priceSim": 70000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Plus",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 60000,
+      "priceSim": 60000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 66500,
+      "priceSim": 66500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 53000,
+      "priceSim": 53000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 13",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 13",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 13",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 60500,
+      "priceSim": 60500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 13",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 44500,
+      "priceSim": 44500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 12",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 12",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 12",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 12",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 35000,
+      "priceSim": 35000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 12",
+      "sim": "eSIM",
+      "memory": "64",
+      "price": 33000,
+      "priceSim": 33000,
+      "result": "Закупаем"
+    }
+  ],
+  "Ноутбук": [
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M1",
+      "code": "MGN63",
+      "price": 62000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M1",
+      "code": "MGND3",
+      "price": 65000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M1",
+      "code": "MGN93",
+      "price": 66000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MLXY3",
+      "price": 80000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MLXW3",
+      "price": 80000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MLY13",
+      "price": 80000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MLY33",
+      "price": 80000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MLY03",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MLXX3",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MLY23",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MLY43",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/2048",
+      "proc": "M2",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "16/256",
+      "proc": "M2",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "16/1024",
+      "proc": "M2",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "24/256",
+      "proc": "M2",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "24/1024",
+      "proc": "M2",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRXV3",
+      "price": 96500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRXT3",
+      "price": 96500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRXQ3",
+      "price": 96500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRXN3",
+      "price": 96500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRXW3",
+      "price": 113000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRXU3",
+      "price": 113000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRXP3",
+      "price": 113000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRXR3",
+      "price": 113000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXCV3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXCT3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXCR3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 13",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXCU3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 13",
+      "memory": "16/512",
+      "proc": "M1",
+      "code": "Z11C0002Z",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 13",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MNEP3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 13",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MNEJ3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MQKW3",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MQKU3",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MQKP3",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M2",
+      "code": "MQKR3",
+      "price": 97000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MQKX3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MQKV3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MQKQ3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M2",
+      "code": "MQKT3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRYU3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRYR3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRYM3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/256",
+      "proc": "M3",
+      "code": "MRYP3",
+      "price": 110000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRYV3",
+      "price": 122000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRYT3",
+      "price": 122000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRYN3",
+      "price": 122000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MRYQ3",
+      "price": 122000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXD13",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXD33",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Air 15",
+      "memory": "16/512",
+      "proc": "M3",
+      "code": "MXD43",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "16/1024",
+      "proc": "M1",
+      "code": "MKGT3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "16/512",
+      "proc": "M2",
+      "code": "MPHH3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "32/1024",
+      "proc": "M2",
+      "code": "MPHK3LL",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MTL73",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "8/512",
+      "proc": "M3",
+      "code": "MR7J3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "8/1024",
+      "proc": "M3",
+      "code": "MTL83",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "8/1024",
+      "proc": "M3",
+      "code": "MR7K3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "18/512",
+      "proc": "M3",
+      "code": "MRX33",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "18/512",
+      "proc": "M3",
+      "code": "MRX63",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "18/1024",
+      "proc": "M3",
+      "code": "MRX43",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "18/1024",
+      "proc": "M3",
+      "code": "MRX73",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "36/1024",
+      "proc": "M3",
+      "code": "MRX53",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "36/1024",
+      "proc": "M3",
+      "code": "MRX83",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 14",
+      "memory": "16/1024",
+      "proc": "M4",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "16/512",
+      "proc": "M1",
+      "code": "MK183LL",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "16/512",
+      "proc": "M1",
+      "code": "MK1E3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "16/512",
+      "proc": "M2",
+      "code": "MNW83",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "16/1024",
+      "proc": "M2",
+      "code": "MNWD3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "32/1024",
+      "proc": "M2",
+      "code": "MNWA3",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "18/512",
+      "proc": "M3",
+      "code": "MRW13",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "18/512",
+      "proc": "M3",
+      "code": "MRW43",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "36/1024",
+      "proc": "M3",
+      "code": "MRW33",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "48/1024",
+      "proc": "M3",
+      "code": "MUW63",
+      "price": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "MacBook Pro 16",
+      "memory": "48/1024",
+      "proc": "M4",
+      "code": "заглушка",
+      "price": null,
+      "result": "Закупаем"
+    }
+  ],
+  "Планшет": [
+    {
+      "description": "Apple iPad mini",
+      "year": "2021",
+      "diagonal": "8.3",
+      "memory": "256",
+      "lte": "LTE",
+      "price": 53500,
+      "priceLte": 53500,
+      "описание": "iPad mini 7 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad mini",
+      "year": "2021",
+      "diagonal": "8.3",
+      "memory": "128",
+      "lte": "LTE",
+      "price": 45500,
+      "priceLte": 45500,
+      "описание": "iPad mini 7 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad mini",
+      "year": "2021",
+      "diagonal": "8.3",
+      "memory": "64",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad mini 7 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "2048",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "512",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "256",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "2048",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "1024",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "512",
+      "lte": "LTE",
+      "price": 104000,
+      "priceLte": 104000,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "256",
+      "lte": "LTE",
+      "price": 88000,
+      "priceLte": 102000,
+      "описание": "iPad Pro 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "12.9",
+      "memory": "2048",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 13 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "12.9",
+      "memory": "1024",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 13 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "12.9",
+      "memory": "512",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 13 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "12.9",
+      "memory": "256",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 13 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "12.9",
+      "memory": "128",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 13 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "11",
+      "memory": "512",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2022",
+      "diagonal": "11",
+      "memory": "256",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2021",
+      "diagonal": "11",
+      "memory": "2048",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2021",
+      "diagonal": "11",
+      "memory": "1024",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2021",
+      "diagonal": "11",
+      "memory": "512",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2021",
+      "diagonal": "11",
+      "memory": "256",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Pro",
+      "year": "2021",
+      "diagonal": "11",
+      "memory": "128",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Pro 11 2021",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "1024",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Air 13 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "512",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Air 13 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "256",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Air 13 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "13",
+      "memory": "128",
+      "lte": "LTE",
+      "price": 65500,
+      "priceLte": 65500,
+      "описание": "iPad Air 13 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "512",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Air 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "256",
+      "lte": "LTE",
+      "price": 63000,
+      "priceLte": 63000,
+      "описание": "iPad Air 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2024",
+      "diagonal": "11",
+      "memory": "128",
+      "lte": "LTE",
+      "price": 55000,
+      "priceLte": 55000,
+      "описание": "iPad Air 11 2024",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2022",
+      "diagonal": "10.9",
+      "memory": "256",
+      "lte": "LTE",
+      "price": 56000,
+      "priceLte": 56000,
+      "описание": "iPad Air 11 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2022",
+      "diagonal": "10.9",
+      "memory": "64",
+      "lte": "LTE",
+      "price": 44500,
+      "priceLte": 44500,
+      "описание": "iPad Air 11 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad Air",
+      "year": "2020",
+      "diagonal": "10.9",
+      "memory": "64",
+      "lte": "LTE",
+      "price": null,
+      "priceLte": null,
+      "описание": "iPad Air 11 2022",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad",
+      "year": "2022",
+      "diagonal": "10.9",
+      "memory": "256",
+      "lte": "LTE",
+      "price": 44000,
+      "priceLte": 44000,
+      "описание": "iPad 10 256",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad",
+      "year": "2022",
+      "diagonal": "10.9",
+      "memory": "64",
+      "lte": "LTE",
+      "price": 30500,
+      "priceLte": 30500,
+      "описание": "iPad 10 64",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad",
+      "year": "2021",
+      "diagonal": "10.2",
+      "memory": "256",
+      "lte": "LTE",
+      "price": 34000,
+      "priceLte": 34000,
+      "описание": "iPad 9 256",
+      "result": "Закупаем"
+    },
+    {
+      "description": "Apple iPad",
+      "year": "2021",
+      "diagonal": "10.2",
+      "memory": "64",
+      "lte": "LTE",
+      "price": 22000,
+      "priceLte": 22000,
+      "описание": "iPad 9 64",
+      "result": "Закупаем"
+    }
+  ],
+  "Игровая приставка": [
+    {
+      "description": "Playstation 5 Pro",
+      "memory": "2 Тб",
+      "code": ["7000B", "7022B"],
+      "price": 79000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 5 Fat",
+      "memory": "1 Тб",
+      "code": ["1208A", "1216A", "1200A", "1218A"],
+      "price": 52500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 5 Fat",
+      "memory": "825",
+      "code": ["1208B", "1216B", "1200B", "1218B"],
+      "price": 40000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 5 Slim",
+      "memory": "1 Тб",
+      "code": ["2000A", "2016A", "2018A"],
+      "price": 49200,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 5 Slim",
+      "memory": "1 Тб",
+      "code": ["2000B", "2016B", "2018B"],
+      "price": 43500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 4 Slim",
+      "memory": "1 Тб",
+      "code": [],
+      "price": 26000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 4 Slim",
+      "memory": "1 Тб",
+      "code": [],
+      "price": 26000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 4 Slim",
+      "memory": "1 Тб",
+      "code": [],
+      "price": 26000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 4 Slim",
+      "memory": "512",
+      "code": [],
+      "price": 23000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Playstation 4 Slim",
+      "memory": "512",
+      "code": [],
+      "price": 23000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Microsoft Xbox Series X",
+      "memory": "2 Тб",
+      "code": [],
+      "price": 50500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Microsoft Xbox Series X",
+      "memory": "1 Тб",
+      "code": [],
+      "price": 50500,
+      "result": "Закупаем"
+    },
+
+    {
+      "description": "Microsoft Xbox Series X",
+      "memory": "512",
+      "code": [],
+      "price": 50500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Microsoft Xbox Series S",
+      "memory": "1 Тб",
+      "code": [],
+      "price": 26500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Microsoft Xbox Series S",
+      "memory": "512",
+      "code": [],
+      "price": 26500,
+      "result": "Закупаем"
+    }
+  ],
+  "Шлем Sony": [
+    {
+      "description": "Playstation VR 2",
+      "price": 39500,
+      "result": "Закупаем"
+    }
+  ]
+}
