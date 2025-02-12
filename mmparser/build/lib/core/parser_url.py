@@ -570,12 +570,12 @@ class Parser_url:
             brand = item["goods"]["brand"]
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
-            # match = re.search(r"Apple iPhone 15 Pro Max", item_title)
+            # match = re.search(r"Apple iPad mini", item_title)
             # if match:
-                # filename = f"'Z'.{uuid.uuid4().hex}.json"
-                # with open(filename, "w", encoding="utf-8") as file:
-                #     json.dump(item, file, indent=4, ensure_ascii=False)
-                self.all_titles.append(item_title)
+            #     filename = f"'Z'.{uuid.uuid4().hex}.json"
+            #     with open(filename, "w", encoding="utf-8") as file:
+            #         json.dump(item, file, indent=4, ensure_ascii=False)
+            #     self.all_titles.append(item_title)
             if self.perecup_price is None:
                 if bonus_percent >= self.bonus_percent_alert:
                     if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
@@ -600,6 +600,8 @@ class Parser_url:
         return parse_next_page
     
     def _match_category_phone_apple(self, input_string, attributes):
+        if not attributes:
+            return None
         one = ["128", "128gb", "128гб"]
         two = ["256", "256gb", "256гб"]
         three = ["512", "512gb", "512гб"]
@@ -663,7 +665,6 @@ class Parser_url:
                 memory_hard = hdd
                 break
 
-        print(memory, memory_hard)
         if memory and memory_hard:
             return f"{memory}/{memory_hard}"
         return None
@@ -678,13 +679,56 @@ class Parser_url:
         return self._getMemory(attributes)
     
     def _match_product_apple(self, input_string, attributes):
-        print(input_string)
         input_string = input_string.lower()
         if input_string.startswith("смартфон"):
             return self._match_product_phone_apple(input_string, self._match_category_phone_apple(input_string, attributes))
         elif input_string.startswith("ноутбук"):
             return self._match_product_notebook_apple(input_string, self._match_category_notebook_apple(input_string), self._processor_apple(input_string, attributes))
-        # elif input_string.startswith("планшет"):
+        elif input_string.startswith("планшет"):
+            return self._match_product_planshet_apple(input_string, self._get_memory_planshet_apple(attributes), self._get_year_planshet_apple(input_string, attributes), self._get_size_planshet_apple(attributes))
+        
+        return None
+    
+    def _match_product_planshet_apple(self, input_string: str, memory: str, year: str, size: str):
+        if not memory or not year or not size:
+            return None
+        
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string and product["memory"] in memory and product["year"] in year and product["diagonal"] in size:
+                        if product["lte"].lower() in input_string:
+                            return product["priceLte"]
+                        return product["price"]
+        return None
+        
+    def _get_memory_planshet_apple(self, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Встроенная память"):
+                return attribute["value"]
+        return None
+    
+    def _get_size_planshet_apple(self, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Диагональ экрана"):
+                return attribute["value"]
+        return None
+    
+    def _get_year_planshet_apple(self, input_string, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Год релиза"):
+                return attribute["value"]
+        
+        year_patterns = {"2020", "2021", "2022", "2024"}
+        for x in year_patterns:
+            if x in input_string:
+                return x
         
         return None
     
