@@ -238,9 +238,9 @@ class Parser_url:
                 self.logger.info("Целевой URL: %s", self.url)
                 self.logger.info("Потоков: %s", self.threads)
                 self._single_url()
-            filename = f"{uuid.uuid4().hex}.json"
-            with open(filename, "w", encoding="utf-8") as file:
-                json.dump(sorted(set(self.all_titles)), file, indent=4, ensure_ascii=False)
+            # filename = f"{uuid.uuid4().hex}.json"
+            # with open(filename, "w", encoding="utf-8") as file:
+            #     json.dump(sorted(set(self.all_titles)), file, indent=4, ensure_ascii=False)
 
     def _single_url(self):
         self.parse_input_url()
@@ -560,7 +560,6 @@ class Parser_url:
             bonus_percent = item["favoriteOffer"]["bonusPercent"]
             item_title = item["goods"]["title"]
             price = item["favoriteOffer"]["price"]
-            
             if self._exclude_check(item_title) or (item["isAvailable"] is not True) or (not self._include_check(item_title)):
                 # пропускаем, если товар не доступен или исключен
                 self.rich_progress.update(page_progress, advance=1)
@@ -568,6 +567,7 @@ class Parser_url:
             is_listing = self.parsed_url["type"] == "TYPE_LISTING"
             attributes = item["goods"]["attributes"]
             brand = item["goods"]["brand"]
+            self.perecup_price = None
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
             # match = re.search(r"Apple iPad mini", item_title)
@@ -575,7 +575,7 @@ class Parser_url:
             #     filename = f"'Z'.{uuid.uuid4().hex}.json"
             #     with open(filename, "w", encoding="utf-8") as file:
             #         json.dump(item, file, indent=4, ensure_ascii=False)
-            #     self.all_titles.append(item_title)
+            # self.all_titles.append(item_title)
             if self.perecup_price is None:
                 if bonus_percent >= self.bonus_percent_alert:
                     if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
@@ -600,12 +600,22 @@ class Parser_url:
         return parse_next_page
     
     def _match_category_phone_apple(self, input_string, attributes):
-        if not attributes:
-            return None
         one = ["128", "128gb", "128гб"]
         two = ["256", "256gb", "256гб"]
         three = ["512", "512gb", "512гб"]
         four = ["1024", "1024gb", "1024гб"]
+        
+        if any(x in input_string for x in one):
+            return "128"
+        elif any(x in input_string for x in two):
+            return "256"
+        elif any(x in input_string for x in three):
+            return "512"
+        elif any(x in input_string for x in four):
+            return "1024"
+                
+        if not attributes:
+            return None
         for category, method in self.category_methods.items():
             if input_string.startswith(category.lower()):
                 result = method(attributes)
@@ -616,6 +626,7 @@ class Parser_url:
                 elif any(x in input_string for x in two):
                     return "256"
                 elif any(x in input_string for x in three):
+                    print("memore")
                     return "512"
                 elif any(x in input_string for x in four):
                     return "1024"
@@ -745,6 +756,8 @@ class Parser_url:
         return None
     
     def _match_product_phone_apple(self, input_string: str, memory: str):
+        if not memory:
+            return None
         for category, products in self.categories.items():
             if input_string.startswith(category.lower()):
                 for product in products:
