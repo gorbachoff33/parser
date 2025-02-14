@@ -111,11 +111,6 @@ class Parser_url:
 
         self.address_id: str = None
         self.lock = threading.Lock()
-        self.category_methods = {
-            "Смартфон": self._process_smartphone_apple,
-            "Ноутбук": self._process_notebook_apple,
-            "Планшет": self._process_planshet
-        }
         
         self.all_titles = []
         self.zakup_info = ""
@@ -163,19 +158,22 @@ class Parser_url:
             # No free proxies, wait and retry
 
     def _api_request(self, api_url: str, json_data: dict, tries: int = 10, delay: float = 0) -> dict:
+        headers = {
+            "cookie": "spid=1739524944560_206a03d45181b4ec04b4fb09d6d7c655_c32xxggt69laajxw; __zzatw-smm=MDA0dBA=Fz2+aQ==; _sa=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945; _sas=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945.1739524945; spjs=1739524947625_424d73cd_0134fe0a_717888e8ba5d44f93ec371269d7796f8_bdCTMz8GeqtWDLFwnMZy5+KuDm6bY/aW0o6PL3Gc5RGY0BrKli+zkzpgwSEB+W0uyvJnYqN0+iVnPBDCmhR5eVXOP705RMUlEWru6172ZxCMwWnZFS5nhwtim+tg+Bxd2aRj1oJpUpx4hpMCuZKs3nMb9iaOsKVEUQg6uA/348OWfw1oJUpkRRhTe23C2kIrLrEzZJFa+F5KVUcWjcNsLdBIZJfLYE4/FvjsXGghRUfTDYhp3JsxYVnALNxHyQd26jLFdZd8eYis1+eWA/tOyNVsMAGcQM+/MxuW8uiQRFQxuV/N2cB1pHKnS+sXm7rd/mTo6JxMDaJe8Zbix99Juj/GZSA+Jlr8AO9kNC3kLnExXmvfumejRHEvmzgXy9HSXocZv0NaxFVtowOB5Yj6Pn2mEvJ2Blt/IfhEFNuXfR5Tqsk5yuJykNUvS7uPlqEDnwcr6sPt0SF7BL7JYNhsfcmRJqbSa7+/CyyQQF2FaQr2niPHnERU1/M9Pe144VZHkog5S5RupHRIMUxatL9jPTjx1fWWaS6+ajJXZvyk6GnkbaJlHUFY3BJcidhcNX4FwT1KGm45NfFbkFxY/U1oQMWkJ2cfswUH2mC2ZzBY3GvHjzLzluWrCxWAADGbwVcWwpovTVnA9aRBh7lrFE5xId6FO0jUy/6vXwKy5hLt7Y1oBALgnsfIqlSPcmGvRHwnhw8L7o/hooID3Zk9Gs9BAx4m7b7CagemDvdhkCT8iVz5phO1MDTZfRGYxPVfSbbHK3PAEGS9BrX2mRydkMDVKd/msuo0RrHz/BJ+fvWMSRjNhGcylm5qek8oIkJ+SBqo2F1xMJBLM+UDDr8aW08Vp9vIaksnz3Oj39W5aRDOcC3TM2LNgljcjflWIoNZkboK1y5nl8umK9p0ChmvmuNXoad/yppeHfc1uTRYaJFblmaKRjNxdXgcP/mFoYFkDC4pUxnVpMiH/T+zPlKiH1WQYIRIOXq/18agpwHtj2IMdnc7864Oxon7WF1UUhLTyj/PyhITJukQ3hzBT7QXSuAM5XPuSLi+92Lncw7vP0Gc8BH9lRq69grjwyoQxCEBSR07utcXxxZUbf0BHDmiLmX5OMScL/+LUuIAUousTBhMj0mc5jfVzv7AKVUMs2iS6n+ml6x2BJrFc185h7trFcb7iXUGGowhmxeGXqqcTtaBSmTvyASrqA7N4myAukl0TEEv6gMi66I88l1MoJTkGefb9Nw2RaDNRPascQVwphMvdQABjzVI0=; device_id=35899286-eab5-11ef-9f27-fa163e551efb; sbermegamarket_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; ecom_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; _ym_uid=1739524948866859906; _ym_d=1739524948; _ym_visorc=b; _ym_isad=1; isOldUser=true; spsc=1739524949967_0523d70dcd6399b4a5c9303cf33ece42_bf4cd2fa3d30987fd0282ffebd8a9122; adspire_uid=AS.258800070.1739524950; _ga=GA1.1.1029686991.1739524950; _sv=SA1.cde8b57e-6cd3-4f86-b94c-49af5eed4df5.1714480000; __tld__=null; ssaid=378b7040-eab5-11ef-bc88-8968fbb7d467; ma_cid=4267358201739524951; adtech_uid=9b0c39e2-055a-4433-9a93-a60a5c995d75%3Amegamarket.ru; top100_id=t1.7729504.882577337.1739524951495; ma_id=1499508061701609951554; region_info=%7B%22displayName%22%3A%22%D0%9C%D0%9E%D0%A1%D0%9A%D0%92%D0%90%22%2C%22kladrId%22%3A%227700000000000%22%2C%22isDeliveryEnabled%22%3Atrue%2C%22geo%22%3A%7B%22lat%22%3A55.755814%2C%22lon%22%3A37.617635%7D%2C%22id%22%3A%2250%22%7D; cfidsw-smm=opCoTy6g2b4IzMmxVQQfv75AJgicCFs87jgV5K7TgPOyYKQYLHqN/XpEq3sJaDr8MxksQTSI6fbPme5Q/F489Gse2g88tO+MHAtLdWZHu6jlT89+BhYxWEjFUdi5QyyFW2RRp4lWMEfATXQx+5vAnnHxAHHKBN2QsDYTVuau; ma_ss_d19e96e4-c103-40bf-a791-3dcb7460a86f=0733784061739524951.1.1739524998.7; cfidsw-smm=Sjsi6mmmKmMHCuI7eqo+mLohsBFLJikK/8nU5B9Ip7t8HnTZA4vksjL9xjknATKWHkbPBthy7xB+Cj9En02XaZvQUEKCdkkJ8zUTPVDOKIzXhW69z/6zO4nK2Yu18B1bJeD849J3YHiWZ7m0u0nvhUIeNxHWzauhr9O1f/5b; _ga_W49D2LL5S1=GS1.1.1739524950.1.1.1739525004.6.0.0; t3_sid_7729504=s1.1027760779.1739524943708.1739525004058.1.10"
+        }
         json_data["auth"] = {
-            "locationId": self.region_id,
-            "appPlatform": "WEB",
-            "appVersion": 1710405202,
-            "experiments": {},
-            "os": "UNKNOWN_OS",
+            "locationId":"50",
+            "appPlatform":"WEB",
+            "appVersion":0,
+            "experiments":{},
+            "os":"UNKNOWN_OS"
         }
         for i in range(0, tries):
             proxy: Connection = self._get_connection()
             proxy.busy = True
             self.logger.debug("Прокси : %s", proxy.proxy_string)
             try:
-                response = requests.post(api_url, json=json_data, proxy=proxy.proxy_string, verify=False, impersonate="chrome120")
+                response = requests.post(api_url, headers=headers, json=json_data, proxy=proxy.proxy_string, verify=False, impersonate="chrome120")
                 response_data: dict = response.json()
             except Exception:
                 response = None
@@ -238,9 +236,10 @@ class Parser_url:
                 self.logger.info("Целевой URL: %s", self.url)
                 self.logger.info("Потоков: %s", self.threads)
                 self._single_url()
-            # filename = f"{uuid.uuid4().hex}.json"
-            # with open(filename, "w", encoding="utf-8") as file:
-            #     json.dump(sorted(set(self.all_titles)), file, indent=4, ensure_ascii=False)
+                # filename = f"{uuid.uuid4().hex}.json"
+                # with open(filename, "w", encoding="utf-8") as file:
+                #     json.dump(sorted(set(self.all_titles)), file, indent=4, ensure_ascii=False)
+                # self.all_titles = []
 
     def _single_url(self):
         self.parse_input_url()
@@ -571,11 +570,26 @@ class Parser_url:
             self.zakup_info = ""
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
-            # match = re.search(r"Apple iPad mini", item_title)
+            elif item_title.startswith("Игровая приставка"):
+                self.perecup_price = self._match_product_konsol(item_title, attributes)
+            elif item_title.startswith("Игровая портативная консоль"):
+                self.perecup_price = self._match_product_konsol(item_title, attributes)
+            elif item_title.startswith("Шлем Sony"):
+                self.perecup_price = self._match_product_shlem(item_title)
+            elif item_title.startswith("Фен Dyson"):
+                self.perecup_price = self._match_product_dyson(item_title)
+            elif item_title.startswith("Смартфон"):
+                self.perecup_price = self._match_product_smartphone(item_title, attributes)
+            elif item_title.startswith("Видеокарта"):
+                self.perecup_price = self._match_product_video_card(item_title, attributes)
+            elif item_title.startswith("Умная колонка") or item_title.startswith("Колонка умная"):
+                self.perecup_price = self._match_product_colonka(item_title)
+            # match = re.search(r"Яндекс", item_title)
             # if match:
             #     filename = f"'Z'.{uuid.uuid4().hex}.json"
             #     with open(filename, "w", encoding="utf-8") as file:
             #         json.dump(item, file, indent=4, ensure_ascii=False)
+            # print(item_title, self.perecup_price)
             # self.all_titles.append(item_title)
             if self.perecup_price is None:
                 if bonus_percent >= self.bonus_percent_alert:
@@ -595,206 +609,14 @@ class Parser_url:
                 else:
                     self._parse_item(item)
             self.rich_progress.update(page_progress, advance=1)
-
         self.rich_progress.remove_task(page_progress)
         parse_next_page = response_json["items"] and response_json["items"][-1]["isAvailable"]
         return parse_next_page
-    
-    def _match_category_phone_apple(self, input_string, attributes):
-        one = ["128", "128gb", "128гб"]
-        two = ["256", "256gb", "256гб"]
-        three = ["512", "512gb", "512гб"]
-        four = ["1024", "1024gb", "1024гб"]
-        
-        if any(x in input_string for x in one):
-            return "128"
-        elif any(x in input_string for x in two):
-            return "256"
-        elif any(x in input_string for x in three):
-            return "512"
-        elif any(x in input_string for x in four):
-            return "1024"
-                
-        if not attributes:
-            return None
-        for category, method in self.category_methods.items():
-            if input_string.startswith(category.lower()):
-                result = method(attributes)
-                if result:
-                    return result
-                if any(x in input_string for x in one):
-                    return "128"
-                elif any(x in input_string for x in two):
-                    return "256"
-                elif any(x in input_string for x in three):
-                    print("memore")
-                    return "512"
-                elif any(x in input_string for x in four):
-                    return "1024"
-        return None
-    
-    def _processor_apple(self, input_string, attributes):
-        if not attributes:
-            return None
-        processor_patterns = {"M1", "M2", "M3", "M4"}
-        for x in processor_patterns:
-            if x in input_string:
-                return x
-        processor = self._getProcessor(attributes)
-        for x in processor_patterns:
-            if x in processor:
-                return x
-        return None
-    
-    def _match_category_notebook_apple(self, input_string):
-        input_string = input_string.lower().replace(" ", "")
-
-        memory_patterns = {
-            "48": [r"48/256", r"/48/256", r"48/512", r"/48/512", r"48/1024", r"48/1000", r"48/1tb", r"48/1тб", r"/48/1024", r"/48/1000", r"/48/1tb", r"/48/1тб", r"48/2048", r"48/2000", r"48/2tb", r"48/2тб", r"/48/2048", r"/48/2000", r"/48/2tb", r"/48/2тб", r"48gb", r"/48gb", r"48гб", r"/48гб"],
-            "32": [r"32/256", r"/32/256", r"32/512", r"/32/512", r"32/1024", r"32/1000", r"32/1tb", r"32/1тб", r"/32/1024", r"/32/1000", r"/32/1tb", r"/32/1тб", r"32/2048", r"32/2000", r"32/2tb", r"32/2тб", r"/32/2048", r"/32/2000", r"/32/2tb", r"/32/2тб", r"32gb", r"/32gb", r"32гб", r"/32гб"],
-            "24": [r"24/256", r"/24/256", r"24/512", r"/24/512", r"24/1024", r"24/1000", r"24/1tb", r"24/1тб", r"/24/1024", r"/24/1000", r"/24/1tb", r"/24/1тб", r"24/2048", r"24/2000", r"24/2tb", r"24/2тб", r"/24/2048", r"/24/2000", r"/24/2tb", r"/24/2тб", r"24gb", r"/24gb", r"24гб", r"/24гб"],
-            "16": [r"16/256", r"/16/256", r"16/512", r"/16/512", r"16/1024", r"16/1000", r"16/1tb", r"16/1тб", r"/16/1024", r"/16/1000", r"/16/1tb", r"/16/1тб", r"16/2048", r"16/2000", r"16/2tb", r"16/2тб", r"/16/2048", r"/16/2000", r"/16/2tb", r"/16/2тб", r"16gb", r"/16gb", r"16гб", r"/16гб"],
-            "8": [r"8/256", r"/8/256", r"8/512", r"/8/512", r"8/1024", r"8/1000", r"8/1tb", r"8/1тб", r"/8/1024", r"/8/1000", r"/8/1tb", r"/8/1тб", r"8/2048", r"8/2000", r"8/2tb", r"8/2тб", r"/8/2048", r"/8/2000", r"/8/2tb", r"/8/2тб", r"8gb", r"/8gb", r"8гб", r"/8гб"]
-        }
-
-        hard_drive_patterns = {
-            "2048": [r"2048", r"2000", r"2000gb", r"2000 gb", r"2048gb", r"2048 gb", r"2048гб", r"2048 гб", r"2000 гб", r"2000гб", r"2tb", r"2тб", r"2 tb", r"2 тб"],
-            "1024": [r"1024", r"1000", r"1000gb", r"1000 gb", r"1024gb", r"1024 gb", r"1024гб", r"1024 гб", r"1000 гб", r"1000гб", r"1tb", r"1тб", r"1 tb", r"1 тб"],
-            "512": [r"512gb", r"512гб", r"512"],
-            "256": [r"256gb", r"256гб", r"256"]
-        }
-
-        memory = None
-        memory_hard = None
-
-        for mem, patterns in memory_patterns.items():
-            if any(re.search(pattern, input_string) for pattern in patterns):
-                memory = mem
-                break
-
-        for hdd, patterns in hard_drive_patterns.items():
-            if any(re.search(pattern, input_string) for pattern in patterns):
-                memory_hard = hdd
-                break
-
-        if memory and memory_hard:
-            return f"{memory}/{memory_hard}"
-        return None
-    
-    def _process_smartphone_apple(self, attributes):
-        return self._getMemory(attributes)
-    
-    def _process_notebook_apple(self, attributes):
-        return self._getMemory(attributes)
-    
-    def _process_planshet(self, attributes):
-        return self._getMemory(attributes)
-    
-    def _match_product_apple(self, input_string, attributes):
-        input_string = input_string.lower()
-        if input_string.startswith("смартфон"):
-            return self._match_product_phone_apple(input_string, self._match_category_phone_apple(input_string, attributes))
-        elif input_string.startswith("ноутбук"):
-            return self._match_product_notebook_apple(input_string, self._match_category_notebook_apple(input_string), self._processor_apple(input_string, attributes))
-        elif input_string.startswith("планшет"):
-            return self._match_product_planshet_apple(input_string, self._get_memory_planshet_apple(attributes), self._get_year_planshet_apple(input_string, attributes), self._get_size_planshet_apple(attributes))
-        
-        return None
-    
-    def _match_product_planshet_apple(self, input_string: str, memory: str, year: str, size: str):
-        if not memory or not year or not size:
-            return None
-        
-        for category, products in self.categories.items():
-            if input_string.startswith(category.lower()):
-                for product in products:
-                    if product["description"].lower() in input_string and product["memory"] in memory and product["year"] in year and product["diagonal"] in size:
-                        if product["lte"].lower() in input_string:
-                            self.zakup_info = product["result"]
-                            return product["priceLte"]
-                        self.zakup_info = product["result"]
-                        return product["price"]
-        return None
-        
-    def _get_memory_planshet_apple(self, attributes):
-        if not attributes:
-            return None
-        for attribute in attributes:
-            if attribute["title"].startswith("Встроенная память"):
-                return attribute["value"]
-        return None
-    
-    def _get_size_planshet_apple(self, attributes):
-        if not attributes:
-            return None
-        for attribute in attributes:
-            if attribute["title"].startswith("Диагональ экрана"):
-                return attribute["value"]
-        return None
-    
-    def _get_year_planshet_apple(self, input_string, attributes):
-        if not attributes:
-            return None
-        for attribute in attributes:
-            if attribute["title"].startswith("Год релиза"):
-                return attribute["value"]
-        
-        year_patterns = {"2020", "2021", "2022", "2024"}
-        for x in year_patterns:
-            if x in input_string:
-                return x
-        
-        return None
-    
-    def _match_product_notebook_apple(self, input_string: str, memory: str, processor: str):
-        if not memory or not processor:
-            return None
-        for category, products in self.categories.items():
-            if input_string.startswith(category.lower()):
-                for product in products:
-                    if product["code"].lower() in input_string:
-                        self.zakup_info = product["result"]
-                        return product["price"]
-                    if product["description"].lower() in input_string and product["memory"] in memory and product["proc"] in processor:
-                        self.zakup_info = product["result"]
-                        return product["price"]
-        return None
-    
-    def _match_product_phone_apple(self, input_string: str, memory: str):
-        if not memory:
-            return None
-        for category, products in self.categories.items():
-            if input_string.startswith(category.lower()):
-                for product in products:
-                    if product["description"].lower() in input_string and product["memory"] in memory:
-                        if product["sim"].lower() in input_string:
-                            if not product["priceSim"]:
-                                return None
-                            self.zakup_info = product["result"]
-                            return product["priceSim"]
-                        if not product["price"]:
-                            return None
-                        self.zakup_info = product["result"]
-                        return product["price"]
-        return None
-    
-    def _getProcessor(self, attributes):
-        for attribute in attributes:
-            if attribute["title"].startswith("Модель процессора"):
-                return attribute["value"]
-        return None
     
     def _getOperative(self, attributes):
         """Ищет в атрибутах значение оперативной памяти и возвращает его"""
         for attribute in attributes:
             if attribute["title"].startswith("Оперативная память"):
-                return attribute["value"]
-        return None
-
-    def _getMemory(self, attributes):
-        """Ищет в атрибутах значение оперативной памяти и возвращает его"""
-        for attribute in attributes:
-            if attribute["title"].startswith("Встроенная память"):
                 return attribute["value"]
         return None
 
@@ -878,3 +700,368 @@ class Parser_url:
                                 self.rich_progress.update(main_job, total=len(pages_to_parse))
                                 fut.cancel()
         self.rich_progress.stop()
+
+
+
+# ------------------------------APPLE------------------------------
+
+    def _match_product_apple(self, input_string, attributes):
+            input_string = input_string.lower()
+            if input_string.startswith("смартфон"):
+                return self._match_product_phone_apple(input_string, self._match_category_phone_apple(input_string, attributes))
+            elif input_string.startswith("ноутбук"):
+                return self._match_product_notebook_apple(input_string, self._match_category_notebook_apple(input_string), self._processor_apple(input_string, attributes))
+            elif input_string.startswith("планшет"):
+                return self._match_product_planshet_apple(input_string, self._get_memory_planshet_apple(attributes), self._get_year_planshet_apple(input_string, attributes), self._get_size_planshet_apple(attributes))
+            elif "наушники" in input_string:
+                return self._match_product_yho_apple(input_string)
+                
+            return None
+    
+    # --------------------PHONE--------------------
+    
+    def _match_product_phone_apple(self, input_string: str, memory: str):
+        if not memory:
+            return None
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string and product["memory"] in memory:
+                        if product["sim"].lower() in input_string:
+                            if not product["priceSim"]:
+                                return None
+                            self.zakup_info = product["result"]
+                            return product["priceSim"]
+                        if not product["price"]:
+                            return None
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    def _match_category_phone_apple(self, input_string, attributes):
+        one = ["128", "128gb", "128гб"]
+        two = ["256", "256gb", "256гб"]
+        three = ["512", "512gb", "512гб"]
+        four = ["1024", "1024gb", "1024гб"]
+        
+        if any(x in input_string for x in one):
+            return "128"
+        elif any(x in input_string for x in two):
+            return "256"
+        elif any(x in input_string for x in three):
+            return "512"
+        elif any(x in input_string for x in four):
+            return "1024"
+                
+        if not attributes:
+            return None
+        result = self._process_smartphone_apple(attributes)
+        if result:
+            return result
+        if any(x in input_string for x in one):
+            return "128"
+        elif any(x in input_string for x in two):
+            return "256"
+        elif any(x in input_string for x in three):
+            return "512"
+        elif any(x in input_string for x in four):
+            return "1024"
+        return None
+    
+    def _process_smartphone_apple(self, attributes):
+        return self._get_memory_smartphone_apple(attributes)
+    
+    def _get_memory_smartphone_apple(self, attributes):
+        """Ищет в атрибутах значение оперативной памяти и возвращает его"""
+        for attribute in attributes:
+            if attribute["title"].startswith("Встроенная память"):
+                return attribute["value"]
+        return None
+    
+    # --------------------NOTEBOOK--------------------
+
+    def _match_product_notebook_apple(self, input_string: str, memory: str, processor: str):
+            if not memory or not processor:
+                return None
+            for category, products in self.categories.items():
+                if input_string.startswith(category.lower()):
+                    for product in products:
+                        if product["code"].lower() in input_string:
+                            self.zakup_info = product["result"]
+                            return product["price"]
+                        if product["description"].lower() in input_string and product["memory"] in memory and product["proc"] in processor:
+                            self.zakup_info = product["result"]
+                            return product["price"]
+            return None
+        
+    def _match_category_notebook_apple(self, input_string):
+        input_string = input_string.lower().replace(" ", "")
+
+        memory_patterns = {
+            "48": [r"48/256", r"/48/256", r"48/512", r"/48/512", r"48/1024", r"48/1000", r"48/1tb", r"48/1тб", r"/48/1024", r"/48/1000", r"/48/1tb", r"/48/1тб", r"48/2048", r"48/2000", r"48/2tb", r"48/2тб", r"/48/2048", r"/48/2000", r"/48/2tb", r"/48/2тб", r"48gb", r"/48gb", r"48гб", r"/48гб"],
+            "32": [r"32/256", r"/32/256", r"32/512", r"/32/512", r"32/1024", r"32/1000", r"32/1tb", r"32/1тб", r"/32/1024", r"/32/1000", r"/32/1tb", r"/32/1тб", r"32/2048", r"32/2000", r"32/2tb", r"32/2тб", r"/32/2048", r"/32/2000", r"/32/2tb", r"/32/2тб", r"32gb", r"/32gb", r"32гб", r"/32гб"],
+            "24": [r"24/256", r"/24/256", r"24/512", r"/24/512", r"24/1024", r"24/1000", r"24/1tb", r"24/1тб", r"/24/1024", r"/24/1000", r"/24/1tb", r"/24/1тб", r"24/2048", r"24/2000", r"24/2tb", r"24/2тб", r"/24/2048", r"/24/2000", r"/24/2tb", r"/24/2тб", r"24gb", r"/24gb", r"24гб", r"/24гб"],
+            "16": [r"16/256", r"/16/256", r"16/512", r"/16/512", r"16/1024", r"16/1000", r"16/1tb", r"16/1тб", r"/16/1024", r"/16/1000", r"/16/1tb", r"/16/1тб", r"16/2048", r"16/2000", r"16/2tb", r"16/2тб", r"/16/2048", r"/16/2000", r"/16/2tb", r"/16/2тб", r"16gb", r"/16gb", r"16гб", r"/16гб"],
+            "8": [r"8/256", r"/8/256", r"8/512", r"/8/512", r"8/1024", r"8/1000", r"8/1tb", r"8/1тб", r"/8/1024", r"/8/1000", r"/8/1tb", r"/8/1тб", r"8/2048", r"8/2000", r"8/2tb", r"8/2тб", r"/8/2048", r"/8/2000", r"/8/2tb", r"/8/2тб", r"8gb", r"/8gb", r"8гб", r"/8гб"]
+        }
+
+        hard_drive_patterns = {
+            "2048": [r"2048", r"2000", r"2000gb", r"2000 gb", r"2048gb", r"2048 gb", r"2048гб", r"2048 гб", r"2000 гб", r"2000гб", r"2tb", r"2тб", r"2 tb", r"2 тб"],
+            "1024": [r"1024", r"1000", r"1000gb", r"1000 gb", r"1024gb", r"1024 gb", r"1024гб", r"1024 гб", r"1000 гб", r"1000гб", r"1tb", r"1тб", r"1 tb", r"1 тб"],
+            "512": [r"512gb", r"512гб", r"512"],
+            "256": [r"256gb", r"256гб", r"256"]
+        }
+
+        memory = None
+        memory_hard = None
+
+        for mem, patterns in memory_patterns.items():
+            if any(re.search(pattern, input_string) for pattern in patterns):
+                memory = mem
+                break
+
+        for hdd, patterns in hard_drive_patterns.items():
+            if any(re.search(pattern, input_string) for pattern in patterns):
+                memory_hard = hdd
+                break
+
+        if memory and memory_hard:
+            return f"{memory}/{memory_hard}"
+        return None
+    
+    def _processor_apple(self, input_string, attributes):
+        if not attributes:
+            return None
+        processor_patterns = {"M1", "M2", "M3", "M4"}
+        for x in processor_patterns:
+            if x in input_string:
+                return x
+        processor = self._getProcessor(attributes)
+        for x in processor_patterns:
+            if x in processor:
+                return x
+        return None
+    
+    def _getProcessor(self, attributes):
+        for attribute in attributes:
+            if attribute["title"].startswith("Модель процессора"):
+                return attribute["value"]
+        return None
+    
+        # --------------------PLANSHET--------------------
+
+    def _match_product_planshet_apple(self, input_string: str, memory: str, year: str, size: str):
+        if not memory or not year or not size:
+            return None
+        
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string and product["memory"] in memory and product["year"] in year and product["diagonal"] in size:
+                        if product["lte"].lower() in input_string:
+                            self.zakup_info = product["result"]
+                            return product["priceLte"]
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    def _get_memory(self, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Оперативная память"):
+                return attribute["value"]
+        return None
+        
+    def _get_memory_planshet_apple(self, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Встроенная память"):
+                return attribute["value"]
+        return None
+    
+    def _get_size_planshet_apple(self, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Диагональ экрана"):
+                return attribute["value"]
+        return None
+    
+    def _get_year_planshet_apple(self, input_string, attributes):
+        if not attributes:
+            return None
+        for attribute in attributes:
+            if attribute["title"].startswith("Год релиза"):
+                return attribute["value"]
+        
+        year_patterns = {"2020", "2021", "2022", "2024"}
+        for x in year_patterns:
+            if x in input_string:
+                return x
+        
+        return None
+    
+    # --------------------KONSOL--------------------
+
+    def _match_product_konsol(self, input_string, attributes):
+        input_string = input_string.lower()
+        if not attributes:
+            return None
+        
+        memory = self._get_memory_konsol(input_string, attributes)
+        if not memory:
+            return None
+        
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string:
+                        for x in product["code"]:
+                            if x in input_string:
+                                self.zakup_info = product["result"]
+                                return product["price"]
+                            if product["memory"] in memory:
+                                self.zakup_info = product["result"]
+                                return product["price"]
+        return None
+    
+    def _get_memory_konsol(self, input_string, attributes):
+        for attribute in attributes:
+            if attribute["title"].startswith("Объем встроенной памяти"):
+                return attribute["value"]
+        memory_patterns = {
+        "512": [r"500", r"512", r"500gb", r"512gb", r"500гб", r"512гб", r"500 gb", r"512 gb", r"500 гб", r"512 гб"],
+        "825": [r"825", r"825gb", r"825 gb", r"825гб", r"825 гб"],
+        "1 Тб": [r"1000", r"1024", r"1000gb", r"1024gb", r"1000 gb", r"1024 gb", r"1000гб", r"1024гб", r"1000 гб", r"1024 гб", r"1tb", r"1 tb", r"1тб", r"1 тб"],
+        "2 Тб": [r"2000", r"2048", r"2000gb", r"2048gb", r"2000 gb", r"2048 gb", r"2000гб", r"2048гб", r"2000 гб", r"2048 гб", r"2tb", r"2 tb", r"2тб", r"2 тб"]
+        }
+        
+        for mem, patterns in memory_patterns.items():
+            if any(re.search(pattern, input_string) for pattern in patterns):
+                return mem
+        return None
+    
+    # --------------------VR--------------------
+    
+    def _match_product_shlem(self, input_string: str):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string:
+                            return product["price"]
+        return None
+    
+    # --------------------DYSON--------------------
+    
+    def _match_product_dyson(self, input_string: str):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["code"].lower() in input_string and product["description"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------СМАРТФОНЫ--------------------
+    
+    def _match_product_smartphone(self, input_string, attributes):
+        input_string = input_string.lower()
+        memory = self._getMemory(input_string, attributes)
+        if not memory:
+            return None
+        
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string and product["memory"] in memory:
+                        self.zakup_info = product["result"]
+                        if product["sim"].lower() in input_string:
+                            return product["priceSim"]
+                        return product["price"]
+        return None
+        
+        
+    def _getMemory(self, input_string, attributes):
+        memory = None
+        memory_hard = None
+        if attributes:
+            memory = self._get_memory(attributes)
+            memory_hard = self._get_memory_planshet_apple(attributes)
+            
+        memory_patterns = {
+            "4": [r"/4/", r" 4/", r"4gb", r"4 gb", r"4гб", r"4 гб"],
+            "6": [r"/6/", r" 6/", r"6gb", r"6 gb", r"6гб", r"6 гб"],
+            "8": [r"/8/", r" 8/", r"8gb", r"8 gb", r"8гб", r"8 гб"],
+            "12": [r"/12/", r" 12/", r"12gb", r"12 gb", r"12гб", r"12 гб"],
+            "16": [r"/16/", r" 16/", r"16gb", r"16 gb", r"16гб", r"16 гб"],
+            "24": [r"/24/", r" 24/", r"24gb", r"24 gb", r"24гб", r"24 гб"],
+            "32": [r"/32/", r" 32/", r"32gb", r"32 gb", r"32гб", r"32 гб"],
+            "64": [r"/64", r"/64gb", r"/64 gb", r"/64гб", r"/64 гб", r" 64 gb", r"64gb", r"64гб", r"64 гб"],
+            "128": [r"128", r"/128", r"/128gb", r"/128 gb", r"/128гб", r"/128 гб", r"128 gb", r"128gb", r"128гб", r"128 гб"],
+            "256": [r"256", r"/256", r"/256gb", r"/256 gb", r"/256гб", r"/256 гб", r"256 gb", r"256gb", r"256гб", r"256 гб"],
+            "512": [r"512", r"500", r"/512", r"/500", r"/512gb", r"/500gb", r"/512 gb", r"500 gb", r"/512гб", r"/500гб", r"/512 гб", r"/500 гб", r"512 gb", r"500 gb", r"512gb", r"500gb", r"512гб", r"500гб", r"512 гб", r"500 гб"],
+            "1024": [r"1024", r"1000", r"/1024", r"/1000", r"/1024gb", r"/1000gb", r"/1024 gb", r"1000 gb", r"/1024гб", r"/1000гб", r"/1024 гб", r"/1000 гб", r"1024 gb", r"1000 gb", r"1024gb", r"1000gb", r"1024гб", r"1000гб", r"1024 гб", r"1000 гб"],
+            "2048": [r"2048", r"2000", r"/2048", r"/2000", r"/2048gb", r"/2000gb", r"/2048 gb", r"2000 gb", r"/2048гб", r"/2000гб", r"/2048 гб", r"/2000 гб", r"2048 gb", r"2000 gb", r"2048gb", r"2000gb", r"2048гб", r"2000гб", r"2048 гб", r"2000 гб"]
+        }
+        
+        if memory:
+            for mem, patterns in memory_patterns.items():
+                if any(re.search(pattern, memory) for pattern in patterns):
+                    memory = mem
+        else:
+            for mem, patterns in memory_patterns.items():
+                if any(re.search(pattern, input_string) for pattern in patterns):
+                    memory = mem
+        if memory_hard:
+            for mem, patterns in memory_patterns.items():
+                if any(re.search(pattern, memory) for pattern in patterns):
+                    memory_hard = mem
+        else:
+            for mem, patterns in memory_patterns.items():
+                if any(re.search(pattern, input_string) for pattern in patterns):
+                    memory_hard = mem
+        if not memory or not memory_hard:
+            return None
+        return f"{memory}/{memory_hard}"
+    
+    # --------------------ВИДЕОКАРТЫ--------------------
+    
+    def _match_product_video_card(self, input_string, attributes):
+        input_string = input_string.lower()
+        
+        for category, products in self.categories.items():
+            if input_string.startswith(category.lower()):
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------НАУШНИКИ APPLE--------------------
+    
+    def _match_product_yho_apple(self, input_string):
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        if product["name"].lower() in input_string:
+                            return product["priceYear"]
+                        return product["price"]
+        return None
+    
+    # --------------------УМНАЯ КОЛОНКА--------------------
+    
+    def _match_product_colonka(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None

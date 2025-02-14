@@ -439,6 +439,462 @@
       "price": 33000,
       "priceSim": 33000,
       "result": "Закупаем"
+    },
+    {
+      "description": "Samsung Galaxy S24 Ultra",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 90000,
+      "priceSim": 92000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24 Ultra",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 78000,
+      "priceSim": 80000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24 Plus",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 76000,
+      "priceSim": 78000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24 Plus",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 67000,
+      "priceSim": 69000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24 FE",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 60000,
+      "priceSim": 62000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24 FE",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 50000,
+      "priceSim": 52000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 40000,
+      "priceSim": 42000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 66000,
+      "priceSim": 68000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 55500,
+      "priceSim": 57500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 45000,
+      "priceSim": 47000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23 Ultra",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 71000,
+      "priceSim": 73000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23 Ultra",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 68000,
+      "priceSim": 70000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23 Ultra",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 63500,
+      "priceSim": 66500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23 FE",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 43000,
+      "priceSim": 45000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 36000,
+      "priceSim": 38000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 47500,
+      "priceSim": 49500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 41000,
+      "priceSim": 43000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Ultra",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 90000,
+      "priceSim": 92000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Ultra",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 78000,
+      "priceSim": 80000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Plus",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 76000,
+      "priceSim": 78000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Plus",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 67000,
+      "priceSim": 69000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 FE",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 60000,
+      "priceSim": 62000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 FE",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 50000,
+      "priceSim": 52000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 40000,
+      "priceSim": 42000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 66000,
+      "priceSim": 68000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 55500,
+      "priceSim": 57500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 45000,
+      "priceSim": 47000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 Ultra",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 71000,
+      "priceSim": 73000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 Ultra",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 68000,
+      "priceSim": 70000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 Ultra",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 63500,
+      "priceSim": 66500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 FE",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 43000,
+      "priceSim": 45000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 36000,
+      "priceSim": 38000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 47500,
+      "priceSim": 49500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 41000,
+      "priceSim": 43000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A55",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 29000,
+      "priceSim": 31000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A55",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 26500,
+      "priceSim": 28500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A55",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 24500,
+      "priceSim": 26500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A54",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 23500,
+      "priceSim": 25500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A54",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 18500,
+      "priceSim": 20500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A35",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 21000,
+      "priceSim": 23000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A35",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 18500,
+      "priceSim": 20500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A34",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 17500,
+      "priceSim": 19500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A34",
+      "sim": "eSIM",
+      "memory": "6/128",
+      "price": 11000,
+      "priceSim": 11000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A15",
+      "sim": "eSIM",
+      "memory": "6/128",
+      "price": 10000,
+      "priceSim": 10000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy A15",
+      "sim": "eSIM",
+      "memory": "4/128",
+      "price": 9000,
+      "priceSim": 9000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO X6 Pro",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 25000,
+      "priceSim": 25000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO X6",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 19000,
+      "priceSim": 19000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO M6 Pro",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 18500,
+      "priceSim": 18500,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO M6 Pro",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 16000,
+      "priceSim": 16000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO F6 Pro",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 39000,
+      "priceSim": 39000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO F6 Pro",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 39000,
+      "priceSim": 39000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO F6",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 30000,
+      "priceSim": 30000,
+      "result": "Стоп"
+    },
+    {
+      "description": "POCO F6 Pro",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 26000,
+      "priceSim": 26000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Redmi 13",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 12500,
+      "priceSim": 12500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Redmi 13",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 11700,
+      "priceSim": 11700,
+      "result": "Стоп"
+    },
+    {
+      "description": "Redmi 13",
+      "sim": "eSIM",
+      "memory": "6/128",
+      "price": 10800,
+      "priceSim": 10800,
+      "result": "Стоп"
+    },
+    {
+      "description": "Redmi Note 13",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 13500,
+      "priceSim": 13500,
+      "result": "Стоп"
     }
   ],
   "Ноутбук": [
@@ -1472,49 +1928,49 @@
     {
       "description": "Playstation 4 Slim",
       "memory": "1 Тб",
-      "code": [],
+      "code": ["заглушка"],
       "price": 26000,
       "result": "Закупаем"
     },
     {
       "description": "Playstation 4 Slim",
       "memory": "1 Тб",
-      "code": [],
+      "code": ["заглушка"],
       "price": 26000,
       "result": "Закупаем"
     },
     {
       "description": "Playstation 4 Slim",
       "memory": "1 Тб",
-      "code": [],
+      "code": ["заглушка"],
       "price": 26000,
       "result": "Закупаем"
     },
     {
       "description": "Playstation 4 Slim",
       "memory": "512",
-      "code": [],
+      "code": ["заглушка"],
       "price": 23000,
       "result": "Закупаем"
     },
     {
       "description": "Playstation 4 Slim",
       "memory": "512",
-      "code": [],
+      "code": ["заглушка"],
       "price": 23000,
       "result": "Закупаем"
     },
     {
       "description": "Microsoft Xbox Series X",
       "memory": "2 Тб",
-      "code": [],
+      "code": ["заглушка"],
       "price": 50500,
       "result": "Закупаем"
     },
     {
       "description": "Microsoft Xbox Series X",
       "memory": "1 Тб",
-      "code": [],
+      "code": ["заглушка"],
       "price": 50500,
       "result": "Закупаем"
     },
@@ -1522,29 +1978,406 @@
     {
       "description": "Microsoft Xbox Series X",
       "memory": "512",
-      "code": [],
+      "code": ["заглушка"],
       "price": 50500,
       "result": "Закупаем"
     },
     {
       "description": "Microsoft Xbox Series S",
       "memory": "1 Тб",
-      "code": [],
+      "code": ["заглушка"],
       "price": 26500,
       "result": "Закупаем"
     },
     {
       "description": "Microsoft Xbox Series S",
       "memory": "512",
-      "code": [],
+      "code": ["заглушка"],
       "price": 26500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck OLED",
+      "memory": "512",
+      "code": ["заглушка"],
+      "price": 52500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck OLED",
+      "memory": "1 Тб",
+      "code": ["заглушка"],
+      "price": 62000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck",
+      "memory": "512",
+      "code": ["заглушка"],
+      "price": 41500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck",
+      "memory": "256",
+      "code": ["заглушка"],
+      "price": 40500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck",
+      "memory": "64",
+      "code": ["заглушка"],
+      "price": 34000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Nintendo Switch OLED",
+      "memory": "64",
+      "code": ["заглушка"],
+      "price": 23000,
+      "result": "Закупаем"
+    }
+  ],
+  "Игровая портативная": [
+    {
+      "description": "Valve Steam Deck OLED",
+      "memory": "512",
+      "code": ["заглушка"],
+      "price": 52500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck OLED",
+      "memory": "1 Тб",
+      "code": ["заглушка"],
+      "price": 62000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck",
+      "memory": "512",
+      "code": ["заглушка"],
+      "price": 41500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck",
+      "memory": "256",
+      "code": ["заглушка"],
+      "price": 40500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Valve Steam Deck",
+      "memory": "64",
+      "code": ["заглушка"],
+      "price": 34000,
       "result": "Закупаем"
     }
   ],
   "Шлем Sony": [
     {
-      "description": "Playstation VR 2",
+      "description": "Playstation VR2",
       "price": 39500,
+      "result": "Закупаем"
+    }
+  ],
+  "Фен Dyson": [
+    {
+      "description": "Dyson",
+      "code": "HS08",
+      "price" : 47500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Dyson",
+      "code": "HS05",
+      "price" : 44000,
+      "result": "Закупаем"
+    }
+  ],
+  "Видеокарта": [
+    {
+      "description": "Palit",
+      "name": "3060 dual",
+      "price" : 25000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4060 dual",
+      "price" : 30000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4060 stormx",
+      "price" : 28500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4060 ti dual",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4060 ti stormx",
+      "price" : 36000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4060 ti Jetstream",
+      "price" : 39500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4070 dual",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4070 Jetstream",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Palit",
+      "name": "4070 super dual",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "3060 gaming",
+      "price" : 25000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "3060 Windforce",
+      "price" : 25000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4060 Windforce",
+      "price" : 30000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4060 eagle",
+      "price" : 30000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4060 gaming",
+      "price" : 30000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4060 ti eagle",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4060 ti Windforce",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4060 ti gaming",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4070 super Windforce",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4070 Windforce",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4070 super eagle",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4070 eagle",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4070 super gaming",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Gigabyte",
+      "name": "4070 gaming",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "3060 Ventus 2x",
+      "price" : 25000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4060 Ventus 2x",
+      "price" : 30000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4060 ti Ventus 2x",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4060 ti Ventus 3x",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4060 ti gaming",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4070 super Ventus 2x",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4070 Ventus 2x",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4070 super Ventus 3x",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4070 Ventus 3x",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Msi",
+      "name": "4070 gaming slim",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Asus",
+      "name": "4060 dual",
+      "price" : 30000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Asus",
+      "name": "4060 ti dual",
+      "price" : 37500,
+      "result": "Релиз"
+    },
+    {
+      "description": "Asus",
+      "name": "4070 dual",
+      "price" : 52000,
+      "result": "Релиз"
+    },
+    {
+      "description": "Asus",
+      "name": "4060 super dual",
+      "price" : 52000,
+      "result": "Релиз"
+    }
+  ],
+  "Наушники": [
+    {
+      "description": "AirPods Max",
+      "name": "2024",
+      "price" : 44000,
+      "priceYear": 53000,
+      "result": "Стоп"
+    },
+    {
+      "description": "AirPods Pro",
+      "name": "2",
+      "price" : 18600,
+      "priceYear": 18600,
+      "result": "Стоп"
+    }
+  ],
+  "колонка": [
+    {
+      "description": "мини 3",
+      "name": "с часами",
+      "price" : 7300,
+      "result": "Закупаем"
+    },
+    {
+      "description": "мини",
+      "name": "с часами",
+      "price" : 6100,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Дуо Макс",
+      "name": "яндекс",
+      "price" : 32000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Макс",
+      "name": "яндекс",
+      "price" : 25000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Миди",
+      "name": "яндекс",
+      "price" : 12200,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Станция 2",
+      "name": "яндекс",
+      "price" : 12400,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Станция лайт",
+      "name": "яндекс",
+      "price" : 3650,
       "result": "Закупаем"
     }
   ]
