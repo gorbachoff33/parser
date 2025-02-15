@@ -249,8 +249,9 @@ class Parser_url:
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
+                    print(self.tg_client_error.thread_id)
                     message = f"🟢 <b>Статус:</b> Запуск успешный"
-                    executor.submit(self.tg_client_phone.notify, message, None)
+                    executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
             for single_url in self.urls:

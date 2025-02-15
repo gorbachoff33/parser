@@ -45,6 +45,7 @@ class TelegramClient:
         else:
             base_url = f"https://api.telegram.org/bot{self.bot_token}/sendMessage"
             params = {"chat_id": self.chat_id, "message_thread_id": self.thread_id, "text": message, "parse_mode": "HTML"}
+            print(params)
             try:
                 response = requests.get(base_url, params=params)
                 response.raise_for_status()
