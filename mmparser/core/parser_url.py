@@ -248,6 +248,9 @@ class Parser_url:
         utils.check_for_new_version()
         if self.address:
             self._get_address_from_string(self.address)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+                    message = f"🟢 <b>Статус:</b> Запуск успешный"
+                    executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
             for single_url in self.urls:

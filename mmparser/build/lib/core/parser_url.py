@@ -248,6 +248,9 @@ class Parser_url:
         utils.check_for_new_version()
         if self.address:
             self._get_address_from_string(self.address)
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+                    message = f"🟢 <b>Статус:</b> Запуск успешный"
+                    executor.submit(self.tg_client_phone.notify, message, None)
         while True:
             db_utils.delete_old_entries()
             for single_url in self.urls:
@@ -264,7 +267,6 @@ class Parser_url:
     def _single_url(self):
         self.parse_input_url()
         if self.parsed_url and not self.job_name:
-            print("TTTTTTTTTT")
             search_text = self.parsed_url.get("searchText", {})
             collection_title = (self.parsed_url.get("collection", {}) or {}).get("title")
             merchant = (self.parsed_url.get("merchant", {}) or {}).get("slug")
@@ -272,7 +274,6 @@ class Parser_url:
             self.job_name = search_text or collection_title or merchant or unknown
             self.job_name = utils.slugify(self.job_name)
         if self.parsed_url["type"] == "TYPE_PRODUCT_CARD":
-            print("KKKKKKKKKK")
             self._parse_card()
             self.logger.info("%s", self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
         else:
@@ -597,7 +598,7 @@ class Parser_url:
             brand = item["goods"]["brand"]
             self.perecup_price = None
             self.zakup_info = ""
-            self.naming_product_for_tg_chat = "Перекуп"
+            self.naming_product_for_tg_chat = ""
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
             elif item_title.startswith("Игровая приставка"):
@@ -622,15 +623,8 @@ class Parser_url:
                 self.perecup_price = self._match_product_pilesos_karcher(item_title)
             elif "телевизор sber" in item_title.lower():
                 self.perecup_price = self._match_product_sber(item_title)
-            else:
-                if item_title.startswith("Смартфон"):
-                    self.naming_product_for_tg_chat = "Смартфон"
-                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
-                    self.naming_product_for_tg_chat = "Компьютер"
-                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
-                    self.naming_product_for_tg_chat = "Ноутбук"
-                elif item_title.startswith("Монитор"):
-                    self.naming_product_for_tg_chat = "Монитор"
+            elif "геймпад" in item_title.lower():
+                self.perecup_price = self._match_product_gamepad(item_title)
                     
             # match = re.search(r"Яндекс", item_title)
             # if match:
@@ -640,6 +634,14 @@ class Parser_url:
             # print(item_title, self.perecup_price)
             # self.all_titles.append(item_title)
             if self.perecup_price is None:
+                if item_title.startswith("Смартфон"):
+                    self.naming_product_for_tg_chat = "Смартфон"
+                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
+                    self.naming_product_for_tg_chat = "Компьютер"
+                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
+                    self.naming_product_for_tg_chat = "Ноутбук"
+                elif item_title.startswith("Монитор"):
+                    self.naming_product_for_tg_chat = "Монитор"
                 if bonus_percent >= self.bonus_percent_alert:
                     if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
                         self.logger.info("Парсим предложения %s", item_title)
@@ -697,7 +699,6 @@ class Parser_url:
 
     def _parse_card(self) -> None:
         """Парсинг карточки товара"""
-        print("LLLLLLLLLLLLLLL")
         item = self._get_card_info(self.parsed_url["goods"]["goodsId"])
         offers = self._get_offers(self.parsed_url["goods"]["goodsId"])
         self.job_name = utils.slugify(item["title"])
@@ -749,8 +750,6 @@ class Parser_url:
                                 self.rich_progress.update(main_job, total=len(pages_to_parse))
                                 fut.cancel()
         self.rich_progress.stop()
-
-
 
 # ------------------------------APPLE------------------------------
 
@@ -1158,5 +1157,17 @@ class Parser_url:
                 for product in products:
                     if product["description"].lower() in input_string:
                         self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    def _match_product_gamepad(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        if product["name"].lower() in input_string:
+                            return product["priceEdge"]
                         return product["price"]
         return None

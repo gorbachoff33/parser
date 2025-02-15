@@ -101,7 +101,7 @@ def delete_old_entries():
     sqlite_connection = sqlite3.connect(FILENAME)
     cursor = sqlite_connection.cursor()
 
-    one_day_ago = (datetime.datetime.now() - datetime.timedelta(days=1)).strftime("%Y-%m-%d %H:%M:%S")
+    one_day_ago = (datetime.datetime.now() - datetime.timedelta(days=3)).strftime("%Y-%m-%d %H:%M:%S")
 
     cursor.execute("DELETE FROM products WHERE scraped_at < ?", (one_day_ago,))
     sqlite_connection.commit()
