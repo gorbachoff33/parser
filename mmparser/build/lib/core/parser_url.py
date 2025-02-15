@@ -249,7 +249,6 @@ class Parser_url:
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                    print(self.tg_client_error.thread_id)
                     message = f"🟢 <b>Статус:</b> Запуск успешный"
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
