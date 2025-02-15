@@ -1,5 +1,7 @@
 {
   "urls": [
+    "https://megamarket.ru/catalog/dzhoystiki-dlya-xbox/",
+    "https://megamarket.ru/catalog/dzhoystiki-dlya-ps/",
     "https://megamarket.ru/catalog/smartfony-apple/",
     "https://megamarket.ru/catalog/smartfony/#?filters=%7B%222B0B1FF4756D49CF84B094522D57ED3D%22%3A%5B%22Samsung%22%2C%22POCO%22%2C%22Redmi%22%5D%7D",
     "https://megamarket.ru/catalog/apple-macbook/",
@@ -44,7 +46,7 @@
   "price_bonus_value_alert": "",
   "bonus_value_alert": "",
   "bonus_percent_alert": 30,
-  "alert_repeat_timeout": 24,
+  "alert_repeat_timeout": 72,
   "use_merchant_blacklist": "False",
   "threads": 1,
   "delay": 1.8,

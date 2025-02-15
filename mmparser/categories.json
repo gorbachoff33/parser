@@ -2399,19 +2399,19 @@
     {
       "description": "Karcher",
       "name": "K 5 Basic",
-      "price" : 12000,
+      "price" : 25000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "K 5 Power Control",
-      "price" : 12000,
+      "price" : 30000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "K 5 Compact",
-      "price" : 12000,
+      "price" : 25000,
       "result": "Закупаем"
     }
   ],
@@ -2419,25 +2419,25 @@
     {
       "description": "Karcher",
       "name": "WD 5 S",
-      "price" : 12000,
+      "price" : 18000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "WD 5 P S",
-      "price" : 12000,
+      "price" : 25000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "WD 5 P",
-      "price" : 12000,
+      "price" : 25000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "WD 5",
-      "price" : 12000,
+      "price" : 19000,
       "result": "Закупаем"
     }
   ],
@@ -2535,6 +2535,22 @@
     {
       "description": "SDX-32H2012S",
       "price" : 9000,
+      "result": "Закупаем"
+    }
+  ],
+  "геймпад": [
+    {
+      "description": "sony",
+      "name": "edge",
+      "price" : 5600,
+      "priceEdge": 16500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "microsoft",
+      "name": "series x",
+      "price" : null,
+      "priceEdge": 4400,
       "result": "Закупаем"
     }
   ]

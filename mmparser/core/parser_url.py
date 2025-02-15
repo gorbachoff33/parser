@@ -272,9 +272,9 @@ class Parser_url:
             self.job_name = utils.slugify(self.job_name)
         if self.parsed_url["type"] == "TYPE_PRODUCT_CARD":
             self._parse_card()
-            self.logger.info("%s %s", self.job_name, self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
+            self.logger.info("%s", self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
         else:
-            self.logger.info("%s %s", self.job_name, self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
+            self.logger.info("%s", self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
             self._parse_multi_page()
             self.logger.info("Спаршено %s товаров", self.scraped_tems_counter)
 
@@ -595,7 +595,7 @@ class Parser_url:
             brand = item["goods"]["brand"]
             self.perecup_price = None
             self.zakup_info = ""
-            self.naming_product_for_tg_chat = "Перекуп"
+            self.naming_product_for_tg_chat = ""
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
             elif item_title.startswith("Игровая приставка"):
@@ -620,15 +620,8 @@ class Parser_url:
                 self.perecup_price = self._match_product_pilesos_karcher(item_title)
             elif "телевизор sber" in item_title.lower():
                 self.perecup_price = self._match_product_sber(item_title)
-            else:
-                if item_title.startswith("Смартфон"):
-                    self.naming_product_for_tg_chat = "Смартфон"
-                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
-                    self.naming_product_for_tg_chat = "Компьютер"
-                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
-                    self.naming_product_for_tg_chat = "Ноутбук"
-                elif item_title.startswith("Монитор"):
-                    self.naming_product_for_tg_chat = "Монитор"
+            elif "геймпад" in item_title.lower():
+                self.perecup_price = self._match_product_gamepad(item_title)
                     
             # match = re.search(r"Яндекс", item_title)
             # if match:
@@ -638,6 +631,14 @@ class Parser_url:
             # print(item_title, self.perecup_price)
             # self.all_titles.append(item_title)
             if self.perecup_price is None:
+                if item_title.startswith("Смартфон"):
+                    self.naming_product_for_tg_chat = "Смартфон"
+                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
+                    self.naming_product_for_tg_chat = "Компьютер"
+                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
+                    self.naming_product_for_tg_chat = "Ноутбук"
+                elif item_title.startswith("Монитор"):
+                    self.naming_product_for_tg_chat = "Монитор"
                 if bonus_percent >= self.bonus_percent_alert:
                     if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
                         self.logger.info("Парсим предложения %s", item_title)
@@ -746,8 +747,6 @@ class Parser_url:
                                 self.rich_progress.update(main_job, total=len(pages_to_parse))
                                 fut.cancel()
         self.rich_progress.stop()
-
-
 
 # ------------------------------APPLE------------------------------
 
@@ -1155,5 +1154,17 @@ class Parser_url:
                 for product in products:
                     if product["description"].lower() in input_string:
                         self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    def _match_product_gamepad(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        if product["name"].lower() in input_string:
+                            return product["priceEdge"]
                         return product["price"]
         return None

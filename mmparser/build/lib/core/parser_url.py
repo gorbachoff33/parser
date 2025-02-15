@@ -264,6 +264,7 @@ class Parser_url:
     def _single_url(self):
         self.parse_input_url()
         if self.parsed_url and not self.job_name:
+            print("TTTTTTTTTT")
             search_text = self.parsed_url.get("searchText", {})
             collection_title = (self.parsed_url.get("collection", {}) or {}).get("title")
             merchant = (self.parsed_url.get("merchant", {}) or {}).get("slug")
@@ -271,10 +272,11 @@ class Parser_url:
             self.job_name = search_text or collection_title or merchant or unknown
             self.job_name = utils.slugify(self.job_name)
         if self.parsed_url["type"] == "TYPE_PRODUCT_CARD":
+            print("KKKKKKKKKK")
             self._parse_card()
-            self.logger.info("%s %s", self.job_name, self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
+            self.logger.info("%s", self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
         else:
-            self.logger.info("%s %s", self.job_name, self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
+            self.logger.info("%s", self.start_time.strftime("%d-%m-%Y %H:%M:%S"))
             self._parse_multi_page()
             self.logger.info("Спаршено %s товаров", self.scraped_tems_counter)
 
@@ -695,6 +697,7 @@ class Parser_url:
 
     def _parse_card(self) -> None:
         """Парсинг карточки товара"""
+        print("LLLLLLLLLLLLLLL")
         item = self._get_card_info(self.parsed_url["goods"]["goodsId"])
         offers = self._get_offers(self.parsed_url["goods"]["goodsId"])
         self.job_name = utils.slugify(item["title"])
