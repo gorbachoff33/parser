@@ -80,6 +80,11 @@ class Parser_url:
         self.logger: logging.Logger = self._create_logger(self.log_level)
         self.tg_client: TelegramClient = None
         self.tg_client_phone: TelegramClient = None
+        self.tg_client_error: TelegramClient = None
+        self.tg_client_nout: TelegramClient = None
+        self.tg_client_komp: TelegramClient = None
+        self.tg_client_monitor: TelegramClient = None
+        self.tg_client_perekup: TelegramClient = None
 
         self.url: str = url
         self.urls: list[str] = urls
@@ -114,6 +119,7 @@ class Parser_url:
         
         self.all_titles = []
         self.zakup_info = ""
+        self.naming_product_for_tg_chat = ""
         self.count = 1
 
         self._set_up()
@@ -159,12 +165,10 @@ class Parser_url:
             # No free proxies, wait and retry
 
     def _api_request(self, api_url: str, json_data: dict, tries: int = 10, delay: float = 0) -> dict:
-        if self.count > 10000000:
-            self.count = 0
         self.count += 1
-        print(self.count)
-        if self.count % 25 == 0:
-            sleep(51)
+        if self.count == 20:
+            self.count = 0
+            sleep(61)
         headers = {
             "cookie": "spid=1739524944560_206a03d45181b4ec04b4fb09d6d7c655_c32xxggt69laajxw; __zzatw-smm=MDA0dBA=Fz2+aQ==; _sa=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945; _sas=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945.1739524945; spjs=1739524947625_424d73cd_0134fe0a_717888e8ba5d44f93ec371269d7796f8_bdCTMz8GeqtWDLFwnMZy5+KuDm6bY/aW0o6PL3Gc5RGY0BrKli+zkzpgwSEB+W0uyvJnYqN0+iVnPBDCmhR5eVXOP705RMUlEWru6172ZxCMwWnZFS5nhwtim+tg+Bxd2aRj1oJpUpx4hpMCuZKs3nMb9iaOsKVEUQg6uA/348OWfw1oJUpkRRhTe23C2kIrLrEzZJFa+F5KVUcWjcNsLdBIZJfLYE4/FvjsXGghRUfTDYhp3JsxYVnALNxHyQd26jLFdZd8eYis1+eWA/tOyNVsMAGcQM+/MxuW8uiQRFQxuV/N2cB1pHKnS+sXm7rd/mTo6JxMDaJe8Zbix99Juj/GZSA+Jlr8AO9kNC3kLnExXmvfumejRHEvmzgXy9HSXocZv0NaxFVtowOB5Yj6Pn2mEvJ2Blt/IfhEFNuXfR5Tqsk5yuJykNUvS7uPlqEDnwcr6sPt0SF7BL7JYNhsfcmRJqbSa7+/CyyQQF2FaQr2niPHnERU1/M9Pe144VZHkog5S5RupHRIMUxatL9jPTjx1fWWaS6+ajJXZvyk6GnkbaJlHUFY3BJcidhcNX4FwT1KGm45NfFbkFxY/U1oQMWkJ2cfswUH2mC2ZzBY3GvHjzLzluWrCxWAADGbwVcWwpovTVnA9aRBh7lrFE5xId6FO0jUy/6vXwKy5hLt7Y1oBALgnsfIqlSPcmGvRHwnhw8L7o/hooID3Zk9Gs9BAx4m7b7CagemDvdhkCT8iVz5phO1MDTZfRGYxPVfSbbHK3PAEGS9BrX2mRydkMDVKd/msuo0RrHz/BJ+fvWMSRjNhGcylm5qek8oIkJ+SBqo2F1xMJBLM+UDDr8aW08Vp9vIaksnz3Oj39W5aRDOcC3TM2LNgljcjflWIoNZkboK1y5nl8umK9p0ChmvmuNXoad/yppeHfc1uTRYaJFblmaKRjNxdXgcP/mFoYFkDC4pUxnVpMiH/T+zPlKiH1WQYIRIOXq/18agpwHtj2IMdnc7864Oxon7WF1UUhLTyj/PyhITJukQ3hzBT7QXSuAM5XPuSLi+92Lncw7vP0Gc8BH9lRq69grjwyoQxCEBSR07utcXxxZUbf0BHDmiLmX5OMScL/+LUuIAUousTBhMj0mc5jfVzv7AKVUMs2iS6n+ml6x2BJrFc185h7trFcb7iXUGGowhmxeGXqqcTtaBSmTvyASrqA7N4myAukl0TEEv6gMi66I88l1MoJTkGefb9Nw2RaDNRPascQVwphMvdQABjzVI0=; device_id=35899286-eab5-11ef-9f27-fa163e551efb; sbermegamarket_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; ecom_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; _ym_uid=1739524948866859906; _ym_d=1739524948; _ym_visorc=b; _ym_isad=1; isOldUser=true; spsc=1739524949967_0523d70dcd6399b4a5c9303cf33ece42_bf4cd2fa3d30987fd0282ffebd8a9122; adspire_uid=AS.258800070.1739524950; _ga=GA1.1.1029686991.1739524950; _sv=SA1.cde8b57e-6cd3-4f86-b94c-49af5eed4df5.1714480000; __tld__=null; ssaid=378b7040-eab5-11ef-bc88-8968fbb7d467; ma_cid=4267358201739524951; adtech_uid=9b0c39e2-055a-4433-9a93-a60a5c995d75%3Amegamarket.ru; top100_id=t1.7729504.882577337.1739524951495; ma_id=1499508061701609951554; region_info=%7B%22displayName%22%3A%22%D0%9C%D0%9E%D0%A1%D0%9A%D0%92%D0%90%22%2C%22kladrId%22%3A%227700000000000%22%2C%22isDeliveryEnabled%22%3Atrue%2C%22geo%22%3A%7B%22lat%22%3A55.755814%2C%22lon%22%3A37.617635%7D%2C%22id%22%3A%2250%22%7D; cfidsw-smm=opCoTy6g2b4IzMmxVQQfv75AJgicCFs87jgV5K7TgPOyYKQYLHqN/XpEq3sJaDr8MxksQTSI6fbPme5Q/F489Gse2g88tO+MHAtLdWZHu6jlT89+BhYxWEjFUdi5QyyFW2RRp4lWMEfATXQx+5vAnnHxAHHKBN2QsDYTVuau; ma_ss_d19e96e4-c103-40bf-a791-3dcb7460a86f=0733784061739524951.1.1739524998.7; cfidsw-smm=Sjsi6mmmKmMHCuI7eqo+mLohsBFLJikK/8nU5B9Ip7t8HnTZA4vksjL9xjknATKWHkbPBthy7xB+Cj9En02XaZvQUEKCdkkJ8zUTPVDOKIzXhW69z/6zO4nK2Yu18B1bJeD849J3YHiWZ7m0u0nvhUIeNxHWzauhr9O1f/5b; _ga_W49D2LL5S1=GS1.1.1739524950.1.1.1739525004.6.0.0; t3_sid_7729504=s1.1027760779.1739524943708.1739525004058.1.10"
         }
@@ -196,6 +200,9 @@ class Parser_url:
                 sleep(1 * i)
             proxy.busy = False
 
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+                message = f"🟢 <b>Ошибка:</b> Ошибка получения данных api"
+                executor.submit(self.tg_client_error.notify, message, None)
         raise ApiError("Ошибка получения данных api")
 
     def _get_profile(self) -> None:
@@ -211,6 +218,11 @@ class Parser_url:
                     raise ConfigError(f"Конфиг {client} не прошел проверку!")
             self.tg_client = TelegramClient(self.tg_config[0], self.logger)
             self.tg_client_phone = TelegramClient(self.tg_config[1], self.logger)
+            self.tg_client_nout = TelegramClient(self.tg_config[2], self.logger)
+            self.tg_client_komp = TelegramClient(self.tg_config[3], self.logger)
+            self.tg_client_monitor = TelegramClient(self.tg_config[4], self.logger)
+            self.tg_client_perekup = TelegramClient(self.tg_config[5], self.logger)
+            self.tg_client_error = TelegramClient(self.tg_config[6], self.logger)
         self.parsed_proxies = self.proxy_file_path and utils.parse_proxy_file(self.proxy_file_path)
         self.categories = self.categories_path and utils.parse_categories_file(self.categories_path)
         self._proxies_set_up()
@@ -455,7 +467,7 @@ class Parser_url:
             
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 message = self._format_tg_message(parsed_offer)
-                executor.submit(self.tg_client_phone.notify, message, parsed_offer.image_url)
+                executor.submit(self.tg_client_perekup.notify, message, parsed_offer.image_url)
                 return True
         else:
             if (
@@ -469,7 +481,16 @@ class Parser_url:
             ):
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     message = self._format_tg_message(parsed_offer)
-                    executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
+                    if "Смартфон" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_phone.notify, message, parsed_offer.image_url)
+                    elif "Компьютер" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_komp.notify, message, parsed_offer.image_url)
+                    elif "Ноутбук" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_nout.notify, message, parsed_offer.image_url)
+                    elif "Монитор" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_monitor.notify, message, parsed_offer.image_url)
+                    else:
+                        executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
                     self.perecup_price = None
                     return True
         return False
@@ -561,9 +582,7 @@ class Parser_url:
             return False
         page_progress = self.rich_progress.add_task(f"[orange]Страница {int(int(response_json.get('offset')) / items_per_page) + 1}")
         self.rich_progress.update(page_progress, total=len(response_json["items"]))
-        x = 0
         for item in response_json["items"]:
-            x += 1
             bonus_percent = item["favoriteOffer"]["bonusPercent"]
             item_title = item["goods"]["title"]
             price = item["favoriteOffer"]["price"]
@@ -576,6 +595,7 @@ class Parser_url:
             brand = item["goods"]["brand"]
             self.perecup_price = None
             self.zakup_info = ""
+            self.naming_product_for_tg_chat = "Перекуп"
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
             elif item_title.startswith("Игровая приставка"):
@@ -592,11 +612,29 @@ class Parser_url:
                 self.perecup_price = self._match_product_video_card(item_title, attributes)
             elif item_title.startswith("Умная колонка") or item_title.startswith("Колонка умная"):
                 self.perecup_price = self._match_product_colonka(item_title)
+            elif "перфоратор" in item_title.lower():
+                self.perecup_price = self._match_product_perf(item_title)
+            elif "высокого давления karcher" in item_title.lower():
+                self.perecup_price = self._match_product_karcher(item_title)
+            elif "пылесос karcher" in item_title.lower():
+                self.perecup_price = self._match_product_pilesos_karcher(item_title)
+            elif "телевизор sber" in item_title.lower():
+                self.perecup_price = self._match_product_sber(item_title)
+            else:
+                if item_title.startswith("Смартфон"):
+                    self.naming_product_for_tg_chat = "Смартфон"
+                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
+                    self.naming_product_for_tg_chat = "Компьютер"
+                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
+                    self.naming_product_for_tg_chat = "Ноутбук"
+                elif item_title.startswith("Монитор"):
+                    self.naming_product_for_tg_chat = "Монитор"
+                    
             # match = re.search(r"Яндекс", item_title)
             # if match:
-            #     filename = f"'Z'.{uuid.uuid4().hex}.json"
-            #     with open(filename, "w", encoding="utf-8") as file:
-            #         json.dump(item, file, indent=4, ensure_ascii=False)
+            # filename = f"'Z'.{uuid.uuid4().hex}.json"
+            # with open(filename, "w", encoding="utf-8") as file:
+            #     json.dump(item, file, indent=4, ensure_ascii=False)
             # print(item_title, self.perecup_price)
             # self.all_titles.append(item_title)
             if self.perecup_price is None:
@@ -1070,6 +1108,52 @@ class Parser_url:
             if category.lower() in input_string:
                 for product in products:
                     if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------ПЕРФОРАТОР--------------------
+    
+    def _match_product_perf(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------KARKHER--------------------
+    
+    def _match_product_karcher(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    def _match_product_pilesos_karcher(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------SBER--------------------
+    
+    def _match_product_sber(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string:
                         self.zakup_info = product["result"]
                         return product["price"]
         return None

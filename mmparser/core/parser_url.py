@@ -80,6 +80,11 @@ class Parser_url:
         self.logger: logging.Logger = self._create_logger(self.log_level)
         self.tg_client: TelegramClient = None
         self.tg_client_phone: TelegramClient = None
+        self.tg_client_error: TelegramClient = None
+        self.tg_client_nout: TelegramClient = None
+        self.tg_client_komp: TelegramClient = None
+        self.tg_client_monitor: TelegramClient = None
+        self.tg_client_perekup: TelegramClient = None
 
         self.url: str = url
         self.urls: list[str] = urls
@@ -114,6 +119,7 @@ class Parser_url:
         
         self.all_titles = []
         self.zakup_info = ""
+        self.naming_product_for_tg_chat = ""
         self.count = 1
 
         self._set_up()
@@ -160,7 +166,7 @@ class Parser_url:
 
     def _api_request(self, api_url: str, json_data: dict, tries: int = 10, delay: float = 0) -> dict:
         self.count += 1
-        if self.count % 25 == 0:
+        if self.count == 20:
             self.count = 0
             sleep(61)
         headers = {
@@ -194,6 +200,9 @@ class Parser_url:
                 sleep(1 * i)
             proxy.busy = False
 
+        with concurrent.futures.ThreadPoolExecutor() as executor:
+                message = f"🟢 <b>Ошибка:</b> Ошибка получения данных api"
+                executor.submit(self.tg_client_error.notify, message, None)
         raise ApiError("Ошибка получения данных api")
 
     def _get_profile(self) -> None:
@@ -209,6 +218,11 @@ class Parser_url:
                     raise ConfigError(f"Конфиг {client} не прошел проверку!")
             self.tg_client = TelegramClient(self.tg_config[0], self.logger)
             self.tg_client_phone = TelegramClient(self.tg_config[1], self.logger)
+            self.tg_client_nout = TelegramClient(self.tg_config[2], self.logger)
+            self.tg_client_komp = TelegramClient(self.tg_config[3], self.logger)
+            self.tg_client_monitor = TelegramClient(self.tg_config[4], self.logger)
+            self.tg_client_perekup = TelegramClient(self.tg_config[5], self.logger)
+            self.tg_client_error = TelegramClient(self.tg_config[6], self.logger)
         self.parsed_proxies = self.proxy_file_path and utils.parse_proxy_file(self.proxy_file_path)
         self.categories = self.categories_path and utils.parse_categories_file(self.categories_path)
         self._proxies_set_up()
@@ -453,7 +467,7 @@ class Parser_url:
             
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 message = self._format_tg_message(parsed_offer)
-                executor.submit(self.tg_client_phone.notify, message, parsed_offer.image_url)
+                executor.submit(self.tg_client_perekup.notify, message, parsed_offer.image_url)
                 return True
         else:
             if (
@@ -467,7 +481,16 @@ class Parser_url:
             ):
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     message = self._format_tg_message(parsed_offer)
-                    executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
+                    if "Смартфон" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_phone.notify, message, parsed_offer.image_url)
+                    elif "Компьютер" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_komp.notify, message, parsed_offer.image_url)
+                    elif "Ноутбук" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_nout.notify, message, parsed_offer.image_url)
+                    elif "Монитор" in self.naming_product_for_tg_chat:
+                        executor.submit(self.tg_client_monitor.notify, message, parsed_offer.image_url)
+                    else:
+                        executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
                     self.perecup_price = None
                     return True
         return False
@@ -559,9 +582,7 @@ class Parser_url:
             return False
         page_progress = self.rich_progress.add_task(f"[orange]Страница {int(int(response_json.get('offset')) / items_per_page) + 1}")
         self.rich_progress.update(page_progress, total=len(response_json["items"]))
-        x = 0
         for item in response_json["items"]:
-            x += 1
             bonus_percent = item["favoriteOffer"]["bonusPercent"]
             item_title = item["goods"]["title"]
             price = item["favoriteOffer"]["price"]
@@ -574,6 +595,7 @@ class Parser_url:
             brand = item["goods"]["brand"]
             self.perecup_price = None
             self.zakup_info = ""
+            self.naming_product_for_tg_chat = "Перекуп"
             if brand in "Apple":
                 self.perecup_price = self._match_product_apple(item_title, attributes)
             elif item_title.startswith("Игровая приставка"):
@@ -590,11 +612,29 @@ class Parser_url:
                 self.perecup_price = self._match_product_video_card(item_title, attributes)
             elif item_title.startswith("Умная колонка") or item_title.startswith("Колонка умная"):
                 self.perecup_price = self._match_product_colonka(item_title)
+            elif "перфоратор" in item_title.lower():
+                self.perecup_price = self._match_product_perf(item_title)
+            elif "высокого давления karcher" in item_title.lower():
+                self.perecup_price = self._match_product_karcher(item_title)
+            elif "пылесос karcher" in item_title.lower():
+                self.perecup_price = self._match_product_pilesos_karcher(item_title)
+            elif "телевизор sber" in item_title.lower():
+                self.perecup_price = self._match_product_sber(item_title)
+            else:
+                if item_title.startswith("Смартфон"):
+                    self.naming_product_for_tg_chat = "Смартфон"
+                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
+                    self.naming_product_for_tg_chat = "Компьютер"
+                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
+                    self.naming_product_for_tg_chat = "Ноутбук"
+                elif item_title.startswith("Монитор"):
+                    self.naming_product_for_tg_chat = "Монитор"
+                    
             # match = re.search(r"Яндекс", item_title)
             # if match:
-            #     filename = f"'Z'.{uuid.uuid4().hex}.json"
-            #     with open(filename, "w", encoding="utf-8") as file:
-            #         json.dump(item, file, indent=4, ensure_ascii=False)
+            # filename = f"'Z'.{uuid.uuid4().hex}.json"
+            # with open(filename, "w", encoding="utf-8") as file:
+            #     json.dump(item, file, indent=4, ensure_ascii=False)
             # print(item_title, self.perecup_price)
             # self.all_titles.append(item_title)
             if self.perecup_price is None:
@@ -1068,6 +1108,52 @@ class Parser_url:
             if category.lower() in input_string:
                 for product in products:
                     if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------ПЕРФОРАТОР--------------------
+    
+    def _match_product_perf(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------KARKHER--------------------
+    
+    def _match_product_karcher(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    def _match_product_pilesos_karcher(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string and product["name"].lower() in input_string:
+                        self.zakup_info = product["result"]
+                        return product["price"]
+        return None
+    
+    # --------------------SBER--------------------
+    
+    def _match_product_sber(self, input_string):
+        input_string = input_string.lower()
+        for category, products in self.categories.items():
+            if category.lower() in input_string:
+                for product in products:
+                    if product["description"].lower() in input_string:
                         self.zakup_info = product["result"]
                         return product["price"]
         return None

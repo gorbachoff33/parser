@@ -1,23 +1,5 @@
 #
 
-```
-         ____ ___  ____ ___  ____  ____  _____________  _____
-        / __ `__ \/ __ `__ \/ __ \/ __ `/ ___/ ___/ _ \/ ___/
-       / / / / / / / / / / / /_/ / /_/ / /  (__  )  __/ /
-      /_/ /_/ /_/_/ /_/ /_/ .___/\__,_/_/  /____/\___/_/
-                         /_/
-```
-
-![GitHub Downloads (all assets, all releases)](https://img.shields.io/github/downloads/xob0t/mmparser/total)
-
-## Сказать спасибо автору - [Yoomoney](https://yoomoney.ru/to/410018051351692)
-
-Связь со мной [tg](https://t.me/mobate) - Индивидуальной поддержкой бесплатно не занимаюсь
-
-### Демо ускорено в 10 раз
-
-[![asciicast](https://asciinema.org/a/fYFj0HVO16r16vaK1reEa4617.svg)](https://asciinema.org/a/fYFj0HVO16r16vaK1reEa4617)
-
 <details>
   <summary>Пример уведомления Telegram</summary>
   <img src="media/tg_demo.jpg">

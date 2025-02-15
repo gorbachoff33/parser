@@ -2380,5 +2380,162 @@
       "price" : 3650,
       "result": "Закупаем"
     }
+  ],
+  "Перфоратор": [
+    {
+      "description": "Makita",
+      "name": "HR2470",
+      "price" : 10000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Makita",
+      "name": "HR2630",
+      "price" : 12000,
+      "result": "Закупаем"
+    }
+  ],
+  "высокого давления Karcher": [
+    {
+      "description": "Karcher",
+      "name": "K 5 Basic",
+      "price" : 12000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Karcher",
+      "name": "K 5 Power Control",
+      "price" : 12000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Karcher",
+      "name": "K 5 Compact",
+      "price" : 12000,
+      "result": "Закупаем"
+    }
+  ],
+  "пылесос Karcher": [
+    {
+      "description": "Karcher",
+      "name": "WD 5 S",
+      "price" : 12000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Karcher",
+      "name": "WD 5 P S",
+      "price" : 12000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Karcher",
+      "name": "WD 5 P",
+      "price" : 12000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "Karcher",
+      "name": "WD 5",
+      "price" : 12000,
+      "result": "Закупаем"
+    }
+  ],
+  "Телевизор sber": [
+    {
+      "description": "SDX-43U4128",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-43U4124",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-43U4126",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-43U4123B",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-43F2128",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-43F2124",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-43F2120B",
+      "price" : 14000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32F2139",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32F2123",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32F2121",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32F2126",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2128",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2124",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2122B",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2012B",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2120B",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2010B",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2125",
+      "price" : 9000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "SDX-32H2012S",
+      "price" : 9000,
+      "result": "Закупаем"
+    }
   ]
 }
