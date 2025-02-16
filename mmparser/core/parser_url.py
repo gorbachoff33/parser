@@ -201,7 +201,7 @@ class Parser_url:
             proxy.busy = False
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                message = f"🟢 <b>Ошибка:</b> Ошибка получения данных api"
+                message = f"🟢 <b>Ошибка:</b> Ошибка получения данных api: сервер 2"
                 executor.submit(self.tg_client_error.notify, message, None)
         raise ApiError("Ошибка получения данных api")
 
@@ -249,7 +249,7 @@ class Parser_url:
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                    message = f"🟢 <b>Статус:</b> Запуск успешный (сервер 2)"
+                    message = f"🟢 <b>Статус:</b> Запуск успешный: сервер 2"
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
