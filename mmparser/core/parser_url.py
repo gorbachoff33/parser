@@ -69,7 +69,7 @@ class Parser_url:
 
         self.region_id = "50"
         self.session = None
-        self.connections: list[Connection] = []
+        self.connection: Connection = Connection(None)
         self.parsed_proxies: set | None = None
         self.categories: dict = None
         self.cookie_dict: dict = None
@@ -137,40 +137,21 @@ class Parser_url:
 
     def _proxies_set_up(self) -> None:
         """Настройка и валидация прокси"""
+        self.connection.add_connection([Connection(None)])
         if self.proxy:
             is_valid_proxy = utils.proxy_format_check(self.proxy)
             if not is_valid_proxy:
                 raise ConfigError(f"Прокси {self.proxy} не верного формата!")
-            self.connections = [Connection(self.proxy)]
+            self.connection.add_connection([Connection(self.proxy)])
         elif self.parsed_proxies:
             for proxy in self.parsed_proxies:
                 is_valid_proxy = utils.proxy_format_check(proxy)
                 if not is_valid_proxy:
                     raise ConfigError(f"Прокси {proxy} не верного формата!")
-            self.connections = [Connection(proxy) for proxy in self.parsed_proxies]
-        if self.connections and self.allow_direct:
-            self.connections.append(Connection(None))
-        elif not self.connections:
-            self.connections = [Connection(None)]
+            self.connection.add_connection([Connection(proxy) for proxy in self.parsed_proxies])
 
-    def _get_connection(self) -> str:
-        """Получить самое позднее использованное `Соединение`"""
-        while True:
-            free_proxies = [proxy for proxy in self.connections if not proxy.busy]
-            if free_proxies:
-                oldest_proxy = min(free_proxies, key=lambda obj: obj.usable_at)
-                current_time = time()
-                if oldest_proxy.usable_at <= current_time:
-                    return oldest_proxy
-                sleep(oldest_proxy.usable_at - time())
-                return self._get_connection()
-            # No free proxies, wait and retry
 
     def _api_request(self, api_url: str, json_data: dict, tries: int = 10, delay: float = 0) -> dict:
-        self.count += 1
-        if self.count == 20:
-            self.count = 0
-            sleep(61)
         headers = {
             "cookie": "spid=1739524944560_206a03d45181b4ec04b4fb09d6d7c655_c32xxggt69laajxw; __zzatw-smm=MDA0dBA=Fz2+aQ==; _sa=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945; _sas=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945.1739524945; spjs=1739524947625_424d73cd_0134fe0a_717888e8ba5d44f93ec371269d7796f8_bdCTMz8GeqtWDLFwnMZy5+KuDm6bY/aW0o6PL3Gc5RGY0BrKli+zkzpgwSEB+W0uyvJnYqN0+iVnPBDCmhR5eVXOP705RMUlEWru6172ZxCMwWnZFS5nhwtim+tg+Bxd2aRj1oJpUpx4hpMCuZKs3nMb9iaOsKVEUQg6uA/348OWfw1oJUpkRRhTe23C2kIrLrEzZJFa+F5KVUcWjcNsLdBIZJfLYE4/FvjsXGghRUfTDYhp3JsxYVnALNxHyQd26jLFdZd8eYis1+eWA/tOyNVsMAGcQM+/MxuW8uiQRFQxuV/N2cB1pHKnS+sXm7rd/mTo6JxMDaJe8Zbix99Juj/GZSA+Jlr8AO9kNC3kLnExXmvfumejRHEvmzgXy9HSXocZv0NaxFVtowOB5Yj6Pn2mEvJ2Blt/IfhEFNuXfR5Tqsk5yuJykNUvS7uPlqEDnwcr6sPt0SF7BL7JYNhsfcmRJqbSa7+/CyyQQF2FaQr2niPHnERU1/M9Pe144VZHkog5S5RupHRIMUxatL9jPTjx1fWWaS6+ajJXZvyk6GnkbaJlHUFY3BJcidhcNX4FwT1KGm45NfFbkFxY/U1oQMWkJ2cfswUH2mC2ZzBY3GvHjzLzluWrCxWAADGbwVcWwpovTVnA9aRBh7lrFE5xId6FO0jUy/6vXwKy5hLt7Y1oBALgnsfIqlSPcmGvRHwnhw8L7o/hooID3Zk9Gs9BAx4m7b7CagemDvdhkCT8iVz5phO1MDTZfRGYxPVfSbbHK3PAEGS9BrX2mRydkMDVKd/msuo0RrHz/BJ+fvWMSRjNhGcylm5qek8oIkJ+SBqo2F1xMJBLM+UDDr8aW08Vp9vIaksnz3Oj39W5aRDOcC3TM2LNgljcjflWIoNZkboK1y5nl8umK9p0ChmvmuNXoad/yppeHfc1uTRYaJFblmaKRjNxdXgcP/mFoYFkDC4pUxnVpMiH/T+zPlKiH1WQYIRIOXq/18agpwHtj2IMdnc7864Oxon7WF1UUhLTyj/PyhITJukQ3hzBT7QXSuAM5XPuSLi+92Lncw7vP0Gc8BH9lRq69grjwyoQxCEBSR07utcXxxZUbf0BHDmiLmX5OMScL/+LUuIAUousTBhMj0mc5jfVzv7AKVUMs2iS6n+ml6x2BJrFc185h7trFcb7iXUGGowhmxeGXqqcTtaBSmTvyASrqA7N4myAukl0TEEv6gMi66I88l1MoJTkGefb9Nw2RaDNRPascQVwphMvdQABjzVI0=; device_id=35899286-eab5-11ef-9f27-fa163e551efb; sbermegamarket_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; ecom_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; _ym_uid=1739524948866859906; _ym_d=1739524948; _ym_visorc=b; _ym_isad=1; isOldUser=true; spsc=1739524949967_0523d70dcd6399b4a5c9303cf33ece42_bf4cd2fa3d30987fd0282ffebd8a9122; adspire_uid=AS.258800070.1739524950; _ga=GA1.1.1029686991.1739524950; _sv=SA1.cde8b57e-6cd3-4f86-b94c-49af5eed4df5.1714480000; __tld__=null; ssaid=378b7040-eab5-11ef-bc88-8968fbb7d467; ma_cid=4267358201739524951; adtech_uid=9b0c39e2-055a-4433-9a93-a60a5c995d75%3Amegamarket.ru; top100_id=t1.7729504.882577337.1739524951495; ma_id=1499508061701609951554; region_info=%7B%22displayName%22%3A%22%D0%9C%D0%9E%D0%A1%D0%9A%D0%92%D0%90%22%2C%22kladrId%22%3A%227700000000000%22%2C%22isDeliveryEnabled%22%3Atrue%2C%22geo%22%3A%7B%22lat%22%3A55.755814%2C%22lon%22%3A37.617635%7D%2C%22id%22%3A%2250%22%7D; cfidsw-smm=opCoTy6g2b4IzMmxVQQfv75AJgicCFs87jgV5K7TgPOyYKQYLHqN/XpEq3sJaDr8MxksQTSI6fbPme5Q/F489Gse2g88tO+MHAtLdWZHu6jlT89+BhYxWEjFUdi5QyyFW2RRp4lWMEfATXQx+5vAnnHxAHHKBN2QsDYTVuau; ma_ss_d19e96e4-c103-40bf-a791-3dcb7460a86f=0733784061739524951.1.1739524998.7; cfidsw-smm=Sjsi6mmmKmMHCuI7eqo+mLohsBFLJikK/8nU5B9Ip7t8HnTZA4vksjL9xjknATKWHkbPBthy7xB+Cj9En02XaZvQUEKCdkkJ8zUTPVDOKIzXhW69z/6zO4nK2Yu18B1bJeD849J3YHiWZ7m0u0nvhUIeNxHWzauhr9O1f/5b; _ga_W49D2LL5S1=GS1.1.1739524950.1.1.1739525004.6.0.0; t3_sid_7729504=s1.1027760779.1739524943708.1739525004058.1.10"
         }
@@ -182,9 +163,11 @@ class Parser_url:
             "os":"UNKNOWN_OS"
         }
         for i in range(0, tries):
-            proxy: Connection = self._get_connection()
+            proxy: Connection = self.connection._get_connection()
             proxy.busy = True
+            proxy.count += 1
             self.logger.debug("Прокси : %s", proxy.proxy_string)
+            print(proxy.proxy_string)
             try:
                 response = requests.post(api_url, headers=headers, json=json_data, proxy=proxy.proxy_string, verify=False, impersonate="chrome120")
                 response_data: dict = response.json()
@@ -192,7 +175,11 @@ class Parser_url:
             except Exception:
                 response = None
             if response and response.status_code == 200 and not response_data.get("error"):
-                proxy.usable_at = time() + delay
+                if proxy.count == 20:
+                    proxy.count = 0
+                    proxy.usable_at = time() + 61
+                else:
+                    proxy.usable_at = time() + delay
                 proxy.busy = False
                 return response_data
             if response and response.status_code == 200 and response_data.get("code") == 7:
@@ -247,7 +234,7 @@ class Parser_url:
             raise ConfigError(f'Неверное выражение "{self.exclude}"!')
         if self.blacklist_path:
             self._read_blacklist_file()
-        self.threads = self.threads or len(self.connections)
+        # self.threads = self.threads or len(self.connections)
         if not Path(db_utils.FILENAME).exists():
             db_utils.create_db()
 
