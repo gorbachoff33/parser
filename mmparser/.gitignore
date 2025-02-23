@@ -4,6 +4,7 @@
 /core/__pycache__
 *.sqlite
 *.txt
+build
 /mmparser.egg-info
 /tests/__pycache__
 .DS_Store
