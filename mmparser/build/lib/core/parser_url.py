@@ -121,6 +121,8 @@ class Parser_url:
         self.zakup_info = ""
         self.naming_product_for_tg_chat = ""
         self.count = 1
+        self.price = None
+        self.bonus_amount = None
 
         self._set_up()
 
@@ -199,10 +201,16 @@ class Parser_url:
             else:
                 sleep(1 * i)
             proxy.busy = False
+        error = response_data.get("error")
 
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                message = f"🟢 <b>Ошибка:</b> Ошибка получения данных api"
-                executor.submit(self.tg_client_error.notify, message, None)
+                if "8 800 600-08-88" in error:
+                    message = (
+                        f"🔴<b>Ошибка:</b> Ошибка получения данных api: {error}\n"
+                        f"🔴<b>парсер запустится через 60 минут</b>\n"
+                        f"🔷 <b>Сервер:</b> 2")
+                    executor.submit(self.tg_client_error.notify, message, None)
+                    sleep(3600)
         raise ApiError("Ошибка получения данных api")
 
     def _get_profile(self) -> None:
@@ -249,7 +257,7 @@ class Parser_url:
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                    message = f"🟢 <b>Статус:</b> Запуск успешный"
+                    message = f"🟢 <b>Статус:</b> Запуск успешный: сервер 2"
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
@@ -289,15 +297,13 @@ class Parser_url:
         """Экспорт одного предложения в базу данных"""
         with self.lock:
             db_utils.add_to_db(
-                self.job_id,
-                self.job_name,
                 parsed_offer.goods_id,
                 parsed_offer.merchant_id,
                 parsed_offer.url,
                 parsed_offer.title,
-                parsed_offer.price,
+                self.price,
                 parsed_offer.price_bonus,
-                parsed_offer.bonus_amount,
+                self.bonus_amount,
                 parsed_offer.bonus_percent,
                 parsed_offer.available_quantity,
                 parsed_offer.delivery_date,
@@ -458,16 +464,7 @@ class Parser_url:
 
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в tg если предложение подходит по параметрам"""
-        time_diff = 0
-        last_notified = None
-        last_notified = db_utils.get_last_notified(parsed_offer.goods_id, parsed_offer.merchant_id, parsed_offer.price, parsed_offer.bonus_amount)
-        last_notified = datetime.strptime(last_notified, "%Y-%m-%d %H:%M:%S") if last_notified else None
-        if last_notified:
-            now = datetime.now()
-            time_diff = now - last_notified
-              
-        if self.perecup_price and (not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff))):
-            
+        if self.perecup_price:
             with concurrent.futures.ThreadPoolExecutor() as executor:
                 message = self._format_tg_message(parsed_offer)
                 executor.submit(self.tg_client_perekup.notify, message, parsed_offer.image_url)
@@ -479,7 +476,6 @@ class Parser_url:
                 and parsed_offer.price <= self.price_value_alert 
                 and parsed_offer.price_bonus <= self.price_bonus_value_alert 
                 and parsed_offer.price >= self.price_min_value_alert
-                and (not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff)))
                 and self.tg_client
             ):
                 with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -512,7 +508,8 @@ class Parser_url:
             f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
             f"💰 <b>Цена перекупа:</b> {self.perecup_price}₽\n"
             f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽\n"
-            f"🟢 <b>Статус закупки:</b> {self.zakup_info}"
+            f"🟢 <b>Статус закупки:</b> {self.zakup_info}\n"
+            f"🔷 <b>Сервер:</b> 2"
         )
         else:
             return (
@@ -524,6 +521,7 @@ class Parser_url:
                 f"✅ <b>Доступно:</b> {parsed_offer.available_quantity or '?'}\n"
                 f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
                 f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
+                f"🔷 <b>Сервер:</b> 2"
             )
 
     def _get_offers(self, goods_id: str, delay: int = 0) -> list[dict]:
@@ -588,7 +586,8 @@ class Parser_url:
         for item in response_json["items"]:
             bonus_percent = item["favoriteOffer"]["bonusPercent"]
             item_title = item["goods"]["title"]
-            price = item["favoriteOffer"]["price"]
+            self.price = item["favoriteOffer"]["price"]
+            self.bonus_amount = item["favoriteOffer"]["bonusAmount"]
             if self._exclude_check(item_title) or (item["isAvailable"] is not True) or (not self._include_check(item_title)):
                 # пропускаем, если товар не доступен или исключен
                 self.rich_progress.update(page_progress, advance=1)
@@ -633,31 +632,43 @@ class Parser_url:
             #     json.dump(item, file, indent=4, ensure_ascii=False)
             # print(item_title, self.perecup_price)
             # self.all_titles.append(item_title)
-            if self.perecup_price is None:
-                if item_title.startswith("Смартфон"):
-                    self.naming_product_for_tg_chat = "Смартфон"
-                elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
-                    self.naming_product_for_tg_chat = "Компьютер"
-                elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
-                    self.naming_product_for_tg_chat = "Ноутбук"
-                elif item_title.startswith("Монитор"):
-                    self.naming_product_for_tg_chat = "Монитор"
-                if bonus_percent >= self.bonus_percent_alert:
+            time_diff = 0
+            last_notified = None
+            last_notified = db_utils.get_last_notified(item["goods"]["goodsId"].split("_")[0], item["favoriteOffer"]["merchantId"], self.price, self.bonus_amount)
+            last_notified = datetime.strptime(last_notified, "%Y-%m-%d %H:%M:%S") if last_notified else None
+            if last_notified:
+                now = datetime.now()
+                time_diff = now - last_notified
+            if not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff)):
+                if self.perecup_price is None:
+                    if item_title.startswith("Смартфон"):
+                        self.naming_product_for_tg_chat = "Смартфон"
+                    elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
+                        self.naming_product_for_tg_chat = "Компьютер"
+                    elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
+                        self.naming_product_for_tg_chat = "Ноутбук"
+                    elif item_title.startswith("Монитор"):
+                        self.naming_product_for_tg_chat = "Монитор"
+                    if bonus_percent >= self.bonus_percent_alert:
+                        if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
+                            self.logger.info("Парсим предложения %s", item_title)
+                            offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
+                            for offer in offers:
+                                self.price = offer["finalPrice"]
+                                self.bonus_amount = offer["bonusAmountFinalPrice"]
+                                self._parse_offer(item["goods"], offer)
+                        else:
+                            self._parse_item(item)
+                elif self.price < self.perecup_price:
                     if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
-                        self.logger.info("Парсим предложения %s", item_title)
+                        self.logger.info("Парсим предложения %s ", item_title)
                         offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
                         for offer in offers:
+                            self.price = offer["finalPrice"]
+                            self.bonus_amount = offer["bonusAmountFinalPrice"]
                             self._parse_offer(item["goods"], offer)
                     else:
                         self._parse_item(item)
-            elif price < self.perecup_price:
-                if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
-                    self.logger.info("Парсим предложения %s ", item_title)
-                    offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
-                    for offer in offers:
-                        self._parse_offer(item["goods"], offer)
-                else:
-                    self._parse_item(item)
             self.rich_progress.update(page_progress, advance=1)
         self.rich_progress.remove_task(page_progress)
         parse_next_page = response_json["items"] and response_json["items"][-1]["isAvailable"]

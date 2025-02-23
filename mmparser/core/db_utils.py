@@ -34,8 +34,6 @@ def create_db():
 
 
 def add_to_db(
-    job_id,
-    job_name,
     goods_id,
     merchant_id,
     url,
