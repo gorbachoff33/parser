@@ -2362,19 +2362,19 @@
     {
       "description": "Karcher",
       "name": "K 5 Basic",
-      "price" : 2500000,
+      "price" : 25000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "K 5 Power Control",
-      "price" : 3000000,
+      "price" : 30000,
       "result": "Закупаем"
     },
     {
       "description": "Karcher",
       "name": "K 5 Compact",
-      "price" : 2500000,
+      "price" : 25000,
       "result": "Закупаем"
     }
   ],
@@ -2442,63 +2442,63 @@
     },
     {
       "description": "SDX-32F2139",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32F2123",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32F2121",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32F2126",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2128",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2124",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2122B",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2012B",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2120B",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2010B",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2125",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     },
     {
       "description": "SDX-32H2012S",
-      "price" : 900000,
-      "result": "ТЕСТИРУЮ"
+      "price" : 9000,
+      "result": "Закупаем"
     }
   ],
   "геймпад": [

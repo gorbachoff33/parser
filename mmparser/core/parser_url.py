@@ -206,7 +206,8 @@ class Parser_url:
                 if "8 800 600-08-88" in error:
                     message = (
                         f"🔴<b>Ошибка:</b> Ошибка получения данных api: {error}\n"
-                        f"🔴<b>парсер запустится через 60 минут</b>")
+                        f"🔴<b>парсер запустится через 60 минут</b>\n"
+                        f"🔷 <b>Сервер:</b> 1 (с ценами)")
                     executor.submit(self.tg_client_error.notify, message, None)
                     sleep(3600)
         raise ApiError("Ошибка получения данных api")
@@ -255,7 +256,7 @@ class Parser_url:
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                    message = f"🟢 <b>Статус:</b> Запуск успешный"
+                    message = f"🟢 <b>Статус:</b> Запуск успешный - приложение с ценами(server 1)"
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
@@ -506,7 +507,8 @@ class Parser_url:
             f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
             f"💰 <b>Цена перекупа:</b> {self.perecup_price}₽\n"
             f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽\n"
-            f"🟢 <b>Статус закупки:</b> {self.zakup_info}"
+            f"🟢 <b>Статус закупки:</b> {self.zakup_info}\n"
+            f"🔷 <b>Сервер:</b> 1 (с ценами)"
         )
         else:
             return (
@@ -518,6 +520,7 @@ class Parser_url:
                 f"✅ <b>Доступно:</b> {parsed_offer.available_quantity or '?'}\n"
                 f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
                 f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
+                f"🔷 <b>Сервер:</b> 1 (с ценами)"
             )
 
     def _get_offers(self, goods_id: str, delay: int = 0) -> list[dict]:
