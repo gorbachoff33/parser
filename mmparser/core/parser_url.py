@@ -121,6 +121,11 @@ class Parser_url:
         self.price = None
         self.bonus_amount = None
         
+        self.producer = KafkaProducer(
+            bootstrap_servers='88.151.114.88:9092',
+            value_serializer=lambda v: json.dumps(v).encode('utf-8')
+        )
+        
         self.category_methods = {
             "Apple": self._match_product_apple,
             "Игровая приставка": self._match_product_konsol,
@@ -463,9 +468,6 @@ class Parser_url:
 
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в kafka если предложение подходит по параметрам"""
-        producer = KafkaProducer(
-            bootstrap_servers='88.151.114.88:9092'
-        )
         topic = "MM.PARSER.V1"
         message = self._format_tg_message(parsed_offer)
         
@@ -474,8 +476,8 @@ class Parser_url:
             headers = [
                 ("telegram_room", "perekup")
             ]
-            producer.send(topic, value=message, headers=headers)
-            producer.flush()
+            self.producer.send(topic, value=message, headers=headers)
+            self.producer.flush()
             return True
         else:
             if (
@@ -505,8 +507,8 @@ class Parser_url:
                     headers = [
                         ("telegram_room", "client")
                     ]
-                    producer.send(topic, value=message, headers=headers)
-                    producer.flush()
+                    self.producer.send(topic, value=message, headers=headers)
+                    self.producer.flush()
                 self.perecup_price = None
                 return True
         return False
