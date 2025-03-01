@@ -473,46 +473,52 @@ class Parser_url:
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
-        message = "hello"
+        message = {"key": "value"}  # Пример сообщения
+        try:
+            serialized_message = json.dumps(message).encode('utf-8')
+            self.producer.send(topic, value=serialized_message)
+            self.logger.info(f"Сообщение успешно отправлено: {message}")
+        except Exception as e:
+            self.logger.error(f"Ошибка сериализации или отправки сообщения: {e}")
                 
-        if self.perecup_price:
-            headers = [("telegram_room", "perekup")]
-            try:
-                record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
-                self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
-            except Exception as excp:
-                self.logger.error(f"Ошибка отправки сообщения: {excp}")
-            self.producer.flush()
-            return True
-        else:
-            if (
-                parsed_offer.bonus_percent >= self.bonus_percent_alert
-                and parsed_offer.bonus_amount >= self.bonus_value_alert
-                and parsed_offer.price <= self.price_value_alert
-                and parsed_offer.price_bonus <= self.price_bonus_value_alert
-                and parsed_offer.price >= self.price_min_value_alert
-            ):
-                if "Смартфон" in self.naming_product_for_tg_chat:
-                    headers = [("telegram_room", "phone")]
-                elif "Компьютер" in self.naming_product_for_tg_chat:
-                    headers = [("telegram_room", "computer")]
-                elif "Ноутбук" in self.naming_product_for_tg_chat:
-                    headers = [("telegram_room", "notebook")]
-                elif "Монитор" in self.naming_product_for_tg_chat:
-                    headers = [("telegram_room", "monitor")]
-                else:
-                    headers = [("telegram_room", "client")]
+        # if self.perecup_price:
+        #     headers = [("telegram_room", "perekup")]
+        #     try:
+        #         record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
+        #         self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
+        #     except Exception as excp:
+        #         self.logger.error(f"Ошибка отправки сообщения: {excp}")
+        #     self.producer.flush()
+        #     return True
+        # else:
+        #     if (
+        #         parsed_offer.bonus_percent >= self.bonus_percent_alert
+        #         and parsed_offer.bonus_amount >= self.bonus_value_alert
+        #         and parsed_offer.price <= self.price_value_alert
+        #         and parsed_offer.price_bonus <= self.price_bonus_value_alert
+        #         and parsed_offer.price >= self.price_min_value_alert
+        #     ):
+        #         if "Смартфон" in self.naming_product_for_tg_chat:
+        #             headers = [("telegram_room", "phone")]
+        #         elif "Компьютер" in self.naming_product_for_tg_chat:
+        #             headers = [("telegram_room", "computer")]
+        #         elif "Ноутбук" in self.naming_product_for_tg_chat:
+        #             headers = [("telegram_room", "notebook")]
+        #         elif "Монитор" in self.naming_product_for_tg_chat:
+        #             headers = [("telegram_room", "monitor")]
+        #         else:
+        #             headers = [("telegram_room", "client")]
 
-                try:
-                    record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
-                    self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
-                except Exception as excp:
-                    self.logger.error(f"Ошибка отправки сообщения: {excp}, тип ошибки: {type(excp)}")
-                self.producer.flush()
-                self.perecup_price = None
-                return True
-            else:
-                self.logger.info(f"Условия не удовлетворены для предложения: {parsed_offer}")
+        #         try:
+        #             record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
+        #             self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
+        #         except Exception as excp:
+        #             self.logger.error(f"Ошибка отправки сообщения: {excp}, тип ошибки: {type(excp)}")
+        #         self.producer.flush()
+        #         self.perecup_price = None
+        #         return True
+        #     else:
+        #         self.logger.info(f"Условия не удовлетворены для предложения: {parsed_offer}")
                 
         return False
 
