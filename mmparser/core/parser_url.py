@@ -480,7 +480,11 @@ class Parser_url:
         if self.perecup_price:
             headers = [("telegram_room", "perekup")]
             self.logger.info(f"Отправляем сообщение с темой 'perekup' в Kafka: {message}")
-            self.producer.send(topic, value=message, headers=headers, callback=self.on_send_success, error_callback=self.on_send_error)
+            try:
+                record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
+                self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
+            except Exception as excp:
+                self.logger.error(f"Ошибка отправки сообщения: {excp}")
             self.producer.flush()
             self.logger.info("Сообщение успешно отправлено.")
             return True
@@ -506,7 +510,11 @@ class Parser_url:
                     headers = [("telegram_room", "client")]
 
                 self.logger.info(f"Отправляем сообщение в Kafka с темой: {headers[0][1]}")
-                self.producer.send(topic, value=message, headers=headers, callback=self.on_send_success, error_callback=self.on_send_error)
+                try:
+                    record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
+                    self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
+                except Exception as excp:
+                    self.logger.error(f"Ошибка отправки сообщения: {excp}")
                 self.producer.flush()
                 self.logger.info("Сообщение успешно отправлено.")
                 self.perecup_price = None
