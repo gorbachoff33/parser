@@ -262,7 +262,7 @@ class Parser_url:
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
-                    message = f"🟢 <b>Статус:</b> Запуск успешный - приложение с ценами(server 1)"
+                    message = f"🟢 <b>Статус:</b> Запуск успешный - server 2"
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
