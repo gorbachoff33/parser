@@ -17,13 +17,13 @@ services:
     depends_on:
       - zookeeper
     ports:
-      - "9092:9092"  # Открывает порт для внешнего доступа
+      - "9092:9092"  # Не пробрасывайте порт наружу, если не хотите внешнего доступа
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://88.151.114.88:9092
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092  # Слушаем только на localhost
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092  # Слушаем на всех интерфейсах внутри контейнера
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
       KAFKA_LOG_RETENTION_HOURS: 2

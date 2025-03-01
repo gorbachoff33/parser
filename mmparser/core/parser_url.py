@@ -122,7 +122,7 @@ class Parser_url:
         self.bonus_amount = None
         
         self.producer = KafkaProducer(
-            bootstrap_servers='88.151.114.88:9092',
+            bootstrap_servers='localhost:9092',
             value_serializer=lambda v: json.dumps(v).encode('utf-8'),
             acks='all',
             retries=5,  # количество попыток при неудачных отправках
