@@ -83,7 +83,7 @@
   "price_value_alert": "",
   "price_bonus_value_alert": "",
   "bonus_value_alert": "",
-  "bonus_percent_alert": 50,
+  "bonus_percent_alert": 30,
   "alert_repeat_timeout": 72,
   "use_merchant_blacklist": "False",
   "threads": 20,
