@@ -32,7 +32,7 @@
   "address": "Москва",
   "proxy": "",
   "allow_direct": "True",
-  "proxy_file_path": "",
+  "proxy_file_path": "proxy.txt",
   "tg_config": [
     "7588179157:AAEcqSGe8rdx2b9yitZ2ZUhGU6OiNWf5Asc$-1002347815748$12",
     "7588179157:AAEcqSGe8rdx2b9yitZ2ZUhGU6OiNWf5Asc$-1002347815748$9",
