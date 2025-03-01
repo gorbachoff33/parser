@@ -13,6 +13,7 @@ import signal
 from pathlib import Path
 from urllib.parse import urlparse, parse_qsl, parse_qs, unquote, urljoin
 import uuid
+from kafka import KafkaProducer
 
 from rich.progress import BarColumn, Progress, SpinnerColumn, TextColumn, TimeRemainingColumn
 from rich.logging import RichHandler
@@ -213,7 +214,7 @@ class Parser_url:
                 with concurrent.futures.ThreadPoolExecutor() as executor:
                     message = (
                         f"🔴<b>Ошибка:</b> Ошибка получения данных api: {error}\n"
-                        f"🔷 <b>Сервер:</b> 1 (с ценами)")
+                        f"🔷 <b>Заблокирован ip:</b> {proxy.proxy_string}")
                     executor.submit(self.tg_client_error.notify, message, None)
                 proxy.usable_at = time() + 3660
             proxy.busy = False
@@ -265,9 +266,6 @@ class Parser_url:
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                    message = f"🟢 <b>Статус:</b> круг"
-                    executor.submit(self.tg_client_error.notify, message, None)
             for single_url in self.urls:
                 self.url = single_url
                 self.start_time = datetime.now()
@@ -476,12 +474,26 @@ class Parser_url:
                 self._export_to_db(parsed_offer)
 
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
-        """Отправить уведомление в tg если предложение подходит по параметрам"""
+        """Отправить уведомление в kafka если предложение подходит по параметрам"""
+        producer = KafkaProducer(
+            bootstrap_servers='localhost:9092'
+        )
+        topic = "MM.PARSER.V1"
+        message = self._format_tg_message(parsed_offer)
+        
         if self.perecup_price:
-            with concurrent.futures.ThreadPoolExecutor() as executor:
-                message = self._format_tg_message(parsed_offer)
-                executor.submit(self.tg_client_perekup.notify, message, parsed_offer.image_url)
-                return True
+            
+            headers = [
+                ("token", self.tg_client_perekup.bot_token),
+                ("chatId", self.tg_client_perekup.chat_id),
+                ("threadId", self.tg_client_perekup.thread_id)
+            ]
+            producer.send(topic, value=message, headers=headers)
+            producer.flush()
+            # with concurrent.futures.ThreadPoolExecutor() as executor:
+            #     message = self._format_tg_message(parsed_offer)
+            #     executor.submit(self.tg_client_perekup.notify, message)
+            return True
         else:
             if (
                 parsed_offer.bonus_percent >= self.bonus_percent_alert 
@@ -491,20 +503,52 @@ class Parser_url:
                 and parsed_offer.price >= self.price_min_value_alert 
                 and self.tg_client
             ):
-                with concurrent.futures.ThreadPoolExecutor() as executor:
-                    message = self._format_tg_message(parsed_offer)
-                    if "Смартфон" in self.naming_product_for_tg_chat:
-                        executor.submit(self.tg_client_phone.notify, message, parsed_offer.image_url)
-                    elif "Компьютер" in self.naming_product_for_tg_chat:
-                        executor.submit(self.tg_client_komp.notify, message, parsed_offer.image_url)
-                    elif "Ноутбук" in self.naming_product_for_tg_chat:
-                        executor.submit(self.tg_client_nout.notify, message, parsed_offer.image_url)
-                    elif "Монитор" in self.naming_product_for_tg_chat:
-                        executor.submit(self.tg_client_monitor.notify, message, parsed_offer.image_url)
-                    else:
-                        executor.submit(self.tg_client.notify, message, parsed_offer.image_url)
-                    self.perecup_price = None
-                    return True
+                if "Смартфон" in self.naming_product_for_tg_chat:
+                    headers = [
+                        ("token", self.tg_client_phone.bot_token),
+                        ("chatId", self.tg_client_phone.chat_id),
+                        ("threadId", self.tg_client_phone.thread_id)
+                    ]
+                elif "Компьютер" in self.naming_product_for_tg_chat:
+                    headers = [
+                        ("token", self.tg_client_komp.bot_token),
+                        ("chatId", self.tg_client_komp.chat_id),
+                        ("threadId", self.tg_client_komp.thread_id)
+                    ]
+                elif "Ноутбук" in self.naming_product_for_tg_chat:
+                    headers = [
+                        ("token", self.tg_client_nout.bot_token),
+                        ("chatId", self.tg_client_nout.chat_id),
+                        ("threadId", self.tg_client_nout.thread_id)
+                    ]
+                elif "Монитор" in self.naming_product_for_tg_chat:
+                    headers = [
+                        ("token", self.tg_client_monitor.bot_token),
+                        ("chatId", self.tg_client_monitor.chat_id),
+                        ("threadId", self.tg_client_monitor.thread_id)
+                    ]
+                else:
+                    headers = [
+                        ("token", self.tg_client.bot_token),
+                        ("chatId", self.tg_client.chat_id),
+                        ("threadId", self.tg_client.thread_id)
+                    ]
+                    producer.send(topic, value=message, headers=headers)
+                    producer.flush()
+                # with concurrent.futures.ThreadPoolExecutor() as executor:
+                #     message = self._format_tg_message(parsed_offer)
+                #     if "Смартфон" in self.naming_product_for_tg_chat:
+                #         executor.submit(self.tg_client_phone.notify, message)
+                #     elif "Компьютер" in self.naming_product_for_tg_chat:
+                #         executor.submit(self.tg_client_komp.notify, message)
+                #     elif "Ноутбук" in self.naming_product_for_tg_chat:
+                #         executor.submit(self.tg_client_nout.notify, message)
+                #     elif "Монитор" in self.naming_product_for_tg_chat:
+                #         executor.submit(self.tg_client_monitor.notify, message)
+                #     else:
+                #         executor.submit(self.tg_client.notify, message)
+                self.perecup_price = None
+                return True
         return False
 
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
@@ -745,7 +789,7 @@ class Parser_url:
                     if page in pages_to_parse:
                         pages_to_parse.remove(page)
                     if not parse_next_page:
-                        self.logger.info("Дальше товары не в наличии, их не парсим")
+                        # self.logger.info("Дальше товары не в наличии, их не парсим")
                         for fut in futures:
                             future_page = futures[fut]
                             if future_page > page:
