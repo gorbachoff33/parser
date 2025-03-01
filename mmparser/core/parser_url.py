@@ -123,7 +123,8 @@ class Parser_url:
         
         self.producer = KafkaProducer(
             bootstrap_servers='88.151.114.88:9092',
-            value_serializer=lambda v: json.dumps(v).encode('utf-8')
+            value_serializer=lambda v: json.dumps(v).encode('utf-8'),
+            acks='all'
         )
         
         self.category_methods = {
@@ -467,55 +468,56 @@ class Parser_url:
                 self._export_to_db(parsed_offer)
 
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
-        """Отправить уведомление в kafka если предложение подходит по параметрам"""
+        """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
         message = self._format_tg_message(parsed_offer)
+        
         self.logger.info(f"Генерация сообщения: {message}")
+        
         if self.perecup_price:
-            
-            headers = [
-                ("telegram_room", "perekup")
-            ]
+            headers = [("telegram_room", "perekup")]
             self.logger.info(f"Отправляем сообщение с темой 'perekup' в Kafka: {message}")
-            self.producer.send(topic, value=message, headers=headers)
+            self.producer.send(topic, value=message, headers=headers, callback=self.on_send_success, error_callback=self.on_send_error)
             self.producer.flush()
-            self.logger.info("Сообщение в кафка успешно отправлено.")
+            self.logger.info("Сообщение успешно отправлено.")
             return True
         else:
             if (
-                parsed_offer.bonus_percent >= self.bonus_percent_alert 
-                and parsed_offer.bonus_amount >= self.bonus_value_alert 
-                and parsed_offer.price <= self.price_value_alert 
-                and parsed_offer.price_bonus <= self.price_bonus_value_alert 
+                parsed_offer.bonus_percent >= self.bonus_percent_alert
+                and parsed_offer.bonus_amount >= self.bonus_value_alert
+                and parsed_offer.price <= self.price_value_alert
+                and parsed_offer.price_bonus <= self.price_bonus_value_alert
                 and parsed_offer.price >= self.price_min_value_alert
             ):
+                # Логирование всех проверок
+                self.logger.info(f"Проверка условий прошла успешно для предложения: {parsed_offer}")
                 if "Смартфон" in self.naming_product_for_tg_chat:
-                    headers = [
-                        ("telegram_room", "phone")
-                    ]
+                    headers = [("telegram_room", "phone")]
                 elif "Компьютер" in self.naming_product_for_tg_chat:
-                    headers = [
-                        ("telegram_room", "computer")
-                    ]
+                    headers = [("telegram_room", "computer")]
                 elif "Ноутбук" in self.naming_product_for_tg_chat:
-                    headers = [
-                        ("telegram_room", "notebook")
-                    ]
+                    headers = [("telegram_room", "notebook")]
                 elif "Монитор" in self.naming_product_for_tg_chat:
-                    headers = [
-                        ("telegram_room", "monitor")
-                    ]
+                    headers = [("telegram_room", "monitor")]
                 else:
-                    headers = [
-                        ("telegram_room", "client")
-                    ]
-                    self.logger.info(f"Отправляем сообщение в Kafka с темой: {headers[0][1]}")
-                    self.producer.send(topic, value=message, headers=headers)
-                    self.producer.flush()
-                    self.logger.info("Сообщение в кафка успешно отправлено.")
+                    headers = [("telegram_room", "client")]
+
+                self.logger.info(f"Отправляем сообщение в Kafka с темой: {headers[0][1]}")
+                self.producer.send(topic, value=message, headers=headers, callback=self.on_send_success, error_callback=self.on_send_error)
+                self.producer.flush()
+                self.logger.info("Сообщение успешно отправлено.")
                 self.perecup_price = None
                 return True
+            else:
+                self.logger.info(f"Условия не удовлетворены для предложения: {parsed_offer}")
+                
         return False
+    
+    def on_send_success(self, record_metadata):
+        self.logger.info(f"Сообщение отправлено успешно: {record_metadata}")
+    
+    def on_send_error(self, excp):
+        self.logger.error(f"Ошибка отправки сообщения: {excp}")
 
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
         """Форматировать данные для отправки в telegram"""
