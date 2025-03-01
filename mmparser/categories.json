@@ -4,96 +4,96 @@
       "description": "iPhone 16 Pro Max",
       "sim": "eSIM",
       "memory": "1024",
-      "price": 145000,
-      "priceSim": 150000,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 16 Pro Max",
-      "sim": "eSIM",
-      "memory": "512",
-      "price": 125000,
-      "priceSim": 129000,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 16 Pro Max",
-      "sim": "eSIM",
-      "memory": "256",
-      "price": 113000,
-      "priceSim": 114500,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 16 Pro Max",
-      "sim": "eSIM",
-      "memory": "128",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 16 Pro",
-      "sim": "eSIM",
-      "memory": "1024",
       "price": 135000,
-      "priceSim": 141500,
+      "priceSim": 140000,
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 16 Pro",
+      "description": "iPhone 16 Pro Max",
       "sim": "eSIM",
       "memory": "512",
-      "price": 118000,
-      "priceSim": 125000,
+      "price": 115000,
+      "priceSim": 119000,
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 16 Pro",
+      "description": "iPhone 16 Pro Max",
       "sim": "eSIM",
       "memory": "256",
-      "price": 100000,
-      "priceSim": 103500,
+      "price": 103000,
+      "priceSim": 104500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro Max",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": null,
+      "priceSim": null,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 16 Pro",
       "sim": "eSIM",
-      "memory": "128",
-      "price": 92000,
-      "priceSim": 96000,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 16 Plus",
-      "sim": "eSIM",
       "memory": "1024",
-      "price": null,
-      "priceSim": null,
+      "price": 125000,
+      "priceSim": 131500,
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 16 Plus",
+      "description": "iPhone 16 Pro",
       "sim": "eSIM",
       "memory": "512",
-      "price": null,
-      "priceSim": null,
+      "price": 108000,
+      "priceSim": 115000,
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 16 Plus",
+      "description": "iPhone 16 Pro",
       "sim": "eSIM",
       "memory": "256",
       "price": 90000,
-      "priceSim": 94000,
+      "priceSim": 93500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Pro",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 82000,
+      "priceSim": 86000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 16 Plus",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 80000,
+      "priceSim": 84000,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 16 Plus",
       "sim": "eSIM",
       "memory": "128",
-      "price": 78000,
-      "priceSim": 82500,
+      "price": 68000,
+      "priceSim": 72500,
       "result": "Закупаем"
     },
     {
@@ -116,16 +116,16 @@
       "description": "iPhone 16",
       "sim": "eSIM",
       "memory": "256",
-      "price": 78000,
-      "priceSim": 82500,
+      "price": 68000,
+      "priceSim": 72500,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 16",
       "sim": "eSIM",
       "memory": "128",
-      "price": 65000,
-      "priceSim": 69500,
+      "price": 55000,
+      "priceSim": 59500,
       "result": "Закупаем"
     },
     {
@@ -140,16 +140,16 @@
       "description": "iPhone 15 Pro Max",
       "sim": "eSIM",
       "memory": "512",
-      "price": 124000,
-      "priceSim": 124000,
+      "price": 114000,
+      "priceSim": 114000,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 15 Pro Max",
       "sim": "eSIM",
       "memory": "256",
-      "price": 96000,
-      "priceSim": 101000,
+      "price": 86000,
+      "priceSim": 91000,
       "result": "Закупаем"
     },
     {
@@ -164,68 +164,36 @@
       "description": "iPhone 15 Pro",
       "sim": "eSIM",
       "memory": "512",
-      "price": 110000,
-      "priceSim": 117500,
+      "price": 100000,
+      "priceSim": 107500,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 15 Pro",
       "sim": "eSIM",
       "memory": "256",
-      "price": 95000,
-      "priceSim": 110000,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 15 Pro",
-      "sim": "eSIM",
-      "memory": "128",
       "price": 85000,
-      "priceSim": 90000,
+      "priceSim": 100000,
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 15 Plus",
+      "description": "iPhone 15 Pro",
       "sim": "eSIM",
-      "memory": "1024",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 15 Plus",
-      "sim": "eSIM",
-      "memory": "512",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 15 Plus",
-      "sim": "eSIM",
-      "memory": "256",
-      "price": 80000,
+      "memory": "128",
+      "price": 75000,
       "priceSim": 80000,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 15 Plus",
       "sim": "eSIM",
-      "memory": "128",
-      "price": 68000,
-      "priceSim": 68000,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 15",
-      "sim": "eSIM",
       "memory": "1024",
       "price": null,
       "priceSim": null,
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 15",
+      "description": "iPhone 15 Plus",
       "sim": "eSIM",
       "memory": "512",
       "price": null,
@@ -233,95 +201,7 @@
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 15",
-      "sim": "eSIM",
-      "memory": "256",
-      "price": 70000,
-      "priceSim": 72500,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 15",
-      "sim": "eSIM",
-      "memory": "128",
-      "price": 57000,
-      "priceSim": 61000,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro Max",
-      "sim": "eSIM",
-      "memory": "1024",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro Max",
-      "sim": "eSIM",
-      "memory": "512",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro Max",
-      "sim": "eSIM",
-      "memory": "256",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro Max",
-      "sim": "eSIM",
-      "memory": "128",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro",
-      "sim": "eSIM",
-      "memory": "1024",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro",
-      "sim": "eSIM",
-      "memory": "512",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro",
-      "sim": "eSIM",
-      "memory": "256",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Pro",
-      "sim": "eSIM",
-      "memory": "128",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Plus",
-      "sim": "eSIM",
-      "memory": "512",
-      "price": null,
-      "priceSim": null,
-      "result": "Закупаем"
-    },
-    {
-      "description": "iPhone 14 Plus",
+      "description": "iPhone 15 Plus",
       "sim": "eSIM",
       "memory": "256",
       "price": 70000,
@@ -329,14 +209,134 @@
       "result": "Закупаем"
     },
     {
-      "description": "iPhone 14 Plus",
+      "description": "iPhone 15 Plus",
       "sim": "eSIM",
       "memory": "128",
+      "price": 58000,
+      "priceSim": 58000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": 60000,
+      "priceSim": 62500,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 15",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 47000,
+      "priceSim": 51000,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro Max",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "1024",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "256",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Pro",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Plus",
+      "sim": "eSIM",
+      "memory": "512",
+      "price": null,
+      "priceSim": null,
+      "result": "Закупаем"
+    },
+    {
+      "description": "iPhone 14 Plus",
+      "sim": "eSIM",
+      "memory": "256",
       "price": 60000,
       "priceSim": 60000,
       "result": "Закупаем"
     },
     {
+      "description": "iPhone 14 Plus",
+      "sim": "eSIM",
+      "memory": "128",
+      "price": 50000,
+      "priceSim": 50000,
+      "result": "Закупаем"
+    },
+    {
       "description": "iPhone 14",
       "sim": "eSIM",
       "memory": "1024",
@@ -356,16 +356,16 @@
       "description": "iPhone 14",
       "sim": "eSIM",
       "memory": "256",
-      "price": 66500,
-      "priceSim": 66500,
+      "price": 56500,
+      "priceSim": 56500,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 14",
       "sim": "eSIM",
       "memory": "128",
-      "price": 53000,
-      "priceSim": 53000,
+      "price": 43000,
+      "priceSim": 43000,
       "result": "Закупаем"
     },
     {
@@ -388,16 +388,16 @@
       "description": "iPhone 13",
       "sim": "eSIM",
       "memory": "256",
-      "price": 60500,
-      "priceSim": 60500,
+      "price": 50500,
+      "priceSim": 50500,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 13",
       "sim": "eSIM",
       "memory": "128",
-      "price": 44500,
-      "priceSim": 44500,
+      "price": 34500,
+      "priceSim": 34500,
       "result": "Закупаем"
     },
     {
@@ -428,100 +428,36 @@
       "description": "iPhone 12",
       "sim": "eSIM",
       "memory": "128",
-      "price": 35000,
-      "priceSim": 35000,
+      "price": 25000,
+      "priceSim": 25000,
       "result": "Закупаем"
     },
     {
       "description": "iPhone 12",
       "sim": "eSIM",
       "memory": "64",
-      "price": 33000,
-      "priceSim": 33000,
+      "price": 23000,
+      "priceSim": 23000,
       "result": "Закупаем"
     },
     {
       "description": "Samsung Galaxy S24 Ultra",
       "sim": "eSIM",
       "memory": "12/512",
-      "price": 90000,
-      "priceSim": 92000,
+      "price": 85000,
+      "priceSim": 87000,
       "result": "Стоп"
     },
     {
       "description": "Samsung Galaxy S24 Ultra",
       "sim": "eSIM",
       "memory": "12/256",
-      "price": 78000,
-      "priceSim": 80000,
+      "price": 73000,
+      "priceSim": 75000,
       "result": "Стоп"
     },
     {
       "description": "Samsung Galaxy S24 Plus",
-      "sim": "eSIM",
-      "memory": "12/512",
-      "price": 76000,
-      "priceSim": 78000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24 Plus",
-      "sim": "eSIM",
-      "memory": "12/256",
-      "price": 67000,
-      "priceSim": 69000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24 FE",
-      "sim": "eSIM",
-      "memory": "8/512",
-      "price": 60000,
-      "priceSim": 62000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24 FE",
-      "sim": "eSIM",
-      "memory": "8/256",
-      "price": 50000,
-      "priceSim": 52000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24 FE",
-      "sim": "eSIM",
-      "memory": "8/128",
-      "price": 40000,
-      "priceSim": 42000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24",
-      "sim": "eSIM",
-      "memory": "8/512",
-      "price": 66000,
-      "priceSim": 68000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24",
-      "sim": "eSIM",
-      "memory": "8/256",
-      "price": 55500,
-      "priceSim": 57500,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S24",
-      "sim": "eSIM",
-      "memory": "8/128",
-      "price": 45000,
-      "priceSim": 47000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S23 Ultra",
       "sim": "eSIM",
       "memory": "12/512",
       "price": 71000,
@@ -529,103 +465,55 @@
       "result": "Стоп"
     },
     {
-      "description": "Samsung Galaxy S23 Ultra",
+      "description": "Samsung Galaxy S24 Plus",
       "sim": "eSIM",
       "memory": "12/256",
-      "price": 68000,
-      "priceSim": 70000,
+      "price": 62000,
+      "priceSim": 64000,
       "result": "Стоп"
     },
     {
-      "description": "Samsung Galaxy S23 Ultra",
-      "sim": "eSIM",
-      "memory": "8/256",
-      "price": 63500,
-      "priceSim": 66500,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S23 FE",
-      "sim": "eSIM",
-      "memory": "8/256",
-      "price": 43000,
-      "priceSim": 45000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S23 FE",
-      "sim": "eSIM",
-      "memory": "8/128",
-      "price": 36000,
-      "priceSim": 38000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S23",
-      "sim": "eSIM",
-      "memory": "8/256",
-      "price": 47500,
-      "priceSim": 49500,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung Galaxy S23",
-      "sim": "eSIM",
-      "memory": "8/128",
-      "price": 41000,
-      "priceSim": 43000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S24 Ultra",
-      "sim": "eSIM",
-      "memory": "12/512",
-      "price": 90000,
-      "priceSim": 92000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S24 Ultra",
-      "sim": "eSIM",
-      "memory": "12/256",
-      "price": 78000,
-      "priceSim": 80000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S24 Plus",
-      "sim": "eSIM",
-      "memory": "12/512",
-      "price": 76000,
-      "priceSim": 78000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S24 Plus",
-      "sim": "eSIM",
-      "memory": "12/256",
-      "price": 67000,
-      "priceSim": 69000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S24 FE",
+      "description": "Samsung Galaxy S24 FE",
       "sim": "eSIM",
       "memory": "8/512",
-      "price": 60000,
-      "priceSim": 62000,
+      "price": 55000,
+      "priceSim": 57000,
       "result": "Стоп"
     },
     {
-      "description": "Samsung S24 FE",
+      "description": "Samsung Galaxy S24 FE",
       "sim": "eSIM",
       "memory": "8/256",
-      "price": 50000,
-      "priceSim": 52000,
+      "price": 45000,
+      "priceSim": 47000,
       "result": "Стоп"
     },
     {
-      "description": "Samsung S24 FE",
+      "description": "Samsung Galaxy S24 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 35000,
+      "priceSim": 37000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 61000,
+      "priceSim": 63000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 50500,
+      "priceSim": 50500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S24",
       "sim": "eSIM",
       "memory": "8/128",
       "price": 40000,
@@ -633,63 +521,55 @@
       "result": "Стоп"
     },
     {
-      "description": "Samsung S24",
+      "description": "Samsung Galaxy S23 Ultra",
       "sim": "eSIM",
-      "memory": "8/512",
+      "memory": "12/512",
       "price": 66000,
       "priceSim": 68000,
       "result": "Стоп"
     },
     {
-      "description": "Samsung S24",
-      "sim": "eSIM",
-      "memory": "8/256",
-      "price": 55500,
-      "priceSim": 57500,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S24",
-      "sim": "eSIM",
-      "memory": "8/128",
-      "price": 45000,
-      "priceSim": 47000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S23 Ultra",
-      "sim": "eSIM",
-      "memory": "12/512",
-      "price": 71000,
-      "priceSim": 73000,
-      "result": "Стоп"
-    },
-    {
-      "description": "Samsung S23 Ultra",
+      "description": "Samsung Galaxy S23 Ultra",
       "sim": "eSIM",
       "memory": "12/256",
-      "price": 68000,
-      "priceSim": 70000,
+      "price": 63000,
+      "priceSim": 65000,
       "result": "Стоп"
     },
     {
-      "description": "Samsung S23 Ultra",
+      "description": "Samsung Galaxy S23 Ultra",
       "sim": "eSIM",
       "memory": "8/256",
-      "price": 63500,
-      "priceSim": 66500,
+      "price": 58500,
+      "priceSim": 61500,
       "result": "Стоп"
     },
     {
-      "description": "Samsung S23 FE",
+      "description": "Samsung Galaxy S23 FE",
       "sim": "eSIM",
       "memory": "8/256",
-      "price": 43000,
-      "priceSim": 45000,
+      "price": 38000,
+      "priceSim": 40000,
       "result": "Стоп"
     },
     {
-      "description": "Samsung S23 FE",
+      "description": "Samsung Galaxy S23 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 31000,
+      "priceSim": 33000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 42500,
+      "priceSim": 44500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung Galaxy S23",
       "sim": "eSIM",
       "memory": "8/128",
       "price": 36000,
@@ -697,51 +577,171 @@
       "result": "Стоп"
     },
     {
+      "description": "Samsung S24 Ultra",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 85000,
+      "priceSim": 87000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Ultra",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 73000,
+      "priceSim": 75000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Plus",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 71000,
+      "priceSim": 73000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 Plus",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 62000,
+      "priceSim": 64000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 FE",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 55000,
+      "priceSim": 57000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 FE",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 45000,
+      "priceSim": 47000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 35000,
+      "priceSim": 37000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24",
+      "sim": "eSIM",
+      "memory": "8/512",
+      "price": 61000,
+      "priceSim": 63000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 50500,
+      "priceSim": 52500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S24",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 40000,
+      "priceSim": 42000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 Ultra",
+      "sim": "eSIM",
+      "memory": "12/512",
+      "price": 66000,
+      "priceSim": 68000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 Ultra",
+      "sim": "eSIM",
+      "memory": "12/256",
+      "price": 63000,
+      "priceSim": 65000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 Ultra",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 58500,
+      "priceSim": 61500,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 FE",
+      "sim": "eSIM",
+      "memory": "8/256",
+      "price": 38000,
+      "priceSim": 40000,
+      "result": "Стоп"
+    },
+    {
+      "description": "Samsung S23 FE",
+      "sim": "eSIM",
+      "memory": "8/128",
+      "price": 31000,
+      "priceSim": 33000,
+      "result": "Стоп"
+    },
+    {
       "description": "Samsung S23",
       "sim": "eSIM",
       "memory": "8/256",
-      "price": 47500,
-      "priceSim": 49500,
+      "price": 42500,
+      "priceSim": 44500,
       "result": "Стоп"
     },
     {
       "description": "Samsung S23",
       "sim": "eSIM",
       "memory": "8/128",
-      "price": 41000,
-      "priceSim": 43000,
+      "price": 36000,
+      "priceSim": 38000,
       "result": "Стоп"
     },
     {
       "description": "Samsung Galaxy A55",
       "sim": "eSIM",
       "memory": "12/256",
-      "price": 29000,
-      "priceSim": 31000,
+      "price": 23000,
+      "priceSim": 26000,
       "result": "Стоп"
     },
     {
       "description": "Samsung Galaxy A55",
       "sim": "eSIM",
       "memory": "8/256",
-      "price": 26500,
-      "priceSim": 28500,
+      "price": 21500,
+      "priceSim": 23500,
       "result": "Стоп"
     },
     {
       "description": "Samsung Galaxy A55",
       "sim": "eSIM",
       "memory": "8/128",
-      "price": 24500,
-      "priceSim": 26500,
+      "price": 19500,
+      "priceSim": 21500,
       "result": "Стоп"
     },
     {
       "description": "Samsung Galaxy A54",
       "sim": "eSIM",
       "memory": "8/256",
-      "price": 23500,
-      "priceSim": 25500,
+      "price": 18500,
+      "priceSim": 20500,
       "result": "Стоп"
     },
     {
@@ -903,7 +903,7 @@
       "memory": "8/256",
       "proc": "M1",
       "code": "MGN63",
-      "price": 62000,
+      "price": 56000,
       "result": "Закупаем"
     },
     {
@@ -911,7 +911,7 @@
       "memory": "8/256",
       "proc": "M1",
       "code": "MGND3",
-      "price": 65000,
+      "price": 60000,
       "result": "Закупаем"
     },
     {
@@ -919,7 +919,7 @@
       "memory": "8/256",
       "proc": "M1",
       "code": "MGN93",
-      "price": 66000,
+      "price": 60000,
       "result": "Закупаем"
     },
     {
@@ -927,7 +927,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MLXY3",
-      "price": 80000,
+      "price": 70000,
       "result": "Закупаем"
     },
     {
@@ -935,7 +935,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MLXW3",
-      "price": 80000,
+      "price": 70000,
       "result": "Закупаем"
     },
     {
@@ -943,7 +943,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MLY13",
-      "price": 80000,
+      "price": 70000,
       "result": "Закупаем"
     },
     {
@@ -951,7 +951,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MLY33",
-      "price": 80000,
+      "price": 70000,
       "result": "Закупаем"
     },
     {
@@ -959,7 +959,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MLY03",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -967,7 +967,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MLXX3",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -975,7 +975,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MLY23",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -983,7 +983,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MLY43",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -1031,7 +1031,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRXV3",
-      "price": 96500,
+      "price": 86500,
       "result": "Закупаем"
     },
     {
@@ -1039,7 +1039,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRXT3",
-      "price": 96500,
+      "price": 86500,
       "result": "Закупаем"
     },
     {
@@ -1047,7 +1047,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRXQ3",
-      "price": 96500,
+      "price": 86500,
       "result": "Закупаем"
     },
     {
@@ -1055,7 +1055,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRXN3",
-      "price": 96500,
+      "price": 86500,
       "result": "Закупаем"
     },
     {
@@ -1063,7 +1063,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRXW3",
-      "price": 113000,
+      "price": 103000,
       "result": "Закупаем"
     },
     {
@@ -1071,7 +1071,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRXU3",
-      "price": 113000,
+      "price": 103000,
       "result": "Закупаем"
     },
     {
@@ -1079,7 +1079,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRXP3",
-      "price": 113000,
+      "price": 103000,
       "result": "Закупаем"
     },
     {
@@ -1087,7 +1087,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRXR3",
-      "price": 113000,
+      "price": 103000,
       "result": "Закупаем"
     },
     {
@@ -1151,7 +1151,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MQKW3",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -1159,7 +1159,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MQKU3",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -1167,7 +1167,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MQKP3",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -1175,7 +1175,7 @@
       "memory": "8/256",
       "proc": "M2",
       "code": "MQKR3",
-      "price": 97000,
+      "price": 87000,
       "result": "Закупаем"
     },
     {
@@ -1183,7 +1183,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MQKX3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1191,7 +1191,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MQKV3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1199,7 +1199,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MQKQ3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1207,7 +1207,7 @@
       "memory": "8/512",
       "proc": "M2",
       "code": "MQKT3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1215,7 +1215,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRYU3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1223,7 +1223,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRYR3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1231,7 +1231,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRYM3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1239,7 +1239,7 @@
       "memory": "8/256",
       "proc": "M3",
       "code": "MRYP3",
-      "price": 110000,
+      "price": 100000,
       "result": "Закупаем"
     },
     {
@@ -1247,7 +1247,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRYV3",
-      "price": 122000,
+      "price": 112000,
       "result": "Закупаем"
     },
     {
@@ -1255,7 +1255,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRYT3",
-      "price": 122000,
+      "price": 112000,
       "result": "Закупаем"
     },
     {
@@ -1263,7 +1263,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRYN3",
-      "price": 122000,
+      "price": 112000,
       "result": "Закупаем"
     },
     {
@@ -1271,7 +1271,7 @@
       "memory": "8/512",
       "proc": "M3",
       "code": "MRYQ3",
-      "price": 122000,
+      "price": 112000,
       "result": "Закупаем"
     },
     {
@@ -1498,8 +1498,8 @@
       "diagonal": "8.3",
       "memory": "256",
       "lte": "LTE",
-      "price": 53500,
-      "priceLte": 53500,
+      "price": 48500,
+      "priceLte": 48500,
       "result": "Закупаем"
     },
     {
@@ -1508,8 +1508,8 @@
       "diagonal": "8.3",
       "memory": "128",
       "lte": "LTE",
-      "price": 45500,
-      "priceLte": 45500,
+      "price": 40500,
+      "priceLte": 40500,
       "result": "Закупаем"
     },
     {
@@ -1578,8 +1578,8 @@
       "diagonal": "11",
       "memory": "512",
       "lte": "LTE",
-      "price": 104000,
-      "priceLte": 104000,
+      "price": 94000,
+      "priceLte": 94000,
       "result": "Закупаем"
     },
     {
@@ -1588,8 +1588,8 @@
       "diagonal": "11",
       "memory": "256",
       "lte": "LTE",
-      "price": 88000,
-      "priceLte": 102000,
+      "price": 78000,
+      "priceLte": 92000,
       "result": "Закупаем"
     },
     {
@@ -1748,8 +1748,8 @@
       "diagonal": "13",
       "memory": "128",
       "lte": "LTE",
-      "price": 65500,
-      "priceLte": 65500,
+      "price": 60500,
+      "priceLte": 60500,
       "result": "Закупаем"
     },
     {
@@ -1768,8 +1768,8 @@
       "diagonal": "11",
       "memory": "256",
       "lte": "LTE",
-      "price": 63000,
-      "priceLte": 63000,
+      "price": 58000,
+      "priceLte": 58000,
       "result": "Закупаем"
     },
     {
@@ -1778,8 +1778,8 @@
       "diagonal": "11",
       "memory": "128",
       "lte": "LTE",
-      "price": 55000,
-      "priceLte": 55000,
+      "price": 50000,
+      "priceLte": 50000,
       "result": "Закупаем"
     },
     {
@@ -1788,8 +1788,8 @@
       "diagonal": "10.9",
       "memory": "256",
       "lte": "LTE",
-      "price": 56000,
-      "priceLte": 56000,
+      "price": 51000,
+      "priceLte": 51000,
       "result": "Закупаем"
     },
     {
@@ -1798,8 +1798,8 @@
       "diagonal": "10.9",
       "memory": "64",
       "lte": "LTE",
-      "price": 44500,
-      "priceLte": 44500,
+      "price": 39500,
+      "priceLte": 39500,
       "result": "Закупаем"
     },
     {
@@ -1818,8 +1818,8 @@
       "diagonal": "10.9",
       "memory": "256",
       "lte": "LTE",
-      "price": 44000,
-      "priceLte": 44000,
+      "price": 33000,
+      "priceLte": 33000,
       "result": "Закупаем"
     },
     {
@@ -1828,8 +1828,8 @@
       "diagonal": "10.9",
       "memory": "64",
       "lte": "LTE",
-      "price": 30500,
-      "priceLte": 30500,
+      "price": 25500,
+      "priceLte": 25500,
       "result": "Закупаем"
     },
     {
@@ -1838,8 +1838,8 @@
       "diagonal": "10.2",
       "memory": "256",
       "lte": "LTE",
-      "price": 34000,
-      "priceLte": 34000,
+      "price": 30000,
+      "priceLte": 30000,
       "result": "Закупаем"
     },
     {

@@ -37,6 +37,7 @@ def run_url_parser(args: argparse.Namespace, config: dict = {}) -> None:
         delay=config.get("delay") or args.delay,
         error_delay=config.get("error_delay") or args.error_delay,
         log_level=config.get("log_level") or args.log_level,
+        perekup=config.get("perekup") or args.perecup
     )
     parser_instance.parse()
 

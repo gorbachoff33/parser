@@ -28,7 +28,7 @@
   "blacklist": "",
   "all_cards": "False",
   "no_cards": "False",
-  "cookie_file_path": "",
+  "cookie_file_path": "cookie.json",
   "address": "Москва",
   "proxy": "",
   "allow_direct": "True",
@@ -46,12 +46,13 @@
   "price_value_alert": "",
   "price_bonus_value_alert": "",
   "bonus_value_alert": "",
-  "bonus_percent_alert": 30,
+  "bonus_percent_alert": 35,
   "alert_repeat_timeout": 72,
   "use_merchant_blacklist": "False",
   "threads": 1,
   "delay": 1.8,
   "error_delay": 5,
   "account_alert": "False",
-  "log_level": "INFO"
+  "log_level": "INFO",
+  "perekup": "False"
 }

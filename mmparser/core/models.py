@@ -1,6 +1,7 @@
 from dataclasses import dataclass, field
 from time import sleep, time
 from typing import Optional
+from time import sleep, time
 import threading
 
 
@@ -31,19 +32,16 @@ class ParsedOffer:
 class Connection:
     mutex = threading.Lock()
     shared_resource = 0
-    
     def __init__(self, proxy: str | None):
         self.proxy_string: str | None = proxy
         self.usable_at: int = 0
         self.busy = False
-        self.count: int = 0
         self.connections: list[Connection] = []
-        
+
     def add_connection(self, proxies: 'Connection'):
         self.connections.extend(
             Connection(proxy.proxy_string) for proxy in proxies
         )
-        
     def _get_connection(self) -> str:
         """Получить самое позднее использованное `Соединение`"""
         self.mutex.acquire()
@@ -55,5 +53,3 @@ class Connection:
                 if oldest_proxy.usable_at <= current_time:
                     self.mutex.release()
                     return oldest_proxy
-
-        
