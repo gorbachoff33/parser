@@ -8,7 +8,7 @@ services:
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     ports:
-      - "2181:2181"
+      - "2181:2181"  # Проброс порта Zookeeper
 
   kafka:
     image: confluentinc/cp-kafka:latest
@@ -16,11 +16,13 @@ services:
     restart: always
     depends_on:
       - zookeeper
+    ports:
+      - "9092:9092"  # Проброс порта 9092 наружу
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
-      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092  # Слушаем только на localhost
-      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092  # Слушаем на всех интерфейсах внутри контейнера
+      KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://localhost:9092  # Слушает на localhost
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092  # Слушает на всех интерфейсах внутри контейнера
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
