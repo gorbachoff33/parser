@@ -208,16 +208,13 @@ class Parser_url:
                 return response_data
             if response and response.status_code == 200 and response_data.get("code") == 7:
                 self.logger.debug("Соединение %s: слишком частые запросы", proxy.proxy_string)
-                proxy.usable_at = time() + 3660
-            proxy.busy = False
-        error = response_data.get("error")
-
-        with concurrent.futures.ThreadPoolExecutor() as executor:
-                if "8 800 600-08-88" in error:
+                with concurrent.futures.ThreadPoolExecutor() as executor:
                     message = (
-                        f"🔴<b>Ошибка:</b> Ошибка получения данных api: {error}\n"
+                        f"🔴<b>Ошибка:</b> Ошибка получения данных api: {response_data.get("error")}\n"
                         f"🔷 <b>Сервер:</b> 1 (с ценами)")
                     executor.submit(self.tg_client_error.notify, message, None)
+                proxy.usable_at = time() + 3660
+            proxy.busy = False
         raise ApiError("Ошибка получения данных api")
 
     def _get_profile(self) -> None:
