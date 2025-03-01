@@ -464,7 +464,7 @@ class Parser_url:
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в kafka если предложение подходит по параметрам"""
         producer = KafkaProducer(
-            bootstrap_servers='localhost:9092'
+            bootstrap_servers='88.151.114.88:9092'
         )
         topic = "MM.PARSER.V1"
         message = self._format_tg_message(parsed_offer)
