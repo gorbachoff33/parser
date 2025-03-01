@@ -80,13 +80,7 @@ class Parser_url:
         self.job_name: str = ""
 
         self.logger: logging.Logger = self._create_logger(self.log_level)
-        self.tg_client: TelegramClient = None
-        self.tg_client_phone: TelegramClient = None
         self.tg_client_error: TelegramClient = None
-        self.tg_client_nout: TelegramClient = None
-        self.tg_client_komp: TelegramClient = None
-        self.tg_client_monitor: TelegramClient = None
-        self.tg_client_perekup: TelegramClient = None
 
         self.url: str = url
         self.urls: list[str] = urls
@@ -231,13 +225,7 @@ class Parser_url:
             for client in self.tg_config:
                 if not validate_tg_credentials(client):
                     raise ConfigError(f"Конфиг {client} не прошел проверку!")
-            self.tg_client = TelegramClient(self.tg_config[0], self.logger)
-            self.tg_client_phone = TelegramClient(self.tg_config[1], self.logger)
-            self.tg_client_nout = TelegramClient(self.tg_config[2], self.logger)
-            self.tg_client_komp = TelegramClient(self.tg_config[3], self.logger)
-            self.tg_client_monitor = TelegramClient(self.tg_config[4], self.logger)
-            self.tg_client_perekup = TelegramClient(self.tg_config[5], self.logger)
-            self.tg_client_error = TelegramClient(self.tg_config[6], self.logger)
+            self.tg_client_error = TelegramClient(self.tg_config[0], self.logger)
         self.parsed_proxies = self.proxy_file_path and utils.parse_proxy_file(self.proxy_file_path)
         self.categories = self.categories_path and utils.parse_categories_file(self.categories_path)
         self._proxies_set_up()
@@ -484,15 +472,10 @@ class Parser_url:
         if self.perecup_price:
             
             headers = [
-                ("token", self.tg_client_perekup.bot_token),
-                ("chatId", self.tg_client_perekup.chat_id),
-                ("threadId", self.tg_client_perekup.thread_id)
+                ("telegram_room", "perekup")
             ]
             producer.send(topic, value=message, headers=headers)
             producer.flush()
-            # with concurrent.futures.ThreadPoolExecutor() as executor:
-            #     message = self._format_tg_message(parsed_offer)
-            #     executor.submit(self.tg_client_perekup.notify, message)
             return True
         else:
             if (
@@ -500,53 +483,30 @@ class Parser_url:
                 and parsed_offer.bonus_amount >= self.bonus_value_alert 
                 and parsed_offer.price <= self.price_value_alert 
                 and parsed_offer.price_bonus <= self.price_bonus_value_alert 
-                and parsed_offer.price >= self.price_min_value_alert 
-                and self.tg_client
+                and parsed_offer.price >= self.price_min_value_alert
             ):
                 if "Смартфон" in self.naming_product_for_tg_chat:
                     headers = [
-                        ("token", self.tg_client_phone.bot_token),
-                        ("chatId", self.tg_client_phone.chat_id),
-                        ("threadId", self.tg_client_phone.thread_id)
+                        ("telegram_room", "phone")
                     ]
                 elif "Компьютер" in self.naming_product_for_tg_chat:
                     headers = [
-                        ("token", self.tg_client_komp.bot_token),
-                        ("chatId", self.tg_client_komp.chat_id),
-                        ("threadId", self.tg_client_komp.thread_id)
+                        ("telegram_room", "computer")
                     ]
                 elif "Ноутбук" in self.naming_product_for_tg_chat:
                     headers = [
-                        ("token", self.tg_client_nout.bot_token),
-                        ("chatId", self.tg_client_nout.chat_id),
-                        ("threadId", self.tg_client_nout.thread_id)
+                        ("telegram_room", "notebook")
                     ]
                 elif "Монитор" in self.naming_product_for_tg_chat:
                     headers = [
-                        ("token", self.tg_client_monitor.bot_token),
-                        ("chatId", self.tg_client_monitor.chat_id),
-                        ("threadId", self.tg_client_monitor.thread_id)
+                        ("telegram_room", "monitor")
                     ]
                 else:
                     headers = [
-                        ("token", self.tg_client.bot_token),
-                        ("chatId", self.tg_client.chat_id),
-                        ("threadId", self.tg_client.thread_id)
+                        ("telegram_room", "client")
                     ]
                     producer.send(topic, value=message, headers=headers)
                     producer.flush()
-                # with concurrent.futures.ThreadPoolExecutor() as executor:
-                #     message = self._format_tg_message(parsed_offer)
-                #     if "Смартфон" in self.naming_product_for_tg_chat:
-                #         executor.submit(self.tg_client_phone.notify, message)
-                #     elif "Компьютер" in self.naming_product_for_tg_chat:
-                #         executor.submit(self.tg_client_komp.notify, message)
-                #     elif "Ноутбук" in self.naming_product_for_tg_chat:
-                #         executor.submit(self.tg_client_nout.notify, message)
-                #     elif "Монитор" in self.naming_product_for_tg_chat:
-                #         executor.submit(self.tg_client_monitor.notify, message)
-                #     else:
-                #         executor.submit(self.tg_client.notify, message)
                 self.perecup_price = None
                 return True
         return False
