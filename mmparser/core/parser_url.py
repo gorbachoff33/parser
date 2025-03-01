@@ -474,20 +474,32 @@ class Parser_url:
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
-        message = "hello"
         headers = [("telegram_room", "perekup")]
 
-        # Сначала сериализуем в JSON (если нужно)
-        serialized_message = json.dumps({"message": message})
+        message = "hello"  # это может быть любой объект, который вы хотите передать
 
-        # Затем кодируем в байты
-        encoded_message = serialized_message.encode('utf-8')
+        # Прежде чем сериализовать и кодировать, печатаем тип данных
+        self.logger.info(f"Тип данных перед сериализацией: {type(message)}")
 
-        # Отправка в Kafka
+        # Сериализуем в JSON, если это необходимо
         try:
-            # Здесь уже нет повторной сериализации, только передача закодированных байтов
+            if isinstance(message, dict) or isinstance(message, list):
+                serialized_message = json.dumps(message)
+            else:
+                serialized_message = message  # если это строка или байты, не сериализуем
+
+            self.logger.info(f"Сериализованное сообщение: {serialized_message}")
+
+            # Кодируем в байты
+            encoded_message = serialized_message.encode('utf-8')
+
+            # Печатаем закодированное сообщение
+            self.logger.info(f"Закодированное сообщение: {encoded_message}")
+
+            # Отправляем в Kafka
             self.producer.send(topic, value=encoded_message, headers=headers)
             self.logger.info(f"Сообщение успешно отправлено: {encoded_message}")
+
         except Exception as e:
             self.logger.error(f"Ошибка сериализации или отправки сообщения: {e}")
                 
