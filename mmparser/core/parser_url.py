@@ -121,13 +121,7 @@ class Parser_url:
         self.price = None
         self.bonus_amount = None
         
-        self.producer = KafkaProducer(
-            bootstrap_servers='127.0.0.1:9092',
-            value_serializer=lambda v: json.dumps(v).encode('utf-8') if isinstance(v, dict) or isinstance(v, list) else v,
-            acks='all',
-            retries=5,
-            linger_ms=100,
-            batch_size=16384
+        self.producer = KafkaProducer(bootstrap_servers='localhost:9092', value_serializer=lambda v: json.dumps(v).encode('utf-8')
         )
 
         
@@ -476,32 +470,10 @@ class Parser_url:
         topic = "MM.PARSER.V1"
         headers = [("telegram_room", "perekup")]
 
-        message = "hello"  # это может быть любой объект, который вы хотите передать
+        message = "hello"
+        self.producer.send('MM.PARSER.V1', value=message)
+        self.producer.flush()
 
-        # Прежде чем сериализовать и кодировать, печатаем тип данных
-        self.logger.info(f"Тип данных перед сериализацией: {type(message)}")
-
-        # Сериализуем в JSON, если это необходимо
-        try:
-            if isinstance(message, dict) or isinstance(message, list):
-                serialized_message = json.dumps(message)
-            else:
-                serialized_message = message  # если это строка или байты, не сериализуем
-
-            self.logger.info(f"Сериализованное сообщение: {serialized_message}")
-
-            # Кодируем в байты
-            encoded_message = serialized_message.encode('utf-8')
-
-            # Печатаем закодированное сообщение
-            self.logger.info(f"Закодированное сообщение: {encoded_message}")
-
-            # Отправляем в Kafka
-            self.producer.send(topic, value=encoded_message, headers=headers)
-            self.logger.info(f"Сообщение успешно отправлено: {encoded_message}")
-
-        except Exception as e:
-            self.logger.error(f"Ошибка сериализации или отправки сообщения: {e}")
                 
         # if self.perecup_price:
         #     headers = [("telegram_room", "perekup")]
