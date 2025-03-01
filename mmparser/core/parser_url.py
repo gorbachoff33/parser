@@ -474,19 +474,15 @@ class Parser_url:
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
         message = self._format_tg_message(parsed_offer)
-        
-        self.logger.info(f"Генерация сообщения: {message}")
-        
+                
         if self.perecup_price:
             headers = [("telegram_room", "perekup")]
-            self.logger.info(f"Отправляем сообщение с темой 'perekup' в Kafka: {message}")
             try:
                 record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
                 self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
             except Exception as excp:
                 self.logger.error(f"Ошибка отправки сообщения: {excp}")
             self.producer.flush()
-            self.logger.info("Сообщение успешно отправлено.")
             return True
         else:
             if (
@@ -509,14 +505,12 @@ class Parser_url:
                 else:
                     headers = [("telegram_room", "client")]
 
-                self.logger.info(f"Отправляем сообщение в Kafka с темой: {headers[0][1]}")
                 try:
                     record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
                     self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
                 except Exception as excp:
-                    self.logger.error(f"Ошибка отправки сообщения: {excp}")
+                    self.logger.error(f"Ошибка отправки сообщения: {excp}, тип ошибки: {type(excp)}")
                 self.producer.flush()
-                self.logger.info("Сообщение успешно отправлено.")
                 self.perecup_price = None
                 return True
             else:
@@ -528,7 +522,7 @@ class Parser_url:
         self.logger.info(f"Сообщение отправлено успешно: {record_metadata}")
     
     def on_send_error(self, excp):
-        self.logger.error(f"Ошибка отправки сообщения: {excp}")
+        self.logger.error(f"Ошибка отправки сообщения: {excp}, тип ошибки: {type(excp)}")
 
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
         """Форматировать данные для отправки в telegram"""
