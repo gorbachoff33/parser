@@ -470,14 +470,16 @@ class Parser_url:
         """Отправить уведомление в kafka если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
         message = self._format_tg_message(parsed_offer)
-        
+        self.logger.info(f"Генерация сообщения: {message}")
         if self.perecup_price:
             
             headers = [
                 ("telegram_room", "perekup")
             ]
+            self.logger.info(f"Отправляем сообщение с темой 'perekup' в Kafka: {message}")
             self.producer.send(topic, value=message, headers=headers)
             self.producer.flush()
+            self.logger.info("Сообщение в кафка успешно отправлено.")
             return True
         else:
             if (
@@ -507,8 +509,10 @@ class Parser_url:
                     headers = [
                         ("telegram_room", "client")
                     ]
+                    self.logger.info(f"Отправляем сообщение в Kafka с темой: {headers[0][1]}")
                     self.producer.send(topic, value=message, headers=headers)
                     self.producer.flush()
+                    self.logger.info("Сообщение в кафка успешно отправлено.")
                 self.perecup_price = None
                 return True
         return False
