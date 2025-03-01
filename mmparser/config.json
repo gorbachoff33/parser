@@ -1,6 +1,6 @@
 {
   "urls": [
-    "https://megamarket.ru/catalog/dzhoystiki-dlya-ps/",
+    "https://megamarket.ru/catalog/dzhoystiki-dlya-ps/set-ps5/",
     "https://megamarket.ru/catalog/dzhoystiki-dlya-xbox/",
     "https://megamarket.ru/catalog/smartfony-apple/",
     "https://megamarket.ru/catalog/smartfony/#?filters=%7B%222B0B1FF4756D49CF84B094522D57ED3D%22%3A%5B%22Samsung%22%2C%22POCO%22%2C%22Redmi%22%5D%7D",
@@ -26,7 +26,7 @@
   "blacklist": "",
   "all_cards": "False",
   "no_cards": "False",
-  "cookie_file_path": "",
+  "cookie_file_path": "cookie.json",
   "address": "Москва",
   "proxy": "",
   "allow_direct": "True",
@@ -51,5 +51,6 @@
   "delay": 1.8,
   "error_delay": 5,
   "account_alert": "False",
-  "log_level": "INFO"
+  "log_level": "INFO",
+  "perekup": "True"
 }

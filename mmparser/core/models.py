@@ -36,7 +36,6 @@ class Connection:
         self.proxy_string: str | None = proxy
         self.usable_at: int = 0
         self.busy = False
-        self.count: int = 0
         self.connections: list[Connection] = []
 
     def add_connection(self, proxies: 'Connection'):

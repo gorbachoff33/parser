@@ -54,6 +54,7 @@ class Parser_url:
         delay: float = None,
         error_delay: float = None,
         log_level: str = "INFO",
+        perekup: bool = True
     ):
         self.cookie_file_path = cookie_file_path
         self.proxy = proxy
@@ -97,6 +98,7 @@ class Parser_url:
         self.address: str = address
         self.proxy: str = proxy
         self.account_alert: bool = account_alert
+        self.perecup: bool = perekup
         self.use_merchant_blacklist: bool = use_merchant_blacklist
         self.merchant_blacklist: list = utils.load_blacklist() if use_merchant_blacklist else []
         self.price_min_value_alert: float = price_min_value_alert or float("-inf")
@@ -122,8 +124,40 @@ class Parser_url:
         self.naming_product_for_tg_chat = ""
         self.price = None
         self.bonus_amount = None
+        
+        self.category_methods = {
+            "Apple": self._match_product_apple,
+            "Игровая приставка": self._match_product_konsol,
+            "Игровая портативная консоль": self._match_product_konsol,
+            "Шлем Sony" : self._match_product_shlem,
+            "Фен Dyson" : self._match_product_dyson,
+            "Смартфон" : self._match_product_smartphone,
+            "Видеокарта" : self._match_product_video_card,
+            "Умная колонка" : self._match_product_colonka,
+            "перфоратор" : self._match_product_perf,
+            "высокого давления karcher" : self._match_product_karcher,
+            "пылесос karcher" : self._match_product_pilesos_karcher,
+            "телевизор sber" : self._match_product_sber,
+            "геймпад" : self._match_product_gamepad
+        }
+        
+        self.chat_name = {
+            "Смартфон": "Смартфон",
+            "Видеокарта": "Компьютер",
+            "Материнская плата": "Компьютер",
+            "Ноутбук": "Ноутбук",
+            "Монитор": "Монитор"
+        }
 
         self._set_up()
+        self.session = self._new_session()
+
+    def _new_session(self) -> requests.Session:
+        """Создание новой сессии"""
+        session = requests.Session(impersonate="chrome")
+        session.cookies.update(self.cookie_dict)
+        session.cookies["adult_disclaimer_confirmed"] = "1"
+        return session
 
     def _create_logger(self, log_level: str) -> logging.Logger:
         logging.basicConfig(
@@ -151,32 +185,25 @@ class Parser_url:
 
 
     def _api_request(self, api_url: str, json_data: dict, delay: float = 0) -> dict:
-        headers = {
-            "cookie": "spid=1739524944560_206a03d45181b4ec04b4fb09d6d7c655_c32xxggt69laajxw; __zzatw-smm=MDA0dBA=Fz2+aQ==; _sa=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945; _sas=SA1.fb7a2799-258a-4160-a5e0-bbb713c930fb.1739524945.1739524945; spjs=1739524947625_424d73cd_0134fe0a_717888e8ba5d44f93ec371269d7796f8_bdCTMz8GeqtWDLFwnMZy5+KuDm6bY/aW0o6PL3Gc5RGY0BrKli+zkzpgwSEB+W0uyvJnYqN0+iVnPBDCmhR5eVXOP705RMUlEWru6172ZxCMwWnZFS5nhwtim+tg+Bxd2aRj1oJpUpx4hpMCuZKs3nMb9iaOsKVEUQg6uA/348OWfw1oJUpkRRhTe23C2kIrLrEzZJFa+F5KVUcWjcNsLdBIZJfLYE4/FvjsXGghRUfTDYhp3JsxYVnALNxHyQd26jLFdZd8eYis1+eWA/tOyNVsMAGcQM+/MxuW8uiQRFQxuV/N2cB1pHKnS+sXm7rd/mTo6JxMDaJe8Zbix99Juj/GZSA+Jlr8AO9kNC3kLnExXmvfumejRHEvmzgXy9HSXocZv0NaxFVtowOB5Yj6Pn2mEvJ2Blt/IfhEFNuXfR5Tqsk5yuJykNUvS7uPlqEDnwcr6sPt0SF7BL7JYNhsfcmRJqbSa7+/CyyQQF2FaQr2niPHnERU1/M9Pe144VZHkog5S5RupHRIMUxatL9jPTjx1fWWaS6+ajJXZvyk6GnkbaJlHUFY3BJcidhcNX4FwT1KGm45NfFbkFxY/U1oQMWkJ2cfswUH2mC2ZzBY3GvHjzLzluWrCxWAADGbwVcWwpovTVnA9aRBh7lrFE5xId6FO0jUy/6vXwKy5hLt7Y1oBALgnsfIqlSPcmGvRHwnhw8L7o/hooID3Zk9Gs9BAx4m7b7CagemDvdhkCT8iVz5phO1MDTZfRGYxPVfSbbHK3PAEGS9BrX2mRydkMDVKd/msuo0RrHz/BJ+fvWMSRjNhGcylm5qek8oIkJ+SBqo2F1xMJBLM+UDDr8aW08Vp9vIaksnz3Oj39W5aRDOcC3TM2LNgljcjflWIoNZkboK1y5nl8umK9p0ChmvmuNXoad/yppeHfc1uTRYaJFblmaKRjNxdXgcP/mFoYFkDC4pUxnVpMiH/T+zPlKiH1WQYIRIOXq/18agpwHtj2IMdnc7864Oxon7WF1UUhLTyj/PyhITJukQ3hzBT7QXSuAM5XPuSLi+92Lncw7vP0Gc8BH9lRq69grjwyoQxCEBSR07utcXxxZUbf0BHDmiLmX5OMScL/+LUuIAUousTBhMj0mc5jfVzv7AKVUMs2iS6n+ml6x2BJrFc185h7trFcb7iXUGGowhmxeGXqqcTtaBSmTvyASrqA7N4myAukl0TEEv6gMi66I88l1MoJTkGefb9Nw2RaDNRPascQVwphMvdQABjzVI0=; device_id=35899286-eab5-11ef-9f27-fa163e551efb; sbermegamarket_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; ecom_token=572ed57d-6bd2-4e61-91c1-2a8c5a9f4d07; _ym_uid=1739524948866859906; _ym_d=1739524948; _ym_visorc=b; _ym_isad=1; isOldUser=true; spsc=1739524949967_0523d70dcd6399b4a5c9303cf33ece42_bf4cd2fa3d30987fd0282ffebd8a9122; adspire_uid=AS.258800070.1739524950; _ga=GA1.1.1029686991.1739524950; _sv=SA1.cde8b57e-6cd3-4f86-b94c-49af5eed4df5.1714480000; __tld__=null; ssaid=378b7040-eab5-11ef-bc88-8968fbb7d467; ma_cid=4267358201739524951; adtech_uid=9b0c39e2-055a-4433-9a93-a60a5c995d75%3Amegamarket.ru; top100_id=t1.7729504.882577337.1739524951495; ma_id=1499508061701609951554; region_info=%7B%22displayName%22%3A%22%D0%9C%D0%9E%D0%A1%D0%9A%D0%92%D0%90%22%2C%22kladrId%22%3A%227700000000000%22%2C%22isDeliveryEnabled%22%3Atrue%2C%22geo%22%3A%7B%22lat%22%3A55.755814%2C%22lon%22%3A37.617635%7D%2C%22id%22%3A%2250%22%7D; cfidsw-smm=opCoTy6g2b4IzMmxVQQfv75AJgicCFs87jgV5K7TgPOyYKQYLHqN/XpEq3sJaDr8MxksQTSI6fbPme5Q/F489Gse2g88tO+MHAtLdWZHu6jlT89+BhYxWEjFUdi5QyyFW2RRp4lWMEfATXQx+5vAnnHxAHHKBN2QsDYTVuau; ma_ss_d19e96e4-c103-40bf-a791-3dcb7460a86f=0733784061739524951.1.1739524998.7; cfidsw-smm=Sjsi6mmmKmMHCuI7eqo+mLohsBFLJikK/8nU5B9Ip7t8HnTZA4vksjL9xjknATKWHkbPBthy7xB+Cj9En02XaZvQUEKCdkkJ8zUTPVDOKIzXhW69z/6zO4nK2Yu18B1bJeD849J3YHiWZ7m0u0nvhUIeNxHWzauhr9O1f/5b; _ga_W49D2LL5S1=GS1.1.1739524950.1.1.1739525004.6.0.0; t3_sid_7729504=s1.1027760779.1739524943708.1739525004058.1.10"
-        }
+        json_data["addressId"] = ""
         json_data["auth"] = {
             "locationId":"50",
             "appPlatform":"WEB",
             "appVersion":0,
-            "experiments":{},
             "os":"UNKNOWN_OS"
         }
         for i in range(0, 2):
             proxy: Connection = self.connection._get_connection()
             proxy.busy = True
-            proxy.count += 1
             self.logger.debug("Прокси : %s", proxy.proxy_string)
             try:
-                response = requests.post(api_url, headers=headers, json=json_data, proxy=proxy.proxy_string, verify=False, impersonate="chrome120")
+                # response = requests.post(api_url, headers=headers, json=json_data, proxy=proxy.proxy_string, verify=False, impersonate="chrome120")
+                response = self.session.post(api_url, json=json_data, proxy=proxy.proxy_string, verify=False)
                 response_data: dict = response.json()
             except Exception:
                 response = None
             if response and response.status_code == 200 and not response_data.get("error"):
-                if proxy.count == 20:
-                    proxy.count = 0
-                    proxy.usable_at = time() + 61
-                else:
-                    proxy.usable_at = time() + delay
+                proxy.usable_at = time() + delay
                 proxy.busy = False
                 return response_data
             if response and response.status_code == 200 and response_data.get("code") == 7:
@@ -232,7 +259,6 @@ class Parser_url:
 
     def parse(self) -> None:
         """Метод запуска парсинга"""
-        utils.check_for_new_version()
         if self.address:
             self._get_address_from_string(self.address)
         with concurrent.futures.ThreadPoolExecutor() as executor:
@@ -579,37 +605,14 @@ class Parser_url:
                 continue
             is_listing = self.parsed_url["type"] == "TYPE_LISTING"
             attributes = item["goods"]["attributes"]
-            brand = item["goods"]["brand"]
             self.perecup_price = None
             self.zakup_info = ""
             self.naming_product_for_tg_chat = ""
-            if brand in "Apple":
-                self.perecup_price = self._match_product_apple(item_title, attributes)
-            elif item_title.startswith("Игровая приставка"):
-                self.perecup_price = self._match_product_konsol(item_title, attributes)
-            elif item_title.startswith("Игровая портативная консоль"):
-                self.perecup_price = self._match_product_konsol(item_title, attributes)
-            elif item_title.startswith("Шлем Sony"):
-                self.perecup_price = self._match_product_shlem(item_title)
-            elif item_title.startswith("Фен Dyson"):
-                self.perecup_price = self._match_product_dyson(item_title)
-            elif item_title.startswith("Смартфон"):
-                self.perecup_price = self._match_product_smartphone(item_title, attributes)
-            elif item_title.startswith("Видеокарта"):
-                self.perecup_price = self._match_product_video_card(item_title, attributes)
-            elif item_title.startswith("Умная колонка") or item_title.startswith("Колонка умная"):
-                self.perecup_price = self._match_product_colonka(item_title)
-            elif "перфоратор" in item_title.lower():
-                self.perecup_price = self._match_product_perf(item_title)
-            elif "высокого давления karcher" in item_title.lower():
-                self.perecup_price = self._match_product_karcher(item_title)
-            elif "пылесос karcher" in item_title.lower():
-                self.perecup_price = self._match_product_pilesos_karcher(item_title)
-            elif "телевизор sber" in item_title.lower():
-                self.perecup_price = self._match_product_sber(item_title)
-            elif "геймпад" in item_title.lower():
-                self.perecup_price = self._match_product_gamepad(item_title)
-                    
+            if self.perecup:
+                for category, method in self.category_methods.items():
+                    if category.lower() in item_title.lower():
+                        method(item_title, attributes)
+                        break
             # match = re.search(r"Яндекс", item_title)
             # if match:
             # filename = f"'Z'.{uuid.uuid4().hex}.json"
@@ -624,14 +627,10 @@ class Parser_url:
                 time_diff = now - last_notified
             if not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff)):
                 if self.perecup_price is None:
-                    if item_title.startswith("Смартфон"):
-                        self.naming_product_for_tg_chat = "Смартфон"
-                    elif item_title.startswith("Видеокарта") or item_title.startswith("Материнская плата") or item_title.startswith("Процессор"):
-                        self.naming_product_for_tg_chat = "Компьютер"
-                    elif item_title.startswith("Ноутбук") or item_title.startswith("Ультрабук"):
-                        self.naming_product_for_tg_chat = "Ноутбук"
-                    elif item_title.startswith("Монитор"):
-                        self.naming_product_for_tg_chat = "Монитор"
+                    for key, name in self.chat_name.items():
+                        if item_title.startswith(key):
+                            self.naming_product_for_tg_chat = name
+                            break
                     if bonus_percent >= self.bonus_percent_alert:
                         if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
                             self.logger.info("Парсим предложения %s", item_title)
@@ -765,7 +764,7 @@ class Parser_url:
             elif input_string.startswith("планшет"):
                 return self._match_product_planshet_apple(input_string, self._get_memory_planshet_apple(attributes), self._get_year_planshet_apple(input_string, attributes), self._get_size_planshet_apple(attributes))
             elif "наушники" in input_string:
-                return self._match_product_yho_apple(input_string)
+                return self._match_product_yho_apple(input_string, attributes)
                 
             return None
     
@@ -996,7 +995,7 @@ class Parser_url:
     
     # --------------------VR--------------------
     
-    def _match_product_shlem(self, input_string: str):
+    def _match_product_shlem(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if input_string.startswith(category.lower()):
@@ -1007,7 +1006,7 @@ class Parser_url:
     
     # --------------------DYSON--------------------
     
-    def _match_product_dyson(self, input_string: str):
+    def _match_product_dyson(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if input_string.startswith(category.lower()):
@@ -1094,7 +1093,7 @@ class Parser_url:
     
     # --------------------НАУШНИКИ APPLE--------------------
     
-    def _match_product_yho_apple(self, input_string):
+    def _match_product_yho_apple(self, input_string, attributes):
         for category, products in self.categories.items():
             if category.lower() in input_string:
                 for product in products:
@@ -1107,7 +1106,7 @@ class Parser_url:
     
     # --------------------УМНАЯ КОЛОНКА--------------------
     
-    def _match_product_colonka(self, input_string):
+    def _match_product_colonka(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if category.lower() in input_string:
@@ -1119,7 +1118,7 @@ class Parser_url:
     
     # --------------------ПЕРФОРАТОР--------------------
     
-    def _match_product_perf(self, input_string):
+    def _match_product_perf(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if category.lower() in input_string:
@@ -1131,7 +1130,7 @@ class Parser_url:
     
     # --------------------KARKHER--------------------
     
-    def _match_product_karcher(self, input_string):
+    def _match_product_karcher(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if category.lower() in input_string:
@@ -1141,7 +1140,7 @@ class Parser_url:
                         return product["price"]
         return None
     
-    def _match_product_pilesos_karcher(self, input_string):
+    def _match_product_pilesos_karcher(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if category.lower() in input_string:
@@ -1153,7 +1152,7 @@ class Parser_url:
     
     # --------------------SBER--------------------
     
-    def _match_product_sber(self, input_string):
+    def _match_product_sber(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if category.lower() in input_string:
@@ -1163,7 +1162,7 @@ class Parser_url:
                         return product["price"]
         return None
     
-    def _match_product_gamepad(self, input_string):
+    def _match_product_gamepad(self, input_string, attributes):
         input_string = input_string.lower()
         for category, products in self.categories.items():
             if category.lower() in input_string:

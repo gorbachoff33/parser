@@ -135,22 +135,6 @@ def get_latest_version(package_name: str) -> str | None:
     except Exception:
         return None
 
-
-def check_for_new_version() -> None:
-    console = Console()
-    package_name = "mmparser"
-    current_version = get_current_version(package_name)
-    latest_version = get_latest_version(package_name)
-
-    try:
-        if version.parse(current_version) < version.parse(latest_version):
-            console.print(f"[orange]Доступна новая версия [bold]{package_name}[/bold]. Текущая: v{current_version}, Последняя: {latest_version}")
-        else:
-            console.print(f"[green]Вы используете последнюю версию [bold]{package_name}[/bold] (v{current_version}).")
-    except Exception:
-        console.print("[red]Ошибка проверки новой версии.")
-
-
 def parse_proxy_file(path: str) -> set[str]:
     if Path(path).exists():
         proxy_file_contents: str = open(path, "r", encoding="utf-8").read()
