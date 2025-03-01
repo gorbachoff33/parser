@@ -474,6 +474,7 @@ class Parser_url:
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
         message = "hello"
+        headers = [("telegram_room", "perekup")]
 
         # Сначала сериализуем в JSON (если нужно)
         serialized_message = json.dumps({"message": message})
