@@ -477,7 +477,7 @@ class Parser_url:
         if self.perecup_price:
             headers = [("telegram_room", "perekup")]
             try:
-                record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
+                record_metadata = self.producer.produce(topic, value=message, headers=headers)
                 self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
             except Exception as excp:
                 self.logger.error(f"Ошибка отправки сообщения: {excp}")
@@ -503,7 +503,7 @@ class Parser_url:
                     headers = [("telegram_room", "client")]
 
                 try:
-                    record_metadata = self.producer.send(topic, value=message, headers=headers).get(timeout=10)  # Блокируем на 10 секунд
+                    record_metadata = self.producer.produce(topic, value=message, headers=headers)
                     self.logger.info(f"Сообщение успешно отправлено: {record_metadata}")
                 except Exception as excp:
                     self.logger.error(f"Ошибка отправки сообщения: {excp}, тип ошибки: {type(excp)}")
