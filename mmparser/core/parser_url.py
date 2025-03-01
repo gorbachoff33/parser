@@ -473,7 +473,13 @@ class Parser_url:
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
-        message = {"key": "value"}  # Пример сообщения
+        message = "hello"
+
+        # Сначала сериализуем в JSON
+        serialized_message = json.dumps({"message": message})
+
+        # Затем кодируем в байты
+        encoded_message = serialized_message.encode('utf-8')
         try:
             serialized_message = json.dumps(message).encode('utf-8')
             self.producer.send(topic, value=serialized_message)
