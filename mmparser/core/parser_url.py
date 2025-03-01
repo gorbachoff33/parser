@@ -473,7 +473,7 @@ class Parser_url:
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
         message = self._format_tg_message(parsed_offer)
-                
+        print(message)
         if self.perecup_price:
             headers = [("telegram_room", "perekup")]
             self.producer.produce(topic, value=message, headers=headers)
@@ -534,7 +534,7 @@ class Parser_url:
                 "size": parsed_offer.available_quantity or '?',
                 "dostavka": parsed_offer.delivery_date,
                 "prodavec-name": parsed_offer.merchant_name,
-                "prodavec-rating": parsed_offer.merchant_rating or '',
+                "prodavec-rating": parsed_offer.merchant_rating if parsed_offer.merchant_rating is not None else '',
                 "perecup": self.perecup_price,
                 "vigoda": self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount,
                 "status": self.zakup_info,
