@@ -4,7 +4,7 @@ services:
   zookeeper:
     image: confluentinc/cp-zookeeper:latest
     container_name: zookeeper
-    restart: always  # Перезапуск при сбое или перезагрузке сервера
+    restart: always
     environment:
       ZOOKEEPER_CLIENT_PORT: 2181
     ports:
@@ -13,17 +13,18 @@ services:
   kafka:
     image: confluentinc/cp-kafka:latest
     container_name: kafka
-    restart: always  # Перезапуск при сбое или перезагрузке сервера
+    restart: always
     depends_on:
       - zookeeper
     ports:
-      - "9092:9092"
+      - "9092:9092"  # Открывает порт для внешнего доступа
     environment:
       KAFKA_BROKER_ID: 1
       KAFKA_ZOOKEEPER_CONNECT: zookeeper:2181
       KAFKA_ADVERTISED_LISTENERS: PLAINTEXT://88.151.114.88:9092
       KAFKA_LISTENER_SECURITY_PROTOCOL_MAP: PLAINTEXT:PLAINTEXT
+      KAFKA_LISTENERS: PLAINTEXT://0.0.0.0:9092
       KAFKA_INTER_BROKER_LISTENER_NAME: PLAINTEXT
       KAFKA_OFFSETS_TOPIC_REPLICATION_FACTOR: 1
-      KAFKA_LOG_RETENTION_HOURS: 2  # Удаление сообщений через 2 часа
-      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 600000  # Проверка удаления каждые 60 секунд
+      KAFKA_LOG_RETENTION_HOURS: 2
+      KAFKA_LOG_RETENTION_CHECK_INTERVAL_MS: 600000
