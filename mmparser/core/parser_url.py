@@ -144,6 +144,7 @@ class Parser_url:
                 raise ConfigError(f"Прокси {self.proxy} не верного формата!")
             self.connection.add_connection([Connection(self.proxy)])
         elif self.parsed_proxies:
+            print("proxy")
             for proxy in self.parsed_proxies:
                 is_valid_proxy = utils.proxy_format_check(proxy)
                 if not is_valid_proxy:
@@ -167,11 +168,9 @@ class Parser_url:
             proxy.busy = True
             proxy.count += 1
             self.logger.debug("Прокси : %s", proxy.proxy_string)
-            print(proxy.proxy_string)
             try:
                 response = requests.post(api_url, headers=headers, json=json_data, proxy=proxy.proxy_string, verify=False, impersonate="chrome120")
-                response_data: dict = response.json()
-                
+                response_data: dict = response.json() 
             except Exception:
                 response = None
             if response and response.status_code == 200 and not response_data.get("error"):
