@@ -475,15 +475,17 @@ class Parser_url:
         topic = "MM.PARSER.V1"
         message = "hello"
 
-        # Сначала сериализуем в JSON
+        # Сначала сериализуем в JSON (если нужно)
         serialized_message = json.dumps({"message": message})
 
         # Затем кодируем в байты
         encoded_message = serialized_message.encode('utf-8')
+
+        # Отправка в Kafka
         try:
-            serialized_message = json.dumps(message).encode('utf-8')
-            self.producer.send(topic, value=serialized_message)
-            self.logger.info(f"Сообщение успешно отправлено: {message}")
+            # Здесь уже нет повторной сериализации, только передача закодированных байтов
+            self.producer.send(topic, value=encoded_message, headers=headers)
+            self.logger.info(f"Сообщение успешно отправлено: {encoded_message}")
         except Exception as e:
             self.logger.error(f"Ошибка сериализации или отправки сообщения: {e}")
                 
