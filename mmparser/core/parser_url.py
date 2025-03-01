@@ -266,6 +266,9 @@ class Parser_url:
                     executor.submit(self.tg_client_error.notify, message, None)
         while True:
             db_utils.delete_old_entries()
+            with concurrent.futures.ThreadPoolExecutor() as executor:
+                    message = f"🟢 <b>Статус:</b> круг"
+                    executor.submit(self.tg_client_error.notify, message, None)
             for single_url in self.urls:
                 self.url = single_url
                 self.start_time = datetime.now()
