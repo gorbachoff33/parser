@@ -473,7 +473,7 @@ class Parser_url:
     def _notify_if_notify_check(self, parsed_offer: ParsedOffer):
         """Отправить уведомление в Kafka, если предложение подходит по параметрам"""
         topic = "MM.PARSER.V1"
-        message = self._format_tg_message(parsed_offer)
+        message = "hello"
                 
         if self.perecup_price:
             headers = [("telegram_room", "perekup")]
@@ -492,8 +492,6 @@ class Parser_url:
                 and parsed_offer.price_bonus <= self.price_bonus_value_alert
                 and parsed_offer.price >= self.price_min_value_alert
             ):
-                # Логирование всех проверок
-                self.logger.info(f"Проверка условий прошла успешно для предложения: {parsed_offer}")
                 if "Смартфон" in self.naming_product_for_tg_chat:
                     headers = [("telegram_room", "phone")]
                 elif "Компьютер" in self.naming_product_for_tg_chat:
@@ -517,12 +515,6 @@ class Parser_url:
                 self.logger.info(f"Условия не удовлетворены для предложения: {parsed_offer}")
                 
         return False
-    
-    def on_send_success(self, record_metadata):
-        self.logger.info(f"Сообщение отправлено успешно: {record_metadata}")
-    
-    def on_send_error(self, excp):
-        self.logger.error(f"Ошибка отправки сообщения: {excp}, тип ошибки: {type(excp)}")
 
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
         """Форматировать данные для отправки в telegram"""
