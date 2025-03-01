@@ -178,7 +178,6 @@ class Parser_url:
                 raise ConfigError(f"Прокси {self.proxy} не верного формата!")
             self.connection.add_connection([Connection(self.proxy)])
         elif self.parsed_proxies:
-            print("proxy")
             for proxy in self.parsed_proxies:
                 is_valid_proxy = utils.proxy_format_check(proxy)
                 if not is_valid_proxy:
@@ -472,7 +471,7 @@ class Parser_url:
             now = datetime.now()
             time_diff = now - last_notified
         if not last_notified or (last_notified and (time_diff.total_seconds() > self.alert_repeat_timeout * 3600 or not time_diff)):
-            if parsed_offer.price_bonus < self.perecup_price:
+            if not last_notified or (parsed_offer.price_bonus < self.perecup_price):
                 parsed_offer.notified = self._notify_if_notify_check(parsed_offer)
                 self._export_to_db(parsed_offer)
 

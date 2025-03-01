@@ -98,7 +98,7 @@
   "bonus_percent_alert": 10,
   "alert_repeat_timeout": 72,
   "use_merchant_blacklist": "False",
-  "threads": 15,
+  "threads": 20,
   "delay": 1.8,
   "error_delay": 5,
   "account_alert": "False",
