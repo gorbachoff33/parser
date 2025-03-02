@@ -510,20 +510,6 @@ class Parser_url:
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
         """Форматировать данные для отправки в telegram"""
         if self.perecup_price:
-        #     return (
-        #     f'🛍 <b>Товар:</b> <a href="{parsed_offer.url}">{parsed_offer.title}</a>\n'
-        #     f"💰 <b>Цена:</b> {parsed_offer.price}₽\n"
-        #     f"💸 <b>Цена-Бонусы:</b> {parsed_offer.price_bonus}\n"
-        #     f"🟢 <b>Бонусы:</b> {parsed_offer.bonus_amount}\n"
-        #     f"🔢 <b>Процент Бонусов:</b> {parsed_offer.bonus_percent}\n"
-        #     f"✅ <b>Доступно:</b> {parsed_offer.available_quantity or '?'}\n"
-        #     f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
-        #     f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
-        #     f"💰 <b>Цена перекупа:</b> {self.perecup_price}₽\n"
-        #     f"💰 <b>Выгода:</b> {self.perecup_price - parsed_offer.price + parsed_offer.bonus_amount}₽\n"
-        #     f"🟢 <b>Статус закупки:</b> {self.zakup_info}\n"
-        #     f"🔷 <b>Сервер:</b> 1 (с ценами)"
-        # )
             return {
                 "url": parsed_offer.url,
                 "title": parsed_offer.title,
@@ -541,17 +527,6 @@ class Parser_url:
                 "server": "mainserver"
             }
         else:
-            # return (
-            #     f'🛍 <b>Товар:</b> <a href="{parsed_offer.url}">{parsed_offer.title}</a>\n'
-            #     f"💰 <b>Цена:</b> {parsed_offer.price}₽\n"
-            #     f"💸 <b>Цена-Бонусы:</b> {parsed_offer.price_bonus}\n"
-            #     f"🟢 <b>Бонусы:</b> {parsed_offer.bonus_amount}\n"
-            #     f"🔢 <b>Процент Бонусов:</b> {parsed_offer.bonus_percent}\n"
-            #     f"✅ <b>Доступно:</b> {parsed_offer.available_quantity or '?'}\n"
-            #     f"📦 <b>Доставка:</b> {parsed_offer.delivery_date}\n"
-            #     f"🛒 <b>Продавец:</b> {parsed_offer.merchant_name} {parsed_offer.merchant_rating}{'⭐' if parsed_offer.merchant_rating else ''}\n"
-            #     f"🔷 <b>Сервер:</b> 1 (с ценами)"
-            # )
             return {
                 "url": parsed_offer.url,
                 "title": parsed_offer.title,
