@@ -480,6 +480,12 @@ class Parser_url:
             self.producer.flush()
             return True
         else:
+            print(parsed_offer.title)
+            print(parsed_offer.bonus_percent >= self.bonus_percent_alert)
+            print(parsed_offer.bonus_amount >= self.bonus_value_alert)
+            print(parsed_offer.price <= self.price_value_alert)
+            print(parsed_offer.price_bonus <= self.price_bonus_value_alert)
+            print(parsed_offer.price >= self.price_min_value_alert)
             if (
                 parsed_offer.bonus_percent >= self.bonus_percent_alert
                 and parsed_offer.bonus_amount >= self.bonus_value_alert
@@ -640,6 +646,7 @@ class Parser_url:
                     if bonus_percent >= self.bonus_percent_alert:
                         if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
                             self.logger.info("Парсим предложения %s", item_title)
+                            print(bonus_percent)
                             offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
                             for offer in offers:
                                 self.price = offer["finalPrice"]
