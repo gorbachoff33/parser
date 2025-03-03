@@ -480,12 +480,11 @@ class Parser_url:
             self.producer.flush()
             return True
         else:
-            print(parsed_offer.title)
-            print(parsed_offer.bonus_percent >= self.bonus_percent_alert)
-            print(parsed_offer.bonus_amount >= self.bonus_value_alert)
-            print(parsed_offer.price <= self.price_value_alert)
-            print(parsed_offer.price_bonus <= self.price_bonus_value_alert)
-            print(parsed_offer.price >= self.price_min_value_alert)
+            print(parsed_offer.title, "bonus_percent =", parsed_offer.bonus_percent, "bonus_percent_alert =", self.bonus_percent_alert, "itog =", parsed_offer.bonus_percent >= self.bonus_percent_alert, 
+                  "bonus_amount =", parsed_offer.bonus_amount, "bonus_value_alert =", self.bonus_value_alert, "itog =", parsed_offer.bonus_amount >= self.bonus_value_alert,
+                  "price =", parsed_offer.price, "price_value_alert =", self.price_value_alert, "itog =", parsed_offer.price <= self.price_value_alert,
+                  "price_bonus =", parsed_offer.price_bonus, "price_bonus_value_alert =", self.price_bonus_value_alert, "itog =", parsed_offer.price_bonus <= self.price_bonus_value_alert,
+                  "price =", parsed_offer.price, "price_min_value_alert =", self.price_min_value_alert, "itog =", parsed_offer.price >= self.price_min_value_alert)
             if (
                 parsed_offer.bonus_percent >= self.bonus_percent_alert
                 and parsed_offer.bonus_amount >= self.bonus_value_alert
