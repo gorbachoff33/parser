@@ -492,7 +492,6 @@ class Parser_url:
                 and parsed_offer.price_bonus <= self.price_bonus_value_alert
                 and parsed_offer.price >= self.price_min_value_alert
             ):
-                print(parsed_offer.title, "SUUUUUUUUCCCCCCCEEEEEEESSSSSS")
                 if "Смартфон" in self.naming_product_for_tg_chat:
                     headers = [("telegram_room", "phone")]
                 elif "Компьютер" in self.naming_product_for_tg_chat:
@@ -506,6 +505,7 @@ class Parser_url:
 
                 self.producer.produce(topic, value=message, headers=headers)
                 self.producer.flush()
+                print(message, "SUUUUUUUUCCCCCCCEEEEEEESSSSSS")
                 self.perecup_price = None
                 return True
             else:
