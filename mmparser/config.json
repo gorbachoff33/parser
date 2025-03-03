@@ -1,6 +1,5 @@
 {
   "urls": [
-    "https://megamarket.ru/catalog/elektroinstrumenty/",
     "https://megamarket.ru/catalog/smartfony/",
     "https://megamarket.ru/catalog/planshety/",
     "https://megamarket.ru/catalog/umnye-chasy/",
@@ -31,6 +30,7 @@
     "https://megamarket.ru/catalog/igrovye-pristavki-xbox/",
     "https://megamarket.ru/catalog/portativnye-igrovye-konsoli/",
     "https://megamarket.ru/catalog/geympady/",
+    "https://megamarket.ru/catalog/elektroinstrumenty/",
     "https://megamarket.ru/catalog/akkumulyatornyy-instrument/",
     "https://megamarket.ru/catalog/kontrolno-izmeritelnyy-instrument/",
     "https://megamarket.ru/catalog/stanki/",
@@ -83,7 +83,7 @@
   "price_value_alert": "",
   "price_bonus_value_alert": "",
   "bonus_value_alert": "",
-  "bonus_percent_alert": 15,
+  "bonus_percent_alert": 20,
   "alert_repeat_timeout": 72,
   "use_merchant_blacklist": "False",
   "threads": 20,

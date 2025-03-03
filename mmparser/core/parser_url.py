@@ -480,11 +480,6 @@ class Parser_url:
             self.producer.flush()
             return True
         else:
-            # print(parsed_offer.title, "bonus_percent =", parsed_offer.bonus_percent, "bonus_percent_alert =", self.bonus_percent_alert, "itog =", parsed_offer.bonus_percent >= self.bonus_percent_alert, 
-            #       "bonus_amount =", parsed_offer.bonus_amount, "bonus_value_alert =", self.bonus_value_alert, "itog =", parsed_offer.bonus_amount >= self.bonus_value_alert,
-            #       "price =", parsed_offer.price, "price_value_alert =", self.price_value_alert, "itog =", parsed_offer.price <= self.price_value_alert,
-            #       "price_bonus =", parsed_offer.price_bonus, "price_bonus_value_alert =", self.price_bonus_value_alert, "itog =", parsed_offer.price_bonus <= self.price_bonus_value_alert,
-            #       "price =", parsed_offer.price, "price_min_value_alert =", self.price_min_value_alert, "itog =", parsed_offer.price >= self.price_min_value_alert)
             if (
                 parsed_offer.bonus_percent >= self.bonus_percent_alert
                 and parsed_offer.bonus_amount >= self.bonus_value_alert
@@ -505,12 +500,8 @@ class Parser_url:
 
                 self.producer.produce(topic, value=message, headers=headers)
                 self.producer.flush()
-                print(message, "SUUUUUUUUCCCCCCCEEEEEEESSSSSS")
                 self.perecup_price = None
-                return True
-            else:
-                self.logger.info(f"Условия не удовлетворены для предложения: {parsed_offer}")
-                
+                return True                
         return False
 
     def _format_tg_message(self, parsed_offer: ParsedOffer) -> str:
@@ -646,7 +637,6 @@ class Parser_url:
                     if bonus_percent >= self.bonus_percent_alert:
                         if self.all_cards or (not self.no_cards and (item["hasOtherOffers"] or item["offerCount"] > 1 or is_listing)):
                             self.logger.info("Парсим предложения %s", item_title)
-                            print(bonus_percent)
                             offers = self._get_offers(item["goods"]["goodsId"], delay=self.connection_success_delay)
                             for offer in offers:
                                 self.price = offer["finalPrice"]
